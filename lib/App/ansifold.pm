@@ -3,37 +3,23 @@ use 5.008001;
 use strict;
 use warnings;
 
+use Exporter 'import';
+our @EXPORT_OK = qw($VERSION);
+
 our $VERSION = "0.01";
-
-
 
 1;
 __END__
 
-=encoding utf-8
-
-=head1 NAME
-
-App::ansifold - It's new $module
-
-=head1 SYNOPSIS
-
-    use App::ansifold;
-
-=head1 DESCRIPTION
-
-App::ansifold is ...
-
 =head1 LICENSE
 
-Copyright (C) Kaz Utashiro.
+Copyright (C) Kazumasa Utashiro.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =head1 AUTHOR
 
-Kaz Utashiro E<lt>kaz@utashiro.comE<gt>
+Kazumasa Utashiro
 
 =cut
-
