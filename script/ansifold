@@ -82,9 +82,6 @@ my @option = do {
 my $fold = new Text::ANSI::Fold @option;
 
 while (<>) {
-    $fold->configure(text => $_);
-    while ((my $text = $fold->retrieve) ne '') {
-	print $text;
-	print "\n" if $opt{paragraph} or $text !~ /\n\z/;
-    }
+    print join "\n", $fold->text($_)->chops;
+    print "\n" if $opt{paragraph};
 }
