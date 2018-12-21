@@ -11,6 +11,10 @@ our $VERSION = "0.02";
 1;
 __END__
 
+=head1 NAME
+
+App::ansifold - fold command handling ANSI terminal sequences
+
 =head1 LICENSE
 
 Copyright (C) Kazumasa Utashiro.
