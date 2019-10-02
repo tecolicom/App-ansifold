@@ -52,7 +52,7 @@ Number description is handled by L<Getopt::EX::Numbers> module, and
 consists of C<start>, C<end>, C<step> and C<length> elements.  For
 example,
 
-    ansifold -w 2:10:2
+    $ echo AABBBBCCCCCCDDDDDDDDEEEEEEEEEE | ansifold -w 2:10:2
 
 produces output like this:
 
