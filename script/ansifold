@@ -13,6 +13,10 @@ use App::ansifold qw($VERSION);
 
 ansifold - fold command handling ANSI terminal sequences
 
+=head1 VERSION
+
+Version 1.01
+
 =head1 SYNOPSIS
 
 ansifold [ options ]
