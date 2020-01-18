@@ -4,7 +4,7 @@
       "- Kazumasa Utashiro"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v3.1.6, CPAN::Meta::Converter version 2.143240",
+   "generated_by" : "Minilla/v3.1.8, CPAN::Meta::Converter version 2.143240",
    "license" : [
       "perl_5"
    ],
@@ -65,7 +65,7 @@
          "web" : "https://github.com/kaz-utashiro/ansifold"
       }
    },
-   "version" : "1.01",
+   "version" : "1.02",
    "x_authority" : "cpan:UTASHIRO",
    "x_contributors" : [
       "Kaz Utashiro <kaz@utashiro.com>",

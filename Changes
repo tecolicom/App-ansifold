@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.02 2020-01-18T05:09:33Z
+
+    - Fix bug of --smart option not declared.
+
 1.01 2019-12-13T06:19:01Z
 
     - Implement --linebreak option.
