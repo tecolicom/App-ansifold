@@ -124,9 +124,9 @@ L<Text::ANSI::Fold|https://github.com/kaz-utashiro/Text-ANSI-Fold>
 
 L<Getopt::EX::Numbers>
 
-L<https://www.w3.org/TR/2009/NOTE-jlreq-20090604/>,
+L<https://www.w3.org/TR/2012/NOTE-jlreq-20120403/>,
 Requirements for Japanese Text Layout,
-W3C Working Group Note 4 June 2009
+W3C Working Group Note 3 April 2012
 
 =head1 LICENSE
 

@@ -68,7 +68,7 @@
    "version" : "1.03",
    "x_authority" : "cpan:UTASHIRO",
    "x_contributors" : [
-      "Kaz Utashiro <kaz@utashiro.com>",
+      "Kazumasa Utashiro <kaz@utashiro.com>",
       "Mohammad S Anwar <mohammad.anwar@yahoo.com>"
    ],
    "x_serialization_backend" : "JSON::PP version 4.04",
