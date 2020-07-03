@@ -1,8 +1,7 @@
 #!/usr/bin/env perl
 
-use strict;
-use warnings;
 use v5.14;
+use warnings;
 use utf8;
 
 use App::ansifold qw($VERSION);
@@ -202,7 +201,7 @@ my @width_map;
 my @width_index;
 
 use Getopt::EX::Numbers;
-my $numbers = new Getopt::EX::Numbers;
+my $numbers = Getopt::EX::Numbers->new;
 
 @{$opt{width}} = do {
     map {
@@ -236,11 +235,11 @@ else {
     @{$opt{width}} = grep { $_ } @{$opt{width}}; # remove zero
 }
 
-my $fold = new Text::ANSI::Fold do {
+my $fold = Text::ANSI::Fold->new(
     map  { $_ => $opt{$_} }
     grep { defined $opt{$_} }
-    qw(width boundary padding padchar ambiguous linebreak runin runout);
-};
+    qw(width boundary padding padchar ambiguous linebreak runin runout)
+    );
 
 my $separator = do {
     $opt{separate} =~ s{ ( \\ (.) ) } {
