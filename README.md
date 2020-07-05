@@ -4,7 +4,7 @@ ansifold - fold command handling ANSI terminal sequences
 
 # VERSION
 
-Version 1.03
+Version 1.04
 
 # SYNOPSIS
 
