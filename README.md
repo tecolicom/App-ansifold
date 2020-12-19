@@ -10,7 +10,7 @@ Version 1.04
 
 ansifold \[ options \]
 
-    -w#, --width=#                Folding width (default 70)
+    -w#, --width=#                Folding width (default 72)
          --boundary=word          Fold on word boundary
          --padding                Padding to margin space
          --padchar=_              Padding character
@@ -29,7 +29,7 @@ ansifold \[ options \]
 [Text::ANSI::Fold](https://metacpan.org/pod/Text::ANSI::Fold) module, which enables to handle ANSI terminal
 sequences and Unicode multibyte characters properly.
 
-It folds lines in 70 column by default.  Use option **-w** to change
+It folds lines in 72 column by default.  Use option **-w** to change
 the folding width.
 
     $ ansifold -w132

@@ -20,7 +20,7 @@ Version 1.04
 
 ansifold [ options ]
 
-    -w#, --width=#                Folding width (default 70)
+    -w#, --width=#                Folding width (default 72)
          --boundary=word          Fold on word boundary
          --padding                Padding to margin space
          --padchar=_              Padding character
@@ -39,7 +39,7 @@ B<ansifold> is almost B<fold> compatible command utilizing
 L<Text::ANSI::Fold> module, which enables to handle ANSI terminal
 sequences and Unicode multibyte characters properly.
 
-It folds lines in 70 column by default.  Use option B<-w> to change
+It folds lines in 72 column by default.  Use option B<-w> to change
 the folding width.
 
     $ ansifold -w132
@@ -196,7 +196,7 @@ use Getopt::EX::Long;
 Getopt::Long::Configure("bundling");
 GetOptions(@optargs) || pod2usage();
 
-my $DEFAULT_WIDTH = 70;
+my $DEFAULT_WIDTH = 72;
 my @width_map;
 my @width_index;
 
