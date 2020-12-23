@@ -299,7 +299,7 @@ if (defined(my $expand = $opt{expand})) {
 use charnames ':loose';
 for (@opt{qw(tabhead tabspace)}) {
     defined or next;
-    $_ = do { eval qq["\\N{$_}"] or die "$!" } if length > 1;
+    $_ = do { eval qq["\\N{$_}"] or die "$_: invalid name\n" } if length > 1;
 }
 
 my $fold = Text::ANSI::Fold->new(
