@@ -44,7 +44,7 @@
          "requires" : {
             "Getopt::EX" : "v1.21.1",
             "Text::ANSI::Fold" : "2.08",
-            "perl" : "v5.14.0"
+            "perl" : "5.016"
          }
       },
       "test" : {
