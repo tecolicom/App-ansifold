@@ -4,7 +4,7 @@ use v5.14;
 use warnings;
 use utf8;
 
-our $VERSION = "1.06";
+our $VERSION = "1.07";
 
 =encoding utf-8
 
@@ -14,7 +14,7 @@ ansifold - fold command handling ANSI terminal sequences
 
 =head1 VERSION
 
-Version 1.06
+Version 1.07
 
 =head1 SYNOPSIS
 
