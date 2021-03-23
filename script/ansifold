@@ -183,23 +183,30 @@ map { $_ = decode 'utf8', $_ unless utf8::is_utf8($_) } @ARGV;
 
 use Pod::Usage;
 use List::Util qw(min);
+use Hash::Util qw(lock_keys);
 use Text::ANSI::Fold qw(:constants);
 use Data::Dumper;
 
 my %opt = (
-    width => [],
-    separate => "\n",
-    boundary => "none",
+    width     => [],
+    boundary  => "none",
+    padding   => undef,
+    padchar   => undef,
+    ambiguous => undef,
+    paragraph => undef,
+    separate  => "\n",
     linebreak => LINEBREAK_NONE,
-    runin => 4,
-    runout => 4,
-    expand => undef,
-    tabstop => undef,
-    tabhead => undef,
-    tabspace => undef,
-    tabstyle => undef,
-    discard => [],
+    runin     => 4,
+    runout    => 4,
+    expand    => undef,
+    tabstop   => undef,
+    tabhead   => undef,
+    tabspace  => undef,
+    tabstyle  => undef,
+    discard   => [],
     );
+
+lock_keys %opt;
 
 my @optargs = (
     "width|w=s"      =>  $opt{width},
