@@ -137,12 +137,14 @@ microsoft word document.
 
 # LINE BREAKING
 
+Line break adjustment is supported for ASCII word boundaries.  As for
+Japanese, more complicated prohibition processing is performed.  Use
+option **-s** to enable everything.
+
 ## **--boundary**=_word_
 
-Option **--boundary=word** prohibit to break line in the middle of
-alphanumeric word.  This version also supports line break adjustment,
-mainly to perform Japanese \`\`KINSOKU'' processing.  Use
-**--linebreak=all** to enable it.
+Option **--boundary=word** prohibit breaking line in the middle of
+alpha-numeric word.
 
 ## **--linebreak**=_all_|_ruunin_|_runout_|_none_
 
