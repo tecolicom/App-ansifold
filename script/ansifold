@@ -267,6 +267,17 @@ use Hash::Util qw(lock_keys);
 use Text::ANSI::Fold qw(:constants);
 use Data::Dumper;
 
+my $DEFAULT_WIDTH = 72;
+my $DEFAULT_EXPAND = 0;
+
+##
+## when executed as 'ansiexpand'
+##
+if ($0 =~ /expand$/) {
+    $DEFAULT_WIDTH = -1;
+    $DEFAULT_EXPAND = 1;
+}
+
 my %opt = (
     width     => [],
     boundary  => "none",
@@ -278,7 +289,7 @@ my %opt = (
     linebreak => LINEBREAK_NONE,
     runin     => 4,
     runout    => 4,
-    expand    => undef,
+    expand    => $DEFAULT_EXPAND,
     tabstop   => undef,
     tabhead   => undef,
     tabspace  => undef,
@@ -334,7 +345,6 @@ use Getopt::EX::Long;
 Getopt::Long::Configure("bundling");
 GetOptions(@optargs) || pod2usage();
 
-my $DEFAULT_WIDTH = 72;
 my @width_map;
 my @width_index;
 
