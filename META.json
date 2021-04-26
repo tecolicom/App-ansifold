@@ -65,7 +65,7 @@
          "web" : "https://github.com/kaz-utashiro/ansifold"
       }
    },
-   "version" : "1.08",
+   "version" : "1.0801",
    "x_authority" : "cpan:UTASHIRO",
    "x_contributors" : [
       "Kazumasa Utashiro <kaz@utashiro.com>",
