@@ -49,6 +49,7 @@
       },
       "test" : {
          "requires" : {
+            "Command::Runner" : "0",
             "Test::More" : "0.98"
          }
       }

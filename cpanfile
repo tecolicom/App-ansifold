@@ -5,5 +5,6 @@ requires 'Getopt::EX' => 'v1.21.1';
 
 on 'test' => sub {
     requires 'Test::More' => '0.98';
+    requires 'Command::Runner';
 };
 
