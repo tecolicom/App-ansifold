@@ -2,6 +2,11 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.09 2021-07-29T13:36:29Z
+
+    - Update to use Getopt::EX::Hashed.
+    - Introduce --nonewline as an alias for -n.
+
 1.0801 2021-04-26T08:13:50Z
 
     - Remove uninitialized variable error.

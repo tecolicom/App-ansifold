@@ -4,7 +4,7 @@ use v5.14;
 use warnings;
 use utf8;
 
-our $VERSION = "1.0801";
+our $VERSION = "1.09";
 
 =encoding utf-8
 
@@ -14,7 +14,7 @@ ansifold - fold command handling ANSI terminal sequences
 
 =head1 VERSION
 
-Version 1.0801
+Version 1.09
 
 =head1 SYNOPSIS
 
@@ -27,7 +27,7 @@ ansifold [ options ]
           --ambiguous=narrow|wide  Unicode ambiguous character handling
     -p    --paragraph              Print extra newline
           --separate=string        Set separator string (default newline)
-    -n                             Same as --separate ''
+    -n    --nonewline              Same as --separate ''
           --linebreak=mode         Line-break mode (all, runin, runout, none)
           --runin                  Run-in width (default 4)
           --runout                 Run-out width (default 4)
@@ -289,7 +289,7 @@ has paragraph => spec => "p +  " , default => 0;
 has separate  => spec => "  =s " , default => "\n";
 has runin     => spec => "  =i " , default => 4;
 has runout    => spec => "  =i " , default => 4;
-has n         => spec => "     " , default => sub { $_{separate} = "" };
+has nonewline => spec => "n    " , default => sub { $_{separate} = "" };
 has expand    => spec => "x :-1" , default => $DEFAULT_EXPAND;
 has tabstop   => spec => "  =i " ;
 has tabhead   => spec => "  =s " ;
