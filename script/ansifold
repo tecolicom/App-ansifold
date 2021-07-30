@@ -289,36 +289,39 @@ has paragraph => spec => "p +  " , default => 0;
 has separate  => spec => "  =s " , default => "\n";
 has runin     => spec => "  =i " , default => 4;
 has runout    => spec => "  =i " , default => 4;
-has nonewline => spec => "n    " , default => sub { $_{separate} = "" };
+has nonewline => spec => "n    " , action  => sub { $_{separate} = "" };
 has expand    => spec => "x :-1" , default => $DEFAULT_EXPAND;
 has tabstop   => spec => "  =i " ;
 has tabhead   => spec => "  =s " ;
 has tabspace  => spec => "  =s " ;
 has tabstyle  => spec => "  =s " ;
 has discard   => spec => "  =s " , default => [];
-has version   => spec => "v    " , default => sub {
+has version   => spec => "v    " , action  => sub {
     print "Version: $VERSION\n ";
     exit;
 };
 
 #
-# this is a bit tricky.
+# this is a trick.
 # {linebreak} is not a option parameter.
 # {lb} specifies --linebreak as an alias.
 #
 has linebreak => default => LINEBREAK_NONE;
-has lb => spec => "linebreak=s", default => sub {
-    $_->{linebreak} = do {
-	local $_ = $_[1];
-	my $v = LINEBREAK_NONE;
-	$v |= LINEBREAK_ALL    if /all/i;
-	$v |= LINEBREAK_RUNIN  if /runin/i;
-	$v |= LINEBREAK_RUNOUT if /runout/i;
-	$v;
-    };
-};
+has lb => (
+    spec => "=s",
+    alias => "linebreak",
+    action => sub {
+	$_->{linebreak} = do {
+	    local $_ = $_[1];
+	    my $v = LINEBREAK_NONE;
+	    $v |= LINEBREAK_ALL    if /all/i;
+	    $v |= LINEBREAK_RUNIN  if /runin/i;
+	    $v |= LINEBREAK_RUNOUT if /runout/i;
+	    $v;
+	};
+    } );
 
-has smart => spec => "s !" , default => sub {
+has smart => spec => "s !", action => sub {
     ($_->{boundary}, $_->{linebreak}) = do {
 	if ($_[1]) {
 	    ('word', LINEBREAK_ALL);

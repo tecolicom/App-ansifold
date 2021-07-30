@@ -43,7 +43,7 @@
       "runtime" : {
          "requires" : {
             "Getopt::EX" : "v1.21.1",
-            "Getopt::EX::Hashed" : "0.9903",
+            "Getopt::EX::Hashed" : "0.9904",
             "Text::ANSI::Fold" : "2.0903",
             "perl" : "5.016"
          }
