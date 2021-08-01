@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.0901 2021-08-01T14:07:13Z
+
+    - Update to use new Getopt::EX::Hashed interface.
+
 1.09 2021-07-29T13:36:29Z
 
     - Update to use Getopt::EX::Hashed.
