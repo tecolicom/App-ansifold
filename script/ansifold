@@ -297,7 +297,7 @@ has tabspace  => spec => "  =s " ;
 has tabstyle  => spec => "  =s " ;
 has discard   => spec => "  =s " , default => [];
 has version   => spec => "v    " , action  => sub {
-    print "Version: $VERSION\n ";
+    print "Version: $VERSION\n";
     exit;
 };
 
