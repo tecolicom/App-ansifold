@@ -37,6 +37,8 @@ ansifold [ options ]
           --tabhead=char           Tab-head character (default space)
           --tabspace=char          Tab-space character (default space)
           --tabstyle=style         Tab expansion style (shade, dot, symbol)
+    -h    --help                   Show help message
+    -v    --version                Show version
 
 =head1 DESCRIPTION
 
@@ -296,6 +298,7 @@ has tabhead   => spec => "  =s " ;
 has tabspace  => spec => "  =s " ;
 has tabstyle  => spec => "  =s " ;
 has discard   => spec => "  =s " , default => [];
+has help      => spec => "h    " , action  => sub { pod2usage };
 has version   => spec => "v    " , action  => sub {
     print "Version: $VERSION\n";
     exit;
@@ -319,8 +322,9 @@ has linebreak =>
 has smart =>
     spec => "s !",
     action => sub {
+	my $smart = $_->{$_[0]} = $_[1];
 	($_->{boundary}, $_->{linebreak}) = do {
-	    if ($_[1]) {
+	    if ($smart) {
 		('word', LINEBREAK_ALL);
 	    } else {
 		('none', LINEBREAK_NONE);
