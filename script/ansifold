@@ -42,6 +42,169 @@ Version 1.0902
 
 =cut
 
+use open IO => 'utf8', ':std';
+use Encode;
+map { $_ = decode 'utf8', $_ unless utf8::is_utf8($_) } @ARGV;
+
+use Pod::Usage;
+use List::Util qw(min);
+use Hash::Util qw(lock_keys);
+use Text::ANSI::Fold qw(:constants);
+use Data::Dumper;
+
+my $DEFAULT_WIDTH = 72;
+my $DEFAULT_EXPAND = 0;
+
+##
+## when executed as 'ansiexpand'
+##
+if ($0 =~ /expand$/) {
+    $DEFAULT_WIDTH = -1;
+    $DEFAULT_EXPAND = 1;
+}
+
+use Getopt::EX::Hashed 'has';
+
+has width     => spec => " w =s@ " , default => [];
+has boundary  => spec => "   =s  " , default => "none";
+has padding   => spec => "   !   " ;
+has padchar   => spec => "   =s  " ;
+has ambiguous => spec => "   =s  " ;
+has paragraph => spec => " p +   " , default => 0;
+has separate  => spec => "   =s  " , default => "\n";
+has linebreak => spec => "   =s  " , alias   => 'lb';
+has runin     => spec => "   =i  " , default => 4;
+has runout    => spec => "   =i  " , default => 4;
+has nonewline => spec => " n     " ;
+has smart     => spec => " s !   " ;
+has expand    => spec => " x :-1 " , default => $DEFAULT_EXPAND;
+has tabstop   => spec => "   =i  " ;
+has tabhead   => spec => "   =s  " ;
+has tabspace  => spec => "   =s  " ;
+has tabstyle  => spec => "   =s  " ;
+has discard   => spec => "   =s@ " , default => [];
+has help      => spec => " h     " ;
+has version   => spec => " v     " ;
+
+has '+help' => action => sub {
+    pod2usage
+	-verbose  => 99,
+	-sections => [ qw(SYNOPSIS VERSION) ];
+};
+
+has '+version' => action  => sub {
+    print "Version: $VERSION\n";
+    exit;
+};
+
+has '+nonewline' => action  => sub {
+    $_{separate} = "";
+};
+
+has '+linebreak' =>
+    default => LINEBREAK_NONE,
+    action => sub {
+	my($name, $value) = @_;
+	$_->{$name} = do {
+	    local $_ = $value;
+	    my $v = LINEBREAK_NONE;
+	    $v   |= LINEBREAK_ALL    if /all/i;
+	    $v   |= LINEBREAK_RUNIN  if /runin/i;
+	    $v   |= LINEBREAK_RUNOUT if /runout/i;
+	    $v;
+	};
+    };
+
+has '+smart' =>
+    action => sub {
+	my $smart = $_->{$_[0]} = $_[1];
+	($_->{boundary}, $_->{linebreak}) = do {
+	    if ($smart) {
+		('word', LINEBREAK_ALL);
+	    } else {
+		('none', LINEBREAK_NONE);
+	    }
+	};
+    };
+
+no Getopt::EX::Hashed;
+
+use Getopt::EX::Long qw(:DEFAULT ExConfigure Configure);
+ExConfigure BASECLASS => [ __PACKAGE__, 'Getopt::EX' ];
+Configure "bundling";
+my $opt = Getopt::EX::Hashed->new() or die;
+$opt->getopt || pod2usage();
+
+my @width_map;
+my @width_index;
+
+use Getopt::EX::Numbers;
+my $numbers = Getopt::EX::Numbers->new;
+
+my @width = do {
+    map {
+	if    (/^$/)      { 0  }			# empty
+	elsif (/^-?\d+$/) { $_ }			# number
+	elsif (/^(-?[-\d:]+) (?:\{(\d+)\})? $/x) {	# a:b:c:d{e}
+	    ($numbers->parse($1)->sequence) x ($2 // 1);
+	}
+	else { die "$_: width format error.\n" }
+    }
+    map { split /,/, $_, -1 }
+    @{$opt->{width}};
+};
+
+$opt->{width} = do {
+    if    (@width == 0) { $DEFAULT_WIDTH }
+    elsif (@width == 1) { $width[0] }
+    else {
+	my @map = [ (int(pop @width)) x 2 ];
+	unshift @map, map { [ $_ < 0 ? (-$_, 0) : ($_, 1) ] } @width;
+	@width = map { $_->[0] } @map;
+	@width_index = grep { $map[$_][1] } 0 .. $#map;
+	\@width;
+    }
+};
+
+if ($opt->{expand} > 0) {
+    $opt->{tabstop} = $opt->{expand};
+}
+
+use charnames ':loose';
+for (@{$opt}{qw(tabhead tabspace)}) {
+    defined && length > 1 or next;
+    $_ = charnames::string_vianame($_) || die "$_: invalid name\n";
+}
+
+my $fold = Text::ANSI::Fold->new(
+    map  { $_ => $opt->{$_} }
+    grep { defined $opt->{$_} }
+    qw(width boundary padding padchar ambiguous
+       linebreak runin runout
+       expand tabstyle tabstop tabhead tabspace discard)
+    );
+
+my $separator = do {
+    $opt->{separate} =~ s{ ( \\ (.) ) } {
+	{ '\\' => '\\', n => "\n" }->{$2} // $1
+    }gexr;
+};
+
+while (<>) {
+    my $chomped = chomp;
+    my @chops = $fold->text($_)->chops;
+    if (@width_index > 0) {
+	@chops = grep { defined } @chops[@width_index];
+    }
+    print join $separator, @chops;
+    print "\n" if $chomped;
+    print "\n" x $opt->{paragraph} if $opt->{paragraph} > 0;
+}
+
+exit;
+
+__END__
+
 =head1 DESCRIPTION
 
 B<ansifold> is a fold(1) compatible command utilizing
@@ -265,168 +428,5 @@ This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =cut
-
-use open IO => 'utf8', ':std';
-use Encode;
-map { $_ = decode 'utf8', $_ unless utf8::is_utf8($_) } @ARGV;
-
-use Pod::Usage;
-use List::Util qw(min);
-use Hash::Util qw(lock_keys);
-use Text::ANSI::Fold qw(:constants);
-use Data::Dumper;
-
-my $DEFAULT_WIDTH = 72;
-my $DEFAULT_EXPAND = 0;
-
-##
-## when executed as 'ansiexpand'
-##
-if ($0 =~ /expand$/) {
-    $DEFAULT_WIDTH = -1;
-    $DEFAULT_EXPAND = 1;
-}
-
-use Getopt::EX::Hashed 'has';
-
-has width     => spec => " w =s@ " , default => [];
-has boundary  => spec => "   =s  " , default => "none";
-has padding   => spec => "   !   " ;
-has padchar   => spec => "   =s  " ;
-has ambiguous => spec => "   =s  " ;
-has paragraph => spec => " p +   " , default => 0;
-has separate  => spec => "   =s  " , default => "\n";
-has linebreak => spec => "   =s  " , alias   => 'lb';
-has runin     => spec => "   =i  " , default => 4;
-has runout    => spec => "   =i  " , default => 4;
-has nonewline => spec => " n     " ;
-has smart     => spec => " s !   " ;
-has expand    => spec => " x :-1 " , default => $DEFAULT_EXPAND;
-has tabstop   => spec => "   =i  " ;
-has tabhead   => spec => "   =s  " ;
-has tabspace  => spec => "   =s  " ;
-has tabstyle  => spec => "   =s  " ;
-has discard   => spec => "   =s@ " , default => [];
-has help      => spec => " h     " ;
-has version   => spec => " v     " ;
-
-has '+help' => action => sub {
-    pod2usage
-	-verbose  => 99,
-	-sections => [ qw(SYNOPSIS VERSION) ];
-};
-
-has '+version' => action  => sub {
-    print "Version: $VERSION\n";
-    exit;
-};
-
-has '+nonewline' => action  => sub {
-    $_{separate} = "";
-};
-
-has '+linebreak' =>
-    default => LINEBREAK_NONE,
-    action => sub {
-	my($name, $value) = @_;
-	$_->{$name} = do {
-	    local $_ = $value;
-	    my $v = LINEBREAK_NONE;
-	    $v   |= LINEBREAK_ALL    if /all/i;
-	    $v   |= LINEBREAK_RUNIN  if /runin/i;
-	    $v   |= LINEBREAK_RUNOUT if /runout/i;
-	    $v;
-	};
-    };
-
-has '+smart' =>
-    action => sub {
-	my $smart = $_->{$_[0]} = $_[1];
-	($_->{boundary}, $_->{linebreak}) = do {
-	    if ($smart) {
-		('word', LINEBREAK_ALL);
-	    } else {
-		('none', LINEBREAK_NONE);
-	    }
-	};
-    };
-
-no Getopt::EX::Hashed;
-
-use Getopt::EX::Long qw(:DEFAULT ExConfigure Configure);
-ExConfigure BASECLASS => [ __PACKAGE__, 'Getopt::EX' ];
-Configure "bundling";
-my $opt = Getopt::EX::Hashed->new() or die;
-$opt->getopt || pod2usage();
-
-my @width_map;
-my @width_index;
-
-use Getopt::EX::Numbers;
-my $numbers = Getopt::EX::Numbers->new;
-
-my @width = do {
-    map {
-	if    (/^$/)      { 0  }			# empty
-	elsif (/^-?\d+$/) { $_ }			# number
-	elsif (/^(-?[-\d:]+) (?:\{(\d+)\})? $/x) {	# a:b:c:d{e}
-	    ($numbers->parse($1)->sequence) x ($2 // 1);
-	}
-	else { die "$_: width format error.\n" }
-    }
-    map { split /,/, $_, -1 }
-    @{$opt->{width}};
-};
-
-$opt->{width} = do {
-    if    (@width == 0) { $DEFAULT_WIDTH }
-    elsif (@width == 1) { $width[0] }
-    else {
-	my @map = [ (int(pop @width)) x 2 ];
-	unshift @map, map { [ $_ < 0 ? (-$_, 0) : ($_, 1) ] } @width;
-	@width = map { $_->[0] } @map;
-	@width_index = grep { $map[$_][1] } 0 .. $#map;
-	\@width;
-    }
-};
-
-if ($opt->{expand} > 0) {
-    $opt->{tabstop} = $opt->{expand};
-}
-
-use charnames ':loose';
-for (@{$opt}{qw(tabhead tabspace)}) {
-    defined && length > 1 or next;
-    $_ = charnames::string_vianame($_) || die "$_: invalid name\n";
-}
-
-my $fold = Text::ANSI::Fold->new(
-    map  { $_ => $opt->{$_} }
-    grep { defined $opt->{$_} }
-    qw(width boundary padding padchar ambiguous
-       linebreak runin runout
-       expand tabstyle tabstop tabhead tabspace discard)
-    );
-
-my $separator = do {
-    $opt->{separate} =~ s{ ( \\ (.) ) } {
-	{ '\\' => '\\', n => "\n" }->{$2} // $1
-    }gexr;
-};
-
-while (<>) {
-    my $chomped = chomp;
-    my @chops = $fold->text($_)->chops;
-    if (@width_index > 0) {
-	@chops = grep { defined } @chops[@width_index];
-    }
-    print join $separator, @chops;
-    print "\n" if $chomped;
-    print "\n" x $opt->{paragraph} if $opt->{paragraph} > 0;
-}
-
-exit;
-
-__END__
 
 #  LocalWords:  unicode ansifold LANG colrm KINSOKU
