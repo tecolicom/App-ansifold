@@ -29,7 +29,7 @@ ansifold \[ options \]
 
 # VERSION
 
-Version 1.0902
+Version 1.10
 
 # DESCRIPTION
 

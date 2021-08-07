@@ -2,6 +2,11 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.10 2021-08-07T06:21:29Z
+
+    - Update help and version style.
+    - Add --boundary=space option.
+
 1.0902 2021-08-05T05:43:11Z
 
     - Adopt the latest version of Getopt::EX::Hashed.
