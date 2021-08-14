@@ -63,74 +63,74 @@ if ($0 =~ /expand$/) {
     $DEFAULT_EXPAND = 1;
 }
 
-use Getopt::EX::Hashed 'has';
+use Getopt::EX::Hashed 'has'; {
 
-has width     => spec => " w =s@ " , default => [];
-has boundary  => spec => "   =s  " , default => "none";
-has padding   => spec => "   :s  " , action => sub {
-    $_->{padding} = 1;
-    $_->{padchar} = $_[1] if $_[1] ne '';
-};
-has padchar   => spec => "   =s  " ;
-has ambiguous => spec => "   =s  " ;
-has paragraph => spec => " p +   " , default => 0;
-has separate  => spec => "   =s  " , default => "\n";
-has linebreak => spec => "   =s  " , alias   => 'lb';
-has runin     => spec => "   =i  " , default => 4;
-has runout    => spec => "   =i  " , default => 4;
-has nonewline => spec => " n     " ;
-has smart     => spec => " s !   " ;
-has expand    => spec => " x :-1 " , default => $DEFAULT_EXPAND;
-has tabstop   => spec => "   =i  " ;
-has tabhead   => spec => "   =s  " ;
-has tabspace  => spec => "   =s  " ;
-has tabstyle  => spec => "   =s  " ;
-has discard   => spec => "   =s@ " , default => [];
-has help      => spec => " h     " ;
-has version   => spec => " v     " ;
+    has width     => spec => ' w =s@ ' , default => [];
+    has boundary  => spec => '   =s  ' , default => 'none';
+    has padding   => spec => '   :s  ' , action => sub {
+	$_->{padding} = 1;
+	$_->{padchar} = $_[1] if $_[1] ne '';
+    };
+    has padchar   => spec => '   =s  ' ;
+    has ambiguous => spec => '   =s  ' ;
+    has paragraph => spec => ' p +   ' , default => 0;
+    has separate  => spec => '   =s  ' , default => '\n';
+    has linebreak => spec => '   =s  ' , alias   => 'lb';
+    has runin     => spec => '   =i  ' , default => 4;
+    has runout    => spec => '   =i  ' , default => 4;
+    has nonewline => spec => ' n     ' ;
+    has smart     => spec => ' s !   ' ;
+    has expand    => spec => ' x :-1 ' , default => $DEFAULT_EXPAND;
+    has tabstop   => spec => '   =i  ' ;
+    has tabhead   => spec => '   =s  ' ;
+    has tabspace  => spec => '   =s  ' ;
+    has tabstyle  => spec => '   =s  ' ;
+    has discard   => spec => '   =s@ ' , default => [];
+    has help      => spec => ' h     ' ;
+    has version   => spec => ' v     ' ;
 
-has '+help' => action => sub {
-    pod2usage
-	-verbose  => 99,
-	-sections => [ qw(SYNOPSIS VERSION) ];
-};
-
-has '+version' => action  => sub {
-    print "Version: $VERSION\n";
-    exit;
-};
-
-has '+nonewline' => action  => sub {
-    $_{separate} = "";
-};
-
-has '+linebreak' =>
-    default => LINEBREAK_NONE,
-    action => sub {
-	my($name, $value) = @_;
-	$_->{$name} = do {
-	    local $_ = $value;
-	    my $v = LINEBREAK_NONE;
-	    $v   |= LINEBREAK_ALL    if /all/i;
-	    $v   |= LINEBREAK_RUNIN  if /runin/i;
-	    $v   |= LINEBREAK_RUNOUT if /runout/i;
-	    $v;
-	};
+    has '+help' => action => sub {
+	pod2usage
+	    -verbose  => 99,
+	    -sections => [ qw(SYNOPSIS VERSION) ];
     };
 
-has '+smart' =>
-    action => sub {
-	my $smart = $_->{$_[0]} = $_[1];
-	($_->{boundary}, $_->{linebreak}) = do {
-	    if ($smart) {
-		('word', LINEBREAK_ALL);
-	    } else {
-		('none', LINEBREAK_NONE);
-	    }
-	};
+    has '+version' => action  => sub {
+	print "Version: $VERSION\n";
+	exit;
     };
 
-no Getopt::EX::Hashed;
+    has '+nonewline' => action  => sub {
+	$_{separate} = "";
+    };
+
+    has '+linebreak' =>
+	default => LINEBREAK_NONE,
+	action => sub {
+	    my($name, $value) = @_;
+	    $_->{$name} = do {
+		local $_ = $value;
+		my $v = LINEBREAK_NONE;
+		$v   |= LINEBREAK_ALL    if /all/i;
+		$v   |= LINEBREAK_RUNIN  if /runin/i;
+		$v   |= LINEBREAK_RUNOUT if /runout/i;
+		$v;
+	    };
+    };
+
+    has '+smart' =>
+	action => sub {
+	    my $smart = $_->{$_[0]} = $_[1];
+	    ($_->{boundary}, $_->{linebreak}) = do {
+		if ($smart) {
+		    ('word', LINEBREAK_ALL);
+		} else {
+		    ('none', LINEBREAK_NONE);
+		}
+	    };
+    };
+
+} no Getopt::EX::Hashed;
 
 use Getopt::EX::Long qw(:DEFAULT ExConfigure Configure);
 ExConfigure BASECLASS => [ __PACKAGE__, 'Getopt::EX' ];
