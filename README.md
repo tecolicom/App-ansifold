@@ -9,8 +9,8 @@ ansifold \[ options \]
 
     -w#   --width=#                Folding width (default 72)
           --boundary=word|space    Fold on word boundary
-          --padding                Padding to margin space
-          --padchar=_              Padding character
+          --padding[=#]            Padding to margin space
+          --padchar=_              Default padding character
           --ambiguous=narrow|wide  Unicode ambiguous character handling
     -p    --paragraph              Print extra newline
           --separate=string        Set separator string (default newline)
@@ -47,8 +47,9 @@ change the folding width.
 Single field is used repeatedly for the same line.
 
 With option **--padding**, remained columns are filled by padding
-character (space by default).  You can use **--padchar** to change
-padding character.
+character, space by default, or specified by optional value like
+`--padding=_`.  Default padding character can be set by **--padchar**
+option.
 
 **ansifold** handles Unicode multi-byte characters properly.  Option
 **--ambiguous** takes _wide_ or _narrow_ and it specifies the visual

@@ -18,8 +18,8 @@ ansifold [ options ]
 
     -w#   --width=#                Folding width (default 72)
           --boundary=word|space    Fold on word boundary
-          --padding                Padding to margin space
-          --padchar=_              Padding character
+          --padding[=#]            Padding to margin space
+          --padchar=_              Default padding character
           --ambiguous=narrow|wide  Unicode ambiguous character handling
     -p    --paragraph              Print extra newline
           --separate=string        Set separator string (default newline)
@@ -67,7 +67,10 @@ use Getopt::EX::Hashed 'has';
 
 has width     => spec => " w =s@ " , default => [];
 has boundary  => spec => "   =s  " , default => "none";
-has padding   => spec => "   !   " ;
+has padding   => spec => "   :s  " , action => sub {
+    $_->{padding} = 1;
+    $_->{padchar} = $_[1] if $_[1] ne '';
+};
 has padchar   => spec => "   =s  " ;
 has ambiguous => spec => "   =s  " ;
 has paragraph => spec => " p +   " , default => 0;
@@ -221,8 +224,9 @@ change the folding width.
 Single field is used repeatedly for the same line.
 
 With option B<--padding>, remained columns are filled by padding
-character (space by default).  You can use B<--padchar> to change
-padding character.
+character, space by default, or specified by optional value like
+C<--padding=_>.  Default padding character can be set by B<--padchar>
+option.
 
 B<ansifold> handles Unicode multi-byte characters properly.  Option
 B<--ambiguous> takes I<wide> or I<narrow> and it specifies the visual
