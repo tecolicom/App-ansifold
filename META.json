@@ -43,7 +43,7 @@
       "runtime" : {
          "requires" : {
             "Getopt::EX" : "v1.24.1",
-            "Getopt::EX::Hashed" : "0.9906",
+            "Getopt::EX::Hashed" : "0.9912",
             "Text::ANSI::Fold" : "2.11",
             "perl" : "5.016"
          }
@@ -67,7 +67,7 @@
          "web" : "https://github.com/kaz-utashiro/ansifold"
       }
    },
-   "version" : "1.10",
+   "version" : "1.11",
    "x_authority" : "cpan:UTASHIRO",
    "x_contributors" : [
       "Kazumasa Utashiro <kaz@utashiro.com>",
