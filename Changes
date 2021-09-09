@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.1101 2021-09-09T04:37:08Z
+
+    - Improve option validation.
+
 1.11 2021-08-15T01:01:45Z
 
     - Make --padding option to take optional padchar value.

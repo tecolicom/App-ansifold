@@ -4,7 +4,7 @@ use v5.14;
 use warnings;
 use utf8;
 
-our $VERSION = "1.11";
+our $VERSION = "1.1101";
 
 =encoding utf-8
 
@@ -38,7 +38,7 @@ ansifold [ options ]
 
 =head1 VERSION
 
-Version 1.11
+Version 1.1101
 
 =cut
 
@@ -76,18 +76,21 @@ use Getopt::EX::Hashed 'has'; {
     has paragraph => spec => ' p +   ' , default => 0;
     has separate  => spec => '   =s  ' , default => '\n';
     has linebreak => spec => '   =s  ' , alias   => 'lb';
-    has runin     => spec => '   =i  ' , default => 4;
-    has runout    => spec => '   =i  ' , default => 4;
+    has runin     => spec => '   =i  ' , min => 1, default => 4;
+    has runout    => spec => '   =i  ' , min => 1, default => 4;
     has nonewline => spec => ' n     ' ;
     has smart     => spec => ' s !   ' ;
     has expand    => spec => ' x :-1 ' , default => $DEFAULT_EXPAND;
-    has tabstop   => spec => '   =i  ' ;
+    has tabstop   => spec => '   =i  ' , min => 1;
     has tabhead   => spec => '   =s  ' ;
     has tabspace  => spec => '   =s  ' ;
     has tabstyle  => spec => '   =s  ' ;
     has discard   => spec => '   =s@ ' , default => [];
     has help      => spec => ' h     ' ;
     has version   => spec => ' v     ' ;
+
+    has '+boundary'  => re => qr/^(none|word|space)$/;
+    has '+ambiguous' => re => qr/^(wide|narrow)$/ ;
 
     has '+help' => action => sub {
 	pod2usage
