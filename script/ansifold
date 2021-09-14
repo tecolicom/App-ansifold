@@ -65,29 +65,29 @@ if ($0 =~ /expand$/) {
 
 use Getopt::EX::Hashed 'has'; {
 
-    has width     => spec => ' w =s@ ' , default => [];
-    has boundary  => spec => '   =s  ' , default => 'none';
-    has padding   => spec => '   :s  ' , action => sub {
+    has width     => ' w =s@ ' , default => [];
+    has boundary  => '   =s  ' , default => 'none';
+    has padding   => '   :s  ' , action => sub {
 	$_->{padding} = 1;
 	$_->{padchar} = $_[1] if $_[1] ne '';
     };
-    has padchar   => spec => '   =s  ' ;
-    has ambiguous => spec => '   =s  ' ;
-    has paragraph => spec => ' p +   ' , default => 0;
-    has separate  => spec => '   =s  ' , default => '\n';
-    has linebreak => spec => '   =s  ' , alias   => 'lb';
-    has runin     => spec => '   =i  ' , min => 1, default => 4;
-    has runout    => spec => '   =i  ' , min => 1, default => 4;
-    has nonewline => spec => ' n     ' ;
-    has smart     => spec => ' s !   ' ;
-    has expand    => spec => ' x :-1 ' , default => $DEFAULT_EXPAND;
-    has tabstop   => spec => '   =i  ' , min => 1;
-    has tabhead   => spec => '   =s  ' ;
-    has tabspace  => spec => '   =s  ' ;
-    has tabstyle  => spec => '   =s  ' ;
-    has discard   => spec => '   =s@ ' , default => [];
-    has help      => spec => ' h     ' ;
-    has version   => spec => ' v     ' ;
+    has padchar   => '   =s  ' ;
+    has ambiguous => '   =s  ' ;
+    has paragraph => ' p +   ' , default => 0;
+    has separate  => '   =s  ' , default => '\n';
+    has linebreak => '   =s  ' , alias   => 'lb';
+    has runin     => '   =i  ' , min => 1, default => 4;
+    has runout    => '   =i  ' , min => 1, default => 4;
+    has nonewline => ' n     ' ;
+    has smart     => ' s !   ' ;
+    has expand    => ' x :-1 ' , default => $DEFAULT_EXPAND;
+    has tabstop   => '   =i  ' , min => 1;
+    has tabhead   => '   =s  ' ;
+    has tabspace  => '   =s  ' ;
+    has tabstyle  => '   =s  ' ;
+    has discard   => '   =s@ ' , default => [];
+    has help      => ' h     ' ;
+    has version   => ' v     ' ;
 
     has '+boundary'  => re => qr/^(none|word|space)$/;
     has '+ambiguous' => re => qr/^(wide|narrow)$/ ;
