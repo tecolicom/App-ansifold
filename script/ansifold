@@ -104,7 +104,7 @@ use Getopt::EX::Hashed 'has'; {
     };
 
     has '+nonewline' => action  => sub {
-	$_{separate} = "";
+	$_->{separate} = "";
     };
 
     has '+linebreak' =>
