@@ -2,6 +2,11 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.12 2021-10-23T02:01:07Z
+
+    - Introduce --colrm option.
+    - Fix -n not working bug.
+
 1.1101 2021-09-09T04:37:08Z
 
     - Improve option validation.
