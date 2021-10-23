@@ -14,8 +14,8 @@ use Text::ANSI::Fold qw(:constants);
 use Data::Dumper;
 
 our $DEFAULT_WIDTH    //= 72;
-our $DEFAULT_EXPAND   //= 0;
 our $DEFAULT_SEPARATE //= "\n";
+our $DEFAULT_EXPAND   //= 0;
 our $DEFAULT_COLRM    //= 0;
 
 use Getopt::EX::Hashed 'has'; {
@@ -89,9 +89,17 @@ use Getopt::EX::Hashed 'has'; {
 	    };
     };
 
+    has width_index => default => [];
+
 } no Getopt::EX::Hashed;
 
 sub run {
+    my $app = shift;
+    $app->options->params->doit;
+    return 0;
+}
+
+sub options {
     my $app = shift;
 
     for (@ARGV) {
@@ -102,9 +110,6 @@ sub run {
     ExConfigure BASECLASS => [ __PACKAGE__, 'Getopt::EX' ];
     Configure "bundling";
     $app->getopt || pod2usage();
-
-    my @width_map;
-    my @width_index;
 
     if ($app->{colrm}) {
 	@{$app->{width}} = do {
@@ -121,6 +126,22 @@ sub run {
 	    }
 	}
     }
+
+    if ($app->{expand} > 0) {
+	$app->{tabstop} = $app->{expand};
+    }
+
+    use charnames ':loose';
+    for (@{$app}{qw(tabhead tabspace)}) {
+	defined && length > 1 or next;
+	$_ = charnames::string_vianame($_) || die "$_: invalid name\n";
+    }
+
+    return $app;
+}
+
+sub params {
+    my $app = shift;
 
     use Getopt::EX::Numbers;
     my $numbers = Getopt::EX::Numbers->new;
@@ -145,47 +166,44 @@ sub run {
 	    my @map = [ (int(pop @width)) x 2 ];
 	    unshift @map, map { [ $_ < 0 ? (-$_, 0) : ($_, 1) ] } @width;
 	    @width = map { $_->[0] } @map;
-	    @width_index = grep { $map[$_][1] } 0 .. $#map;
+	    $app->{width_index} = [ grep { $map[$_][1] } 0 .. $#map ];
 	    \@width;
 	}
     };
 
-    if ($app->{expand} > 0) {
-	$app->{tabstop} = $app->{expand};
-    }
+    return $app;
+}
 
-    use charnames ':loose';
-    for (@{$app}{qw(tabhead tabspace)}) {
-	defined && length > 1 or next;
-	$_ = charnames::string_vianame($_) || die "$_: invalid name\n";
-    }
+sub doit {
+    my $app = shift;
 
     my $fold = Text::ANSI::Fold->new(
 	map  { $_ => $app->{$_} }
 	grep { defined $app->{$_} }
 	qw(width boundary padding padchar ambiguous
-	linebreak runin runout
-	expand tabstyle tabstop tabhead tabspace discard)
+	   linebreak runin runout
+	   expand tabstyle tabstop tabhead tabspace discard)
 	);
 
     my $separator = do {
-	$app->{separate} =~ s{ ( \\ (.) ) } {
-	{ '\\' => '\\', n => "\n" }->{$2} // $1
+	$app->{separate} =~ s{ ( \\ (.) ) }{
+	    { '\\' => '\\', n => "\n" }->{$2} // $1
 	}gexr;
     };
 
     while (<>) {
 	my $chomped = chomp;
 	my @chops = $fold->text($_)->chops;
-	if (@width_index > 0) {
-	    @chops = grep { defined } @chops[@width_index];
+	my @index = @{$app->{width_index}};
+	if (@index > 0) {
+	    @chops = grep { defined } @chops[@index];
 	}
 	print join $separator, @chops;
 	print "\n" if $chomped;
 	print "\n" x $app->{paragraph} if $app->{paragraph} > 0;
     }
 
-    return 0;
+    return $app;
 }
 
 1;
