@@ -213,13 +213,13 @@ characters at once according to the given style name.  Select from
 
 # COLRM
 
-## **--colrm**
+## **--colrm** \[ start \[ end \] \]
 
 Option **--colrm** takes [colrm(1)](http://man.he.net/man1/colrm) command compatible arguments.
 Next command behave exactly like `colrm start end` and takes care of
 ANSI terminal sequences.
 
-    $ ansifold -n -w-1 --colrm start end
+    $ ansifold --colrm start end
 
 # FILES
 

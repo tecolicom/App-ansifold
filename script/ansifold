@@ -63,9 +63,7 @@ if    ($0 =~ /expand$/) {	## when executed as 'ansiexpand'
     $DEFAULT_EXPAND = 1;
 }
 elsif ($0 =~ /colrm$/) {	## when executed as 'ansicolrm'
-    $DEFAULT_WIDTH = -1;
     $DEFAULT_COLRM = 1;
-    $DEFAULT_SEPARATE = "";
 }
 
 use Getopt::EX::Hashed 'has'; {
@@ -151,6 +149,7 @@ my @width_map;
 my @width_index;
 
 if ($opt->{colrm}) {
+    $opt->{separate} = "";
     @{$opt->{width}} = do {
 	unless (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
 	    "-1";
@@ -414,13 +413,13 @@ L<Text::ANSI::Fold> library.
 
 =head1 COLRM
 
-=head2 B<--colrm>
+=head2 B<--colrm> [ start [ end ] ]
 
 Option B<--colrm> takes L<colrm(1)> command compatible arguments.
 Next command behave exactly like C<colrm start end> and takes care of
 ANSI terminal sequences.
 
-    $ ansifold -n -w-1 --colrm start end
+    $ ansifold --colrm start end
 
 =head1 FILES
 
