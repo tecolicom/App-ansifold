@@ -86,11 +86,12 @@ use Getopt::EX::Hashed 'has'; {
     has tabspace  => '   =s  ' ;
     has tabstyle  => '   =s  ' ;
     has discard   => '   =s@ ' , default => [];
+    has colrm     => '       ' ;
     has help      => ' h     ' ;
     has version   => ' v     ' ;
 
-    has '+boundary'  => re => qr/^(none|word|space)$/;
-    has '+ambiguous' => re => qr/^(wide|narrow)$/ ;
+    has '+boundary'  => any => [ qw(none word space) ];
+    has '+ambiguous' => any => [ qw(wide narrow) ] ;
 
     has '+help' => action => sub {
 	pod2usage
