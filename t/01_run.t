@@ -15,7 +15,7 @@ is(ansifold('--tabstop', '0')->{result} >> 8, 2, "invalid --tabstop");
 
 is(ansifold('--tabstop', '1', '/dev/null')->{result} >> 8, 0, "valid --tabstop");
 
-is(ansifold('--boundary', 'symbol')->{result} >> 8, 2, "invalid --boundary");
+is(ansifold('--boundary', 'symbol', '/dev/null')->{result} >> 8, 2, "invalid --boundary");
 is(ansifold('--boundary', 'space', '/dev/null')->{result} >> 8, 0, "valid --boundary");
 
 done_testing;

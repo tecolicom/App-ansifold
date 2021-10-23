@@ -63,6 +63,7 @@ if    ($0 =~ /expand$/) {	## when executed as 'ansiexpand'
     $DEFAULT_EXPAND = 1;
 }
 elsif ($0 =~ /colrm$/) {	## when executed as 'ansicolrm'
+    $DEFAULT_SEPARATE = "";
     $DEFAULT_COLRM = 1;
 }
 
@@ -149,17 +150,16 @@ my @width_map;
 my @width_index;
 
 if ($opt->{colrm}) {
-    $opt->{separate} = "";
     @{$opt->{width}} = do {
 	unless (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
 	    "-1";
 	} else {
-	    my $start = shift @ARGV;
+	    my $start = shift(@ARGV) - 1;
 	    if (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
-		my $end = shift @ARGV;
-		sprintf '%d,-%d,-1', $start - 1, $end - $start + 1;
+		my $end = shift(@ARGV);
+		sprintf '%d,-%d,-1', $start, $end - $start;
 	    } else {
-		sprintf '%d,', $start - 1;
+		sprintf '%d,', $start;
 	    }
 	}
     }
