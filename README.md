@@ -24,6 +24,7 @@ ansifold \[ options \]
           --tabhead=char           Tab-head character (default space)
           --tabspace=char          Tab-space character (default space)
           --tabstyle=style         Tab expansion style (shade, dot, symbol)
+          --colrm start [ end ]    colrm(1) command compatible
     -h    --help                   Show help message
     -v    --version                Show version
 
@@ -209,6 +210,16 @@ characters at once according to the given style name.  Select from
 [Text::ANSI::Fold](https://metacpan.org/pod/Text::ANSI::Fold) library.
 
     $ ansifold --expand --tabstyle=shade
+
+# COLRM
+
+## **--colrm**
+
+Option **--colrm** takes [colrm(1)](http://man.he.net/man1/colrm) command compatible arguments.
+Next command behave exactly like `colrm start end` and takes care of
+ANSI terminal sequences.
+
+    $ ansifold -n -w-1 --colrm start end
 
 # FILES
 

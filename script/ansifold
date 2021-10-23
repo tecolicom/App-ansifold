@@ -33,6 +33,7 @@ ansifold [ options ]
           --tabhead=char           Tab-head character (default space)
           --tabspace=char          Tab-space character (default space)
           --tabstyle=style         Tab expansion style (shade, dot, symbol)
+          --colrm start [ end ]    colrm(1) command compatible
     -h    --help                   Show help message
     -v    --version                Show version
 
@@ -54,13 +55,17 @@ use Data::Dumper;
 
 my $DEFAULT_WIDTH = 72;
 my $DEFAULT_EXPAND = 0;
+my $DEFAULT_SEPARATE = "\n";
+my $DEFAULT_COLRM = 0;
 
-##
-## when executed as 'ansiexpand'
-##
-if ($0 =~ /expand$/) {
+if    ($0 =~ /expand$/) {	## when executed as 'ansiexpand'
     $DEFAULT_WIDTH = -1;
     $DEFAULT_EXPAND = 1;
+}
+elsif ($0 =~ /colrm$/) {	## when executed as 'ansicolrm'
+    $DEFAULT_WIDTH = -1;
+    $DEFAULT_COLRM = 1;
+    $DEFAULT_SEPARATE = "";
 }
 
 use Getopt::EX::Hashed 'has'; {
@@ -74,7 +79,7 @@ use Getopt::EX::Hashed 'has'; {
     has padchar   => '   =s  ' ;
     has ambiguous => '   =s  ' ;
     has paragraph => ' p +   ' , default => 0;
-    has separate  => '   =s  ' , default => '\n';
+    has separate  => '   =s  ' , default => $DEFAULT_SEPARATE;
     has linebreak => '   =s  ' , alias   => 'lb';
     has runin     => '   =i  ' , min => 1, default => 4;
     has runout    => '   =i  ' , min => 1, default => 4;
@@ -86,7 +91,7 @@ use Getopt::EX::Hashed 'has'; {
     has tabspace  => '   =s  ' ;
     has tabstyle  => '   =s  ' ;
     has discard   => '   =s@ ' , default => [];
-    has colrm     => '       ' ;
+    has colrm     => '       ' , default => $DEFAULT_COLRM;
     has help      => ' h     ' ;
     has version   => ' v     ' ;
 
@@ -144,6 +149,22 @@ $opt->getopt || pod2usage();
 
 my @width_map;
 my @width_index;
+
+if ($opt->{colrm}) {
+    @{$opt->{width}} = do {
+	unless (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
+	    "-1";
+	} else {
+	    my $start = shift @ARGV;
+	    if (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
+		my $end = shift @ARGV;
+		sprintf '%d,-%d,-1', $start - 1, $end - $start + 1;
+	    } else {
+		sprintf '%d,', $start - 1;
+	    }
+	}
+    }
+}
 
 use Getopt::EX::Numbers;
 my $numbers = Getopt::EX::Numbers->new;
@@ -390,6 +411,16 @@ C<dot>, C<symbol> or C<shade>.  Styles are defined in
 L<Text::ANSI::Fold> library.
 
     $ ansifold --expand --tabstyle=shade
+
+=head1 COLRM
+
+=head2 B<--colrm>
+
+Option B<--colrm> takes L<colrm(1)> command compatible arguments.
+Next command behave exactly like C<colrm start end> and takes care of
+ANSI terminal sequences.
+
+    $ ansifold -n -w-1 --colrm start end
 
 =head1 FILES
 

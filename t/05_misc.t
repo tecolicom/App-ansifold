@@ -46,4 +46,20 @@ test
     expect => join(":", ("0123456789") x 5)
     ;
 
+##
+## colrm
+##
+
+test
+    option => "-n --colrm 4",
+    stdin => "1234567890",
+    expect => "123",
+    ;
+
+test
+    option => "-n --colrm 4 7",
+    stdin => "1234567890",
+    expect => "123890",
+    ;
+
 done_testing;
