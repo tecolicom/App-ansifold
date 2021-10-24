@@ -95,6 +95,7 @@ use Getopt::EX::Hashed 'has'; {
 
 sub run {
     my $app = shift;
+    local @ARGV = @_;
     $app->options->params->doit;
     return 0;
 }
@@ -191,13 +192,12 @@ sub doit {
 	}gexr;
     };
 
+    my @index = @{$app->{width_index}};
+
     while (<>) {
 	my $chomped = chomp;
 	my @chops = $fold->text($_)->chops;
-	my @index = @{$app->{width_index}};
-	if (@index > 0) {
-	    @chops = grep { defined } @chops[@index];
-	}
+	@chops = grep { defined } @chops[@index] if @index > 0;
 	print join $separator, @chops;
 	print "\n" if $chomped;
 	print "\n" x $app->{paragraph} if $app->{paragraph} > 0;

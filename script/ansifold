@@ -15,7 +15,7 @@ BEGIN {
 }
 
 use  App::ansifold;
-exit App::ansifold->new->run();
+exit App::ansifold->new->run(splice @ARGV);
 
 __END__
 
