@@ -68,19 +68,22 @@ sub stdout {
     $obj->{stdout};
 }
 
-*result = \&stdout; # for backward compatibility
-
 sub execute {
     my $obj = shift;
-    my $name = $obj->{COMMAND};
-    my $command = $name =~ s{^(?!\/)}{$dir/}r;
+    my $command = $obj->{COMMAND};
     my @option = @{$obj->{OPTION}};
-    exec $^X, "-I$lib", $command, @option;
+    if (ref $command eq 'CODE') {
+	eval { $command->(@option) };
+	exit;
+    } else {
+	my $file = $command =~ s{^(?!\/)}{$dir/}r;
+	exec $^X, "-I$lib", $file, @option;
+    }
 }
 
 sub setstdin {
     my $obj = shift;
-    my $data = shift;
+    my $data = shift // return $obj;
     my $stdin = $obj->{STDIN} //= do {
 	my $fh = new_tmpfile IO::File or die "new_tmpfile: $!\n";
 	$fh->fcntl(F_SETFD, 0) or die "fcntl F_SETFD: $!\n";
