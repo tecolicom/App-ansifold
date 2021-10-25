@@ -34,7 +34,7 @@ ansicolrm \[ options \]
 
 # VERSION
 
-Version 1.12
+Version 1.13
 
 # DESCRIPTION
 

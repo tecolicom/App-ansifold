@@ -2,6 +2,11 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.13 2021-10-25T00:42:27Z
+
+    - Move program body from script/ to lib/.
+    - Improve test codes.
+
 1.12 2021-10-23T02:01:07Z
 
     - Introduce --colrm option.
