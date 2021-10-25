@@ -5,12 +5,12 @@ use warnings;
 
 BEGIN {
     if ($0 =~ /expand$/) {   ## when executed as 'ansiexpand'
-	$App::ansifold::DEFAULT_WIDTH = -1;
-	$App::ansifold::DEFAULT_EXPAND = 1;
+	$App::ansifold::DEFAULT_WIDTH  = -1;
+	$App::ansifold::DEFAULT_EXPAND = -1;
     }
     elsif ($0 =~ /colrm$/) { ## when executed as 'ansicolrm'
 	$App::ansifold::DEFAULT_SEPARATE = "";
-	$App::ansifold::DEFAULT_COLRM = 1;
+	$App::ansifold::DEFAULT_COLRM    = 1;
     }
 }
 
@@ -50,15 +50,24 @@ ansifold [ options ]
     -h    --help                   Show help message
     -v    --version                Show version
 
+ansiexpand [ options ]
+
+ansicolrm [ options ]
+
 =head1 VERSION
 
 Version 1.12
 
 =head1 DESCRIPTION
 
-B<ansifold> is a fold(1) compatible command utilizing
+B<ansifold> is a L<fold(1)> compatible command utilizing
 L<Text::ANSI::Fold> module, which enables to handle ANSI terminal
 sequences.
+
+When executed under the name of B<ansiexpand>, it works like
+L<expand(1)> command.  If the name is B<ansicolrm>, works like
+L<colrm(1)> command.  Because they are not installed automatically,
+make a symbolic link if you want.
 
 =head2 FOLD BY WIDTH
 

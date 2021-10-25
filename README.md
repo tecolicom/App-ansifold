@@ -28,15 +28,24 @@ ansifold \[ options \]
     -h    --help                   Show help message
     -v    --version                Show version
 
+ansiexpand \[ options \]
+
+ansicolrm \[ options \]
+
 # VERSION
 
 Version 1.12
 
 # DESCRIPTION
 
-**ansifold** is a fold(1) compatible command utilizing
+**ansifold** is a [fold(1)](http://man.he.net/man1/fold) compatible command utilizing
 [Text::ANSI::Fold](https://metacpan.org/pod/Text::ANSI::Fold) module, which enables to handle ANSI terminal
 sequences.
+
+When executed under the name of **ansiexpand**, it works like
+[expand(1)](http://man.he.net/man1/expand) command.  If the name is **ansicolrm**, works like
+[colrm(1)](http://man.he.net/man1/colrm) command.  Because they are not installed automatically,
+make a symbolic link if you want.
 
 ## FOLD BY WIDTH
 
