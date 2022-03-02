@@ -27,6 +27,7 @@ use Getopt::EX::Hashed 'has'; {
 	$_->{padchar} = $_[1] if $_[1] ne '';
     };
     has padchar   => '   =s  ' ;
+    has prefix    => '   =s  ' ;
     has ambiguous => '   =s  ' ;
     has paragraph => ' p +   ' , default => 0;
     has separate  => '   =s  ' , default => $DEFAULT_SEPARATE;
@@ -154,6 +155,9 @@ sub params {
 	    elsif (/^(-?[-\d:]+) (?:\{(\d+)\})? $/x) {	# a:b:c:d{e}
 		($numbers->parse($1)->sequence) x ($2 // 1);
 	    }
+	    elsif (/^(term|tty)$/) {
+		terminal_width();
+	    }
 	    else { die "$_: width format error.\n" }
 	}
 	map { split /,/, $_, -1 }
@@ -181,7 +185,7 @@ sub doit {
     my $fold = Text::ANSI::Fold->new(
 	map  { $_ => $app->{$_} }
 	grep { defined $app->{$_} }
-	qw(width boundary padding padchar ambiguous
+	qw(width boundary padding padchar prefix ambiguous
 	   linebreak runin runout
 	   expand tabstyle tabstop tabhead tabspace discard)
 	);
@@ -204,6 +208,19 @@ sub doit {
     }
 
     return $app;
+}
+
+sub terminal_width {
+    use Term::ReadKey;
+    my $default = 80;
+    my @size;
+    if (open my $tty, ">", "/dev/tty") {
+	# Term::ReadKey 2.31 on macOS 10.15 has a bug in argument handling
+	# and the latest version 2.38 fails to install.
+	# This code should work on both versions.
+	@size = GetTerminalSize $tty, $tty;
+    }
+    $size[0] or $default;
 }
 
 1;
