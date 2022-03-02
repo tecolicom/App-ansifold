@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.14 2022-03-02T06:24:42Z
+
+    - Introduce --prefix option.
+
 1.13 2021-10-25T00:42:27Z
 
     - Move program body from script/ to lib/.
