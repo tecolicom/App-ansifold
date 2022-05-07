@@ -165,7 +165,7 @@ Context of word is defined by option value; _word_ means
 alpha-numeric sequence, while _space_ means simply non-space
 printables.
 
-## **--linebreak**=_all_|_ruunin_|_runout_|_none_
+## **--linebreak**=_all_|_runin_|_runout_|_none_
 
 Option **--linebreak** takes a value of _all_, _runin_, _runout_ or
 _none_.  Default value is _none_.

@@ -187,7 +187,7 @@ Context of word is defined by option value; I<word> means
 alpha-numeric sequence, while I<space> means simply non-space
 printables.
 
-=head2 B<--linebreak>=I<all>|I<ruunin>|I<runout>|I<none>
+=head2 B<--linebreak>=I<all>|I<runin>|I<runout>|I<none>
 
 Option B<--linebreak> takes a value of I<all>, I<runin>, I<runout> or
 I<none>.  Default value is I<none>.
