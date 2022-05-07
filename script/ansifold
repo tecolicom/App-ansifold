@@ -271,8 +271,6 @@ See L<Getopt::EX::Module> for format.
 =head2 CPANMINUS
 
     $ cpanm App::ansifold
-    or
-    $ curl -sL http://cpanmin.us | perl - App::ansifold
 
 =head1 SEE ALSO
 

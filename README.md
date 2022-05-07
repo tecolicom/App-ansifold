@@ -245,8 +245,6 @@ ANSI terminal sequences.
 ## CPANMINUS
 
     $ cpanm App::ansifold
-    or
-    $ curl -sL http://cpanmin.us | perl - App::ansifold
 
 # SEE ALSO
 
