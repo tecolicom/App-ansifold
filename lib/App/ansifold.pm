@@ -49,18 +49,18 @@ use Getopt::EX::Hashed 'has'; {
     has '+boundary'  => any => [ qw(none word space) ];
     has '+ambiguous' => any => [ qw(wide narrow) ] ;
 
-    has '+help' => action => sub {
+    has '+help' => sub {
 	pod2usage
 	    -verbose  => 99,
 	    -sections => [ qw(SYNOPSIS VERSION) ];
     };
 
-    has '+version' => action  => sub {
+    has '+version' => sub {
 	print "Version: $VERSION\n";
 	exit;
     };
 
-    has '+nonewline' => action  => sub {
+    has '+nonewline' => sub {
 	$_->{separate} = "";
     };
 
@@ -76,18 +76,17 @@ use Getopt::EX::Hashed 'has'; {
 		$v   |= LINEBREAK_RUNOUT if /runout/i;
 		$v;
 	    };
-    };
+	};
 
-    has '+smart' =>
-	action => sub {
-	    my $smart = $_->{$_[0]} = $_[1];
-	    ($_->{boundary}, $_->{linebreak}) = do {
-		if ($smart) {
-		    ('word', LINEBREAK_ALL);
-		} else {
-		    ('none', LINEBREAK_NONE);
-		}
-	    };
+    has '+smart' => sub {
+	my $smart = $_->{$_[0]} = $_[1];
+	($_->{boundary}, $_->{linebreak}) = do {
+	    if ($smart) {
+		('word', LINEBREAK_ALL);
+	    } else {
+		('none', LINEBREAK_NONE);
+	    }
+	};
     };
 
     has width_index => default => [];
