@@ -113,6 +113,7 @@ sub options {
     $app->getopt || pod2usage();
 
     if ($app->{colrm}) {
+	$app->{separate} = '';
 	@{$app->{width}} = do {
 	    unless (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
 		"-1";

@@ -46,7 +46,7 @@ sequences.
 When executed under the name of **ansiexpand**, it works like
 [expand(1)](http://man.he.net/man1/expand) command.  If the name is **ansicolrm**, works like
 [colrm(1)](http://man.he.net/man1/colrm) command.  Because they are not installed automatically,
-make a symbolic link if you want.
+make a symbolic link manually if you want.
 
 ## FOLD BY WIDTH
 
@@ -227,9 +227,9 @@ characters at once according to the given style name.  Select from
 
 ## **--colrm** \[ start \[ end \] \]
 
-Option **--colrm** takes [colrm(1)](http://man.he.net/man1/colrm) command compatible arguments.
-Next command behave exactly like `colrm start end` and takes care of
-ANSI terminal sequences.
+Option **--colrm** takes [colrm(1)](http://man.he.net/man1/colrm) command compatible arguments and
+implicitly set **--separate** empty.  Next command behave exactly like
+`colrm start end` and takes care of ANSI terminal sequences.
 
     $ ansifold --colrm start end
 

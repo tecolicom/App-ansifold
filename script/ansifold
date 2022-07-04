@@ -68,7 +68,7 @@ sequences.
 When executed under the name of B<ansiexpand>, it works like
 L<expand(1)> command.  If the name is B<ansicolrm>, works like
 L<colrm(1)> command.  Because they are not installed automatically,
-make a symbolic link if you want.
+make a symbolic link manually if you want.
 
 =head2 FOLD BY WIDTH
 
@@ -249,9 +249,9 @@ L<Text::ANSI::Fold> library.
 
 =head2 B<--colrm> [ start [ end ] ]
 
-Option B<--colrm> takes L<colrm(1)> command compatible arguments.
-Next command behave exactly like C<colrm start end> and takes care of
-ANSI terminal sequences.
+Option B<--colrm> takes L<colrm(1)> command compatible arguments and
+implicitly set B<--separate> empty.  Next command behave exactly like
+C<colrm start end> and takes care of ANSI terminal sequences.
 
     $ ansifold --colrm start end
 
@@ -299,4 +299,5 @@ it under the same terms as Perl itself.
 
 =cut
 
-#  LocalWords:  unicode ansifold LANG colrm KINSOKU
+#  LocalWords:  unicode ansifold LANG colrm KINSOKU ansiexpand
+#  LocalWords:  ansicolrm
