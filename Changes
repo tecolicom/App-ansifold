@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.15 2022-07-04T01:13:31Z
+
+    - Make --colrm option set --separate to empty.
+
 1.14 2022-03-02T06:24:42Z
 
     - Introduce --prefix option.
