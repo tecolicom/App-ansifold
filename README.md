@@ -148,7 +148,7 @@ Option **--separate** set separator string.
 
 Option **-n** is a short-cut for `--separate ''`.
 
-Option **--paragraph** or **-p** print extra newline after each lines.
+Option **--paragraph** or **-p** print extra newline after each line.
 This is convenient when a paragraph is made up of single line, like
 microsoft word document.
 
@@ -156,8 +156,9 @@ microsoft word document.
 
 If a string is given by **--prefix** option, that string is inserted at
 the beginning of each folded text.  This is convenient to produce
-indented text block.  Originally made for [App::Greple::frame](https://metacpan.org/pod/App%3A%3AGreple%3A%3Aframe)
-module.
+indented text block.  Because the first line is not affected, insert
+appropiate prefix if necessary.  Originally made for
+[App::Greple::frame](https://metacpan.org/pod/App%3A%3AGreple%3A%3Aframe) module.
 
 # LINE BREAKING
 

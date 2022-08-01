@@ -170,7 +170,7 @@ Option B<--separate> set separator string.
 
 Option B<-n> is a short-cut for C<--separate ''>.
 
-Option B<--paragraph> or B<-p> print extra newline after each lines.
+Option B<--paragraph> or B<-p> print extra newline after each line.
 This is convenient when a paragraph is made up of single line, like
 microsoft word document.
 
