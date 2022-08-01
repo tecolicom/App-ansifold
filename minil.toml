@@ -8,6 +8,9 @@ readme_from = "script/ansifold"
 abstract_from = "script/ansifold"
 authors_from = "script/ansifold"
 
+[release]
+branch = "master"
+
 [unsupported]
 os = [
     "MSWin32",
