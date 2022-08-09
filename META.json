@@ -45,7 +45,7 @@
             "Getopt::EX" : "v1.28.0",
             "Getopt::EX::Hashed" : "1.03",
             "Term::ReadKey" : "0",
-            "Text::ANSI::Fold" : "2.13",
+            "Text::ANSI::Fold" : "2.1301",
             "perl" : "5.016"
          }
       },
