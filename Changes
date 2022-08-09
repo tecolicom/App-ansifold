@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.1501 2022-08-09T02:33:39Z
+
+    - Require Text::ANSI::Fold@2.1301 to fix a bug.
+
 1.15 2022-07-04T01:13:31Z
 
     - Make --colrm option set --separate to empty.
