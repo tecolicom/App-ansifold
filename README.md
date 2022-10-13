@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/kaz-utashiro/ansifold/workflows/test/badge.svg)](https://github.com/kaz-utashiro/ansifold/actions) [![MetaCPAN Release](https://badge.fury.io/pl/App-ansifold.svg)](https://metacpan.org/release/App-ansifold)
+[![Actions Status](https://github.com/kaz-utashiro/App-ansifold/workflows/test/badge.svg)](https://github.com/kaz-utashiro/App-ansifold/actions) [![MetaCPAN Release](https://badge.fury.io/pl/App-ansifold.svg)](https://metacpan.org/release/App-ansifold)
 # NAME
 
 ansifold - fold command handling ANSI terminal sequences
