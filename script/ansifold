@@ -282,7 +282,7 @@ See L<Getopt::EX::Module> for format.
 
 =head1 SEE ALSO
 
-L<ansifold|https://github.com/kaz-utashiro/ansifold>
+L<ansifold|https://github.com/kaz-utashiro/App-ansifold>
 
 L<Text::ANSI::Fold|https://github.com/kaz-utashiro/Text-ANSI-Fold>
 

@@ -256,7 +256,7 @@ implicitly set **--separate** empty.  Next command behave exactly like
 
 # SEE ALSO
 
-[ansifold](https://github.com/kaz-utashiro/ansifold)
+[ansifold](https://github.com/kaz-utashiro/App-ansifold)
 
 [Text::ANSI::Fold](https://github.com/kaz-utashiro/Text-ANSI-Fold)
 
