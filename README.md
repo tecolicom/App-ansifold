@@ -29,13 +29,11 @@ ansifold \[ options \]
     -h    --help                   Show help message
     -v    --version                Show version
 
-ansiexpand \[ options \]
-
 ansicolrm \[ options \]
 
 # VERSION
 
-Version 1.1502
+Version 1.1503
 
 # DESCRIPTION
 
@@ -257,6 +255,8 @@ implicitly set **--separate** empty.  Next command behave exactly like
 # SEE ALSO
 
 [ansifold](https://github.com/kaz-utashiro/App-ansifold)
+
+[ansiexpand](https://github.com/kaz-utashiro/App-ansiexpand)
 
 [Text::ANSI::Fold](https://github.com/kaz-utashiro/Text-ANSI-Fold)
 
