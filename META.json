@@ -58,13 +58,13 @@
    "release_status" : "unstable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/kaz-utashiro/App-ansifold/issues"
+         "web" : "https://github.com/tecolicom/App-ansifold/issues"
       },
-      "homepage" : "https://github.com/kaz-utashiro/App-ansifold",
+      "homepage" : "https://github.com/tecolicom/App-ansifold",
       "repository" : {
          "type" : "git",
-         "url" : "https://github.com/kaz-utashiro/App-ansifold.git",
-         "web" : "https://github.com/kaz-utashiro/App-ansifold"
+         "url" : "https://github.com/tecolicom/App-ansifold.git",
+         "web" : "https://github.com/tecolicom/App-ansifold"
       }
    },
    "version" : "1.1503",

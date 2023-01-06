@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/kaz-utashiro/App-ansifold/workflows/test/badge.svg)](https://github.com/kaz-utashiro/App-ansifold/actions) [![MetaCPAN Release](https://badge.fury.io/pl/App-ansifold.svg)](https://metacpan.org/release/App-ansifold)
+[![Actions Status](https://github.com/tecolicom/App-ansifold/workflows/test/badge.svg)](https://github.com/tecolicom/App-ansifold/actions) [![MetaCPAN Release](https://badge.fury.io/pl/App-ansifold.svg)](https://metacpan.org/release/App-ansifold)
 # NAME
 
 ansifold - fold command handling ANSI terminal sequences
@@ -254,13 +254,13 @@ implicitly set **--separate** empty.  Next command behave exactly like
 
 # SEE ALSO
 
-[ansifold](https://github.com/kaz-utashiro/App-ansifold)
+[ansifold](https://github.com/tecolicom/App-ansifold)
 
-[ansiexpand](https://github.com/kaz-utashiro/App-ansiexpand)
+[ansiexpand](https://github.com/tecolicom/App-ansiexpand)
 
-[Text::ANSI::Fold](https://github.com/kaz-utashiro/Text-ANSI-Fold)
+[Text::ANSI::Fold](https://github.com/tecolicom/Text-ANSI-Fold)
 
-[Text::ANSI::Fold::Util](https://github.com/kaz-utashiro/Text-ANSI-Fold-Util)
+[Text::ANSI::Fold::Util](https://github.com/tecolicom/Text-ANSI-Fold-Util)
 
 [Getopt::EX::Numbers](https://metacpan.org/pod/Getopt%3A%3AEX%3A%3ANumbers)
 
@@ -274,7 +274,7 @@ Kazumasa Utashiro
 
 # LICENSE
 
-Copyright 2018-2022 Kazumasa Utashiro
+Copyright 2018-2023 Kazumasa Utashiro
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

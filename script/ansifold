@@ -280,13 +280,13 @@ See L<Getopt::EX::Module> for format.
 
 =head1 SEE ALSO
 
-L<ansifold|https://github.com/kaz-utashiro/App-ansifold>
+L<ansifold|https://github.com/tecolicom/App-ansifold>
 
-L<ansiexpand|https://github.com/kaz-utashiro/App-ansiexpand>
+L<ansiexpand|https://github.com/tecolicom/App-ansiexpand>
 
-L<Text::ANSI::Fold|https://github.com/kaz-utashiro/Text-ANSI-Fold>
+L<Text::ANSI::Fold|https://github.com/tecolicom/Text-ANSI-Fold>
 
-L<Text::ANSI::Fold::Util|https://github.com/kaz-utashiro/Text-ANSI-Fold-Util>
+L<Text::ANSI::Fold::Util|https://github.com/tecolicom/Text-ANSI-Fold-Util>
 
 L<Getopt::EX::Numbers>
 
@@ -300,7 +300,7 @@ Kazumasa Utashiro
 
 =head1 LICENSE
 
-Copyright 2018-2022 Kazumasa Utashiro
+Copyright 2018-2023 Kazumasa Utashiro
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
