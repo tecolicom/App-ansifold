@@ -35,7 +35,7 @@ ansicolrm \[ options \]
 
 # VERSION
 
-Version 1.1503
+Version 1.16
 
 # DESCRIPTION
 

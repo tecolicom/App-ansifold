@@ -2,6 +2,11 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.16 2023-02-19T03:51:40Z
+
+    - Introduce --autoindent option
+    - Introduce --refill option
+
 1.1503 2022-12-28T11:54:05Z
 
     - Change repository URL.
