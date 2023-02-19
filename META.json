@@ -46,6 +46,7 @@
             "Getopt::EX::Hashed" : "1.05",
             "Term::ReadKey" : "0",
             "Text::ANSI::Fold" : "2.15",
+            "Text::ANSI::Fold::Util" : "1.01",
             "Unicode::EastAsianWidth" : "0",
             "perl" : "5.016"
          }
