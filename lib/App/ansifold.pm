@@ -12,6 +12,7 @@ use List::Util qw(min);
 use Hash::Util qw(lock_keys);
 use Text::ANSI::Fold qw(:constants);
 use Text::ANSI::Fold::Util qw(ansi_width);
+use Unicode::EastAsianWidth;
 use Data::Dumper;
 
 our $DEFAULT_WIDTH    //= 72;
@@ -34,6 +35,7 @@ use Getopt::EX::Hashed 'has'; {
     has autoindent => '   =s  ' ;
     has ambiguous  => '   =s  ' ;
     has paragraph  => ' p +   ' , default => 0;
+    has refill     => ' r +   ' , default => 0;
     has separate   => '   =s  ' , default => $DEFAULT_SEPARATE;
     has linebreak  => '   =s  ' , alias   => 'lb';
     has runin      => '   =i  ' , min => 1, default => 4;
@@ -208,8 +210,10 @@ sub doit {
 
     my @index = @{$app->width_index};
 
+    local $/ = '' if $app->refill;
     while (<>) {
 	my $chomped = chomp;
+	fill_paragraph() if $app->refill;
 	my @opt;
 	if ($app->{indent_pat} && /^$app->{indent_pat}/p) {
 	    my $indent = ansi_width ${^MATCH};
@@ -219,11 +223,20 @@ sub doit {
 	my @chops = $fold->text($_)->chops;
 	@chops = grep { defined } @chops[@index] if @index > 0;
 	print join $separator, @chops;
-	print "\n" if $chomped;
+	print "\n" x $chomped if $chomped;
 	print "\n" x $app->paragraph if $app->paragraph > 0;
     }
 
     return $app;
+}
+
+sub fill_paragraph {
+    s{
+	(?<full> (?<=\p{InFullwidth})\n(?=\p{InFullwidth}) ) |
+	(?<half> [ ]*\n[ ]* )
+    }{
+	$+{full} ? '' : ' '
+    }xge;
 }
 
 sub terminal_width {

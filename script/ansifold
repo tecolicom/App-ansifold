@@ -37,6 +37,7 @@ ansifold [ options ]
           --autoindent=pattern     Set auto-indent pattern
           --ambiguous=narrow|wide  Unicode ambiguous character handling
     -p    --paragraph              Print extra newline
+    -r    --refill                 Join paragraph into single line first
           --separate=string        Set separator string (default newline)
     -n    --nonewline              Same as --separate ''
           --linebreak=mode         Line-break mode (all, runin, runout, none)
@@ -169,13 +170,13 @@ Option B<--separate> set separator string.
 
 Option B<-n> is a short-cut for C<--separate ''>.
 
-Option B<--paragraph> or B<-p> print extra newline after each line.
+Option B<--paragraph> (or B<-p>) print extra newline after each line.
 This is convenient when a paragraph is made up of single line, like
 microsoft word document.
 
-=head1 PREFIX
+=head2 PREFIX
 
-=head2 B<--prefix>=I<string>
+=head3 B<--prefix>=I<string>
 
 If a string is given by B<--prefix> option, that string is inserted at
 the beginning of each folded text.  This is convenient to produce
@@ -183,7 +184,7 @@ indented text block.  Because the first line is not affected, insert
 appropiate prefix if necessary.  Originally made for
 L<App::Greple::frame> module.
 
-=head2 B<--autoindent>=I<pattern>
+=head3 B<--autoindent>=I<pattern>
 
 An experimental B<--autoindent> option takes a regex pattern for the
 indent label, and set the prefix string as a space string of that
@@ -198,6 +199,15 @@ indentation.  In this case use B<--autoindent> option like this:
                                MacOS/TextEdit
       522   ??  Ss     2:50.67 /System/Library/PrivateFrameworks/Uninstall.
                                framework/Resources/uninstalld
+
+=head2 REFILL
+
+Option B<--refill> (or B<-r>) makes the command to run in paragraph
+mode, which read consecutive non-blank lines at once, and join them
+into single line before processing.  So all paragraphs are reformatted
+by new text width.  You can use this with B<--autoindent> option.
+
+Option B<-rw-1> will just fill paragraphs without reformatting.
 
 =head1 LINE BREAKING
 
@@ -279,6 +289,11 @@ implicitly set B<--separate> empty.  Next command behave exactly like
 C<colrm start end> and takes care of ANSI terminal sequences.
 
     $ ansifold --colrm start end
+
+=head1 BUGS
+
+Option B<--refill> will join Hangul string without space.  Probably
+this is not a correct behavior.
 
 =head1 FILES
 

@@ -1,5 +1,6 @@
 requires 'perl' => '5.016';
 
+requires 'Unicode::EastAsianWidth';
 requires 'Text::ANSI::Fold' => '2.15';
 requires 'Getopt::EX' => '2.1.1';
 requires 'Getopt::EX::Hashed' => '1.05';

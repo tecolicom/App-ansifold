@@ -15,6 +15,7 @@ ansifold \[ options \]
           --autoindent=pattern     Set auto-indent pattern
           --ambiguous=narrow|wide  Unicode ambiguous character handling
     -p    --paragraph              Print extra newline
+    -r    --refill                 Join paragraph into single line first
           --separate=string        Set separator string (default newline)
     -n    --nonewline              Same as --separate ''
           --linebreak=mode         Line-break mode (all, runin, runout, none)
@@ -147,13 +148,13 @@ Option **--separate** set separator string.
 
 Option **-n** is a short-cut for `--separate ''`.
 
-Option **--paragraph** or **-p** print extra newline after each line.
+Option **--paragraph** (or **-p**) print extra newline after each line.
 This is convenient when a paragraph is made up of single line, like
 microsoft word document.
 
-# PREFIX
+## PREFIX
 
-## **--prefix**=_string_
+### **--prefix**=_string_
 
 If a string is given by **--prefix** option, that string is inserted at
 the beginning of each folded text.  This is convenient to produce
@@ -161,7 +162,7 @@ indented text block.  Because the first line is not affected, insert
 appropiate prefix if necessary.  Originally made for
 [App::Greple::frame](https://metacpan.org/pod/App%3A%3AGreple%3A%3Aframe) module.
 
-## **--autoindent**=_pattern_
+### **--autoindent**=_pattern_
 
 An experimental **--autoindent** option takes a regex pattern for the
 indent label, and set the prefix string as a space string of that
@@ -176,6 +177,15 @@ indentation.  In this case use **--autoindent** option like this:
                                MacOS/TextEdit
       522   ??  Ss     2:50.67 /System/Library/PrivateFrameworks/Uninstall.
                                framework/Resources/uninstalld
+
+## REFILL
+
+Option **--refill** (or **-r**) makes the command to run in paragraph
+mode, which read consecutive non-blank lines at once, and join them
+into single line before processing.  So all paragraphs are reformatted
+by new text width.  You can use this with **--autoindent** option.
+
+Option **-rw-1** will just fill paragraphs without reformatting.
 
 # LINE BREAKING
 
@@ -257,6 +267,11 @@ implicitly set **--separate** empty.  Next command behave exactly like
 `colrm start end` and takes care of ANSI terminal sequences.
 
     $ ansifold --colrm start end
+
+# BUGS
+
+Option **--refill** will join Hangul string without space.  Probably
+this is not a correct behavior.
 
 # FILES
 
