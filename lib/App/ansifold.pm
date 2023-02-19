@@ -11,6 +11,7 @@ use Pod::Usage;
 use List::Util qw(min);
 use Hash::Util qw(lock_keys);
 use Text::ANSI::Fold qw(:constants);
+use Text::ANSI::Fold::Util qw(ansi_width);
 use Data::Dumper;
 
 our $DEFAULT_WIDTH    //= 72;
@@ -28,25 +29,26 @@ use Getopt::EX::Hashed 'has'; {
 	$_->padding = 1;
 	$_->padchar = $_[1] if $_[1] ne '';
     };
-    has padchar   => '   =s  ' ;
-    has prefix    => '   =s  ' ;
-    has ambiguous => '   =s  ' ;
-    has paragraph => ' p +   ' , default => 0;
-    has separate  => '   =s  ' , default => $DEFAULT_SEPARATE;
-    has linebreak => '   =s  ' , alias   => 'lb';
-    has runin     => '   =i  ' , min => 1, default => 4;
-    has runout    => '   =i  ' , min => 1, default => 4;
-    has nonewline => ' n     ' ;
-    has smart     => ' s !   ' ;
-    has expand    => ' x :-1 ' , default => $DEFAULT_EXPAND;
-    has tabstop   => '   =i  ' , min => 1;
-    has tabhead   => '   =s  ' ;
-    has tabspace  => '   =s  ' ;
-    has tabstyle  => '   =s  ' ;
-    has discard   => '   =s@ ' , default => [];
-    has colrm     => '       ' , default => $DEFAULT_COLRM;
-    has help      => ' h     ' ;
-    has version   => ' v     ' ;
+    has padchar    => '   =s  ' ;
+    has prefix     => '   =s  ' ;
+    has autoindent => '   =s  ' ;
+    has ambiguous  => '   =s  ' ;
+    has paragraph  => ' p +   ' , default => 0;
+    has separate   => '   =s  ' , default => $DEFAULT_SEPARATE;
+    has linebreak  => '   =s  ' , alias   => 'lb';
+    has runin      => '   =i  ' , min => 1, default => 4;
+    has runout     => '   =i  ' , min => 1, default => 4;
+    has nonewline  => ' n     ' ;
+    has smart      => ' s !   ' ;
+    has expand     => ' x :-1 ' , default => $DEFAULT_EXPAND;
+    has tabstop    => '   =i  ' , min => 1;
+    has tabhead    => '   =s  ' ;
+    has tabspace   => '   =s  ' ;
+    has tabstyle   => '   =s  ' ;
+    has discard    => '   =s@ ' , default => [];
+    has colrm      => '       ' , default => $DEFAULT_COLRM;
+    has help       => ' h     ' ;
+    has version    => ' v     ' ;
 
     has '+boundary'  => any => [ qw(none word space) ];
     has '+ambiguous' => any => [ qw(wide narrow) ] ;
@@ -91,7 +93,9 @@ use Getopt::EX::Hashed 'has'; {
 	};
     };
 
+    # internal use
     has width_index => default => [];
+    has indent_pat => ;
 
 } no Getopt::EX::Hashed;
 
@@ -139,6 +143,10 @@ sub options {
     for (@{$app}{qw(tabhead tabspace)}) {
 	defined && length > 1 or next;
 	$_ = charnames::string_vianame($_) || die "$_: invalid name\n";
+    }
+
+    if (my $indent = $app->autoindent) {
+	$app->indent_pat = qr/$indent/;
     }
 
     return $app;
@@ -202,6 +210,12 @@ sub doit {
 
     while (<>) {
 	my $chomped = chomp;
+	my @opt;
+	if ($app->{indent_pat} && /^$app->{indent_pat}/p) {
+	    my $indent = ansi_width ${^MATCH};
+	    my $prefix = ' ' x $indent;
+	    $fold->configure(prefix => $prefix);
+	}
 	my @chops = $fold->text($_)->chops;
 	@chops = grep { defined } @chops[@index] if @index > 0;
 	print join $separator, @chops;

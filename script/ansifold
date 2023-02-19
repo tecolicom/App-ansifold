@@ -34,6 +34,7 @@ ansifold [ options ]
           --padding[=#]            Padding to margin space
           --padchar=_              Default padding character
           --prefix=string          Set prefix string (default empty)
+          --autoindent=pattern     Set auto-indent pattern
           --ambiguous=narrow|wide  Unicode ambiguous character handling
     -p    --paragraph              Print extra newline
           --separate=string        Set separator string (default newline)
@@ -172,13 +173,31 @@ Option B<--paragraph> or B<-p> print extra newline after each line.
 This is convenient when a paragraph is made up of single line, like
 microsoft word document.
 
-=head2 PREFIX
+=head1 PREFIX
+
+=head2 B<--prefix>=I<string>
 
 If a string is given by B<--prefix> option, that string is inserted at
 the beginning of each folded text.  This is convenient to produce
 indented text block.  Because the first line is not affected, insert
 appropiate prefix if necessary.  Originally made for
 L<App::Greple::frame> module.
+
+=head2 B<--autoindent>=I<pattern>
+
+An experimental B<--autoindent> option takes a regex pattern for the
+indent label, and set the prefix string as a space string of that
+label length.  For example, command C<ps auxgw> produce very long line
+output and you may want to fold C<COMMAND> portion with appropiate
+indentation.  In this case use B<--autoindent> option like this:
+
+    $ ps axgw | ansifold --autoindent '.*TIME (?=COMMAND)' -s
+      PID   TT  STAT      TIME COMMAND
+        1   ??  Ss   817:25.87 /sbin/launchd
+      354   ??  S      4:30.01 /System/Applications/TextEdit.app/Contents/
+                               MacOS/TextEdit
+      522   ??  Ss     2:50.67 /System/Library/PrivateFrameworks/Uninstall.
+                               framework/Resources/uninstalld
 
 =head1 LINE BREAKING
 

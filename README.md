@@ -12,6 +12,7 @@ ansifold \[ options \]
           --padding[=#]            Padding to margin space
           --padchar=_              Default padding character
           --prefix=string          Set prefix string (default empty)
+          --autoindent=pattern     Set auto-indent pattern
           --ambiguous=narrow|wide  Unicode ambiguous character handling
     -p    --paragraph              Print extra newline
           --separate=string        Set separator string (default newline)
@@ -150,13 +151,31 @@ Option **--paragraph** or **-p** print extra newline after each line.
 This is convenient when a paragraph is made up of single line, like
 microsoft word document.
 
-## PREFIX
+# PREFIX
+
+## **--prefix**=_string_
 
 If a string is given by **--prefix** option, that string is inserted at
 the beginning of each folded text.  This is convenient to produce
 indented text block.  Because the first line is not affected, insert
 appropiate prefix if necessary.  Originally made for
 [App::Greple::frame](https://metacpan.org/pod/App%3A%3AGreple%3A%3Aframe) module.
+
+## **--autoindent**=_pattern_
+
+An experimental **--autoindent** option takes a regex pattern for the
+indent label, and set the prefix string as a space string of that
+label length.  For example, command `ps auxgw` produce very long line
+output and you may want to fold `COMMAND` portion with appropiate
+indentation.  In this case use **--autoindent** option like this:
+
+    $ ps axgw | ansifold --autoindent '.*TIME (?=COMMAND)' -s
+      PID   TT  STAT      TIME COMMAND
+        1   ??  Ss   817:25.87 /sbin/launchd
+      354   ??  S      4:30.01 /System/Applications/TextEdit.app/Contents/
+                               MacOS/TextEdit
+      522   ??  Ss     2:50.67 /System/Library/PrivateFrameworks/Uninstall.
+                               framework/Resources/uninstalld
 
 # LINE BREAKING
 
