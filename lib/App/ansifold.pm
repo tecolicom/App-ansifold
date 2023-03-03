@@ -210,9 +210,14 @@ sub doit {
 
     my @index = @{$app->width_index};
 
-    local $/ = '' if $app->refill;
+    local $/ = "\n\n" if $app->refill;
     while (<>) {
-	my $chomped = chomp;
+	if (s/\A(\n+)//) {
+	    print $1;
+	    next if length == 0;
+	}
+	# chomp() does not remove single "\n" when $/ is "\n\n"
+	my $chomped = s/(\n+)\z// ? length $1 : 0;
 	fill_paragraph() if $app->refill;
 	my @opt;
 	if ($app->{indent_pat} && /^$app->{indent_pat}/p) {
@@ -231,12 +236,8 @@ sub doit {
 }
 
 sub fill_paragraph {
-    s{
-	(?<full> (?<=\p{InFullwidth})\n(?=\p{InFullwidth}) ) |
-	(?<half> [ ]*\n[ ]* )
-    }{
-	$+{full} ? '' : ' '
-    }xge;
+    s/(?<=\p{InFullwidth})\n(?=\p{InFullwidth})//g;
+    s/[ ]*\n[ ]*/ /g;
 }
 
 sub terminal_width {
