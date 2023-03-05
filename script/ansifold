@@ -27,7 +27,7 @@ ansifold - fold command handling ANSI terminal sequences
 
 =head1 SYNOPSIS
 
-ansifold [ options ]
+  ansifold [ options ]
 
     -w#   --width=#                Folding width (default 72)
           --boundary=word|space    Fold on word boundary
@@ -53,7 +53,7 @@ ansifold [ options ]
     -h    --help                   Show help message
     -v    --version                Show version
 
-ansicolrm [ options ]
+  ansicolrm [ options ]
 
 =head1 VERSION
 

@@ -5,33 +5,33 @@ ansifold - fold command handling ANSI terminal sequences
 
 # SYNOPSIS
 
-ansifold \[ options \]
+    ansifold [ options ]
 
-    -w#   --width=#                Folding width (default 72)
-          --boundary=word|space    Fold on word boundary
-          --padding[=#]            Padding to margin space
-          --padchar=_              Default padding character
-          --prefix=string          Set prefix string (default empty)
-          --autoindent=pattern     Set auto-indent pattern
-          --ambiguous=narrow|wide  Unicode ambiguous character handling
-    -p    --paragraph              Print extra newline
-    -r    --refill                 Join paragraph into single line first
-          --separate=string        Set separator string (default newline)
-    -n    --nonewline              Same as --separate ''
-          --linebreak=mode         Line-break mode (all, runin, runout, none)
-          --runin                  Run-in width (default 4)
-          --runout                 Run-out width (default 4)
-    -s    --smart                  Same as --boundary=word --linebreak=all
-    -x[#] --expand[=#]             Expand tabs
-          --tabstop=n              Tab-stop position (default 8)
-          --tabhead=char           Tab-head character (default space)
-          --tabspace=char          Tab-space character (default space)
-          --tabstyle=style         Tab expansion style (shade, dot, symbol)
-          --colrm start [ end ]    colrm(1) command compatible
-    -h    --help                   Show help message
-    -v    --version                Show version
+      -w#   --width=#                Folding width (default 72)
+            --boundary=word|space    Fold on word boundary
+            --padding[=#]            Padding to margin space
+            --padchar=_              Default padding character
+            --prefix=string          Set prefix string (default empty)
+            --autoindent=pattern     Set auto-indent pattern
+            --ambiguous=narrow|wide  Unicode ambiguous character handling
+      -p    --paragraph              Print extra newline
+      -r    --refill                 Join paragraph into single line first
+            --separate=string        Set separator string (default newline)
+      -n    --nonewline              Same as --separate ''
+            --linebreak=mode         Line-break mode (all, runin, runout, none)
+            --runin                  Run-in width (default 4)
+            --runout                 Run-out width (default 4)
+      -s    --smart                  Same as --boundary=word --linebreak=all
+      -x[#] --expand[=#]             Expand tabs
+            --tabstop=n              Tab-stop position (default 8)
+            --tabhead=char           Tab-head character (default space)
+            --tabspace=char          Tab-space character (default space)
+            --tabstyle=style         Tab expansion style (shade, dot, symbol)
+            --colrm start [ end ]    colrm(1) command compatible
+      -h    --help                   Show help message
+      -v    --version                Show version
 
-ansicolrm \[ options \]
+    ansicolrm [ options ]
 
 # VERSION
 
