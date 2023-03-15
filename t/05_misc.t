@@ -35,6 +35,16 @@ test
     expect => join(":", ("0123456789") x 5);
 
 test
+    option => "-w10 --separate '\\x3a'",
+    stdin  => "0123456789" x 5,
+    expect => join(":", ("0123456789") x 5);
+
+test
+    option => "-w10 --separate '\\N{COLON}'",
+    stdin  => "0123456789" x 5,
+    expect => join(":", ("0123456789") x 5);
+
+test
     option => "-w12 --prefix '> '",
     stdin  => '> ' . ("0123456789" x 5),
     expect => join("\n", ("> 0123456789") x 5);

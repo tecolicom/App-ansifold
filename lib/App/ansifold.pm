@@ -202,11 +202,7 @@ sub doit {
 	   expand tabstyle tabstop tabhead tabspace discard)
 	);
 
-    my $separator = do {
-	$app->separate =~ s{ ( \\ (.) ) }{
-	    { '\\' => '\\', n => "\n" }->{$2} // $1
-	}gexr;
-    };
+    my $separator = eval sprintf qq["%s"], $app->separate;
 
     my @index = @{$app->width_index};
 
@@ -236,8 +232,8 @@ sub doit {
 }
 
 sub fill_paragraph {
-    s/(?<=\p{InFullwidth})\n(?=\p{InFullwidth})//g;
-    s/[ ]*\n[ ]*/ /g;
+    s/(?<=\p{InFullwidth})\R(?=\p{InFullwidth})//g;
+    s/[ ]*\R[ ]*/ /g;
 }
 
 sub terminal_width {
