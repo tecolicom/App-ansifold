@@ -57,7 +57,7 @@ ansifold - fold command handling ANSI terminal sequences
 
 =head1 VERSION
 
-Version 1.17
+Version 1.18
 
 =head1 DESCRIPTION
 

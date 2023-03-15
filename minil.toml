@@ -4,9 +4,9 @@ authority = "cpan:UTASHIRO"
 
 module_maker = "ModuleBuildTiny"
 
-readme_from = "script/ansifold"
+readme_from   = "script/ansifold"
 abstract_from = "script/ansifold"
-authors_from = "script/ansifold"
+authors_from  = "script/ansifold"
 
 [release]
 branch = "master"

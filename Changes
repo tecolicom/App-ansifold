@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.18 2023-03-15T13:09:43Z
+
+    - accept any escape sequence for --separate option
+
 1.17 2023-03-03T06:16:51Z
 
     - Make --refill does not remove extra newlines

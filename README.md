@@ -35,7 +35,7 @@ ansifold - fold command handling ANSI terminal sequences
 
 # VERSION
 
-Version 1.17
+Version 1.18
 
 # DESCRIPTION
 

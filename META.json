@@ -42,10 +42,10 @@
       },
       "runtime" : {
          "requires" : {
-            "Getopt::EX" : "v2.1.1",
+            "Getopt::EX" : "v2.1.2",
             "Getopt::EX::Hashed" : "1.05",
             "Term::ReadKey" : "0",
-            "Text::ANSI::Fold" : "2.15",
+            "Text::ANSI::Fold" : "2.2102",
             "Text::ANSI::Fold::Util" : "1.01",
             "Unicode::EastAsianWidth" : "0",
             "perl" : "5.016"
@@ -69,7 +69,7 @@
          "web" : "https://github.com/tecolicom/App-ansifold"
       }
    },
-   "version" : "1.17",
+   "version" : "1.18",
    "x_authority" : "cpan:UTASHIRO",
    "x_contributors" : [
       "Kazumasa Utashiro <kaz@utashiro.com>",
