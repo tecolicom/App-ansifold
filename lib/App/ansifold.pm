@@ -202,7 +202,10 @@ sub doit {
 	   expand tabstyle tabstop tabhead tabspace discard)
 	);
 
-    my $separator = eval sprintf qq["%s"], $app->separate;
+    my $separator = eval sprintf(qq["%s"], $app->separate) // do {
+	warn $@ =~ s/ at .*//r;
+	$DEFAULT_SEPARATE;
+    };
 
     my @index = @{$app->width_index};
 
