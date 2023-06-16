@@ -2,6 +2,11 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.19 2023-06-16T07:25:03Z
+
+    - make script/ansicolrm installed
+    - option --colrm accept arbitrary number of arguments
+
 1.18 2023-03-15T13:09:43Z
 
     - accept any escape sequence for --separate option

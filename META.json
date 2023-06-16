@@ -1,10 +1,10 @@
 {
-   "abstract" : "fold command handling ANSI terminal sequences",
+   "abstract" : "fold/colrm command handling ANSI terminal sequences",
    "author" : [
       "Kazumasa Utashiro"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v3.1.20, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "Minilla/v3.1.21, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -69,7 +69,7 @@
          "web" : "https://github.com/tecolicom/App-ansifold"
       }
    },
-   "version" : "1.18",
+   "version" : "1.19",
    "x_authority" : "cpan:UTASHIRO",
    "x_contributors" : [
       "Kazumasa Utashiro <kaz@utashiro.com>",

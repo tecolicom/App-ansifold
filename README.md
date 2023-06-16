@@ -1,7 +1,7 @@
 [![Actions Status](https://github.com/tecolicom/App-ansifold/workflows/test/badge.svg)](https://github.com/tecolicom/App-ansifold/actions) [![MetaCPAN Release](https://badge.fury.io/pl/App-ansifold.svg)](https://metacpan.org/release/App-ansifold)
 # NAME
 
-ansifold - fold command handling ANSI terminal sequences
+ansifold/ansicolrm - fold/colrm command handling ANSI terminal sequences
 
 # SYNOPSIS
 
@@ -35,7 +35,7 @@ ansifold - fold command handling ANSI terminal sequences
 
 # VERSION
 
-Version 1.18
+Version 1.19
 
 # DESCRIPTION
 
