@@ -1,0 +1,86 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+BEGIN {
+    if ($0 =~ /expand$/) {   ## when executed as 'ansiexpand'
+	$App::ansifold::DEFAULT_WIDTH  = -1;
+	$App::ansifold::DEFAULT_EXPAND = -1;
+    }
+    elsif ($0 =~ /colrm$/) { ## when executed as 'ansicolrm'
+	$App::ansifold::DEFAULT_SEPARATE = "";
+	$App::ansifold::DEFAULT_COLRM    = 1;
+    }
+}
+
+use  App::ansifold;
+exit App::ansifold->new->run(splice @ARGV);
+
+__END__
+
+=encoding utf-8
+
+=head1 NAME
+
+ansicolrm - colrm command handling ANSI terminal sequences
+
+=head1 SYNOPSIS
+
+  ansicolrm [ start [ end ] ... ]
+
+=head1 VERSION
+
+Version 1.18
+
+=head1 DESCRIPTION
+
+This is an alias for L<ansifold(1)> command and works as if option
+B<--colrm> was given.  See L<App::ansifold> manual for detail.
+
+=head1 OPTIONS
+
+=head2 B<--colrm> [ I<start> [ I<end> ] ... ]
+
+Option B<--colrm> takes L<colrm(1)> command compatible arguments and
+implicitly set B<--separate> empty.  Next command behave exactly like
+C<colrm start end> and takes care of ANSI terminal sequences.
+
+    $ ansifold --colrm start end
+
+Unlike standard L<colrm(1)>, I<start> and I<end> can be repeated as
+many times as desired.  Next command removes column 1-3 and 7-9 and
+produces C<4560> as a result.
+
+    $ echo 1234567890 | ansifold --colrm 1 3 7 9
+           ^^^   ^^^
+
+If the command is executed with the name C<ansicolrm>, it works the
+same as if the B<--colrm> option were given.
+
+=head1 INSTALL
+
+=head2 CPANMINUS
+
+    $ cpanm App::ansifold
+
+=head1 SEE ALSO
+
+L<ansifold|https://github.com/tecolicom/App-ansifold>
+
+L<colrm(1)>
+
+=head1 AUTHOR
+
+Kazumasa Utashiro
+
+=head1 LICENSE
+
+Copyright 2018-2023 Kazumasa Utashiro
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
+
+#  LocalWords:  ansifold colrm ansiexpand ansicolrm

@@ -43,10 +43,9 @@ Version 1.18
 [Text::ANSI::Fold](https://metacpan.org/pod/Text%3A%3AANSI%3A%3AFold) module, which enables to handle ANSI terminal
 sequences.
 
-When executed under the name of **ansiexpand**, it works like
-[expand(1)](http://man.he.net/man1/expand) command.  If the name is **ansicolrm**, works like
-[colrm(1)](http://man.he.net/man1/colrm) command.  Because they are not installed automatically,
-make a symbolic link manually if you want.
+Script **ansicolrm** is also installed and it works like [colrm(1)](http://man.he.net/man1/colrm)
+command.  This is an alias for **ansifold** command and works exactly
+same except option **--colrm** is enabled by default.
 
 ## FOLD BY WIDTH
 
@@ -239,6 +238,9 @@ option.
 
     $ ansifold -x4w-1
 
+If the command is executed with the name `ansiexpand`, it works the
+same as if the **--expand** option were given.
+
 ## **--tabhead**, **--tabspace**
 
 Each tab character is converted to **tabhead** and following
@@ -275,9 +277,6 @@ produces `4560` as a result.
     $ echo 1234567890 | ansifold --colrm 1 3 7 9
            ^^^   ^^^
 
-If the command is executed with the name `ansicolrm`, it works the
-same as if the **--colrm** option were given.
-
 # BUGS
 
 Option **--refill** will join Hangul string without space.  Probably
@@ -303,6 +302,8 @@ this is not a correct behavior.
 [ansifold](https://github.com/tecolicom/App-ansifold)
 
 [ansiexpand](https://github.com/tecolicom/App-ansiexpand)
+
+[ansicolumn](https://github.com/tecolicom/App-ansicolumn)
 
 [Text::ANSI::Fold](https://github.com/tecolicom/Text-ANSI-Fold)
 

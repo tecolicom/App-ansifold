@@ -1,6 +1,7 @@
 name = "App-ansifold"
 badges = [ 'github-actions/test', 'metacpan' ]
 authority = "cpan:UTASHIRO"
+script_files = [ 'script/ansifold', 'script/ansicolrm' ]
 
 module_maker = "ModuleBuildTiny"
 
