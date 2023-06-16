@@ -270,6 +270,8 @@ implicitly set **--separate** empty.  Next command behave exactly like
 
     $ ansifold --colrm start end
 
+    $ ansicolrm start end
+
 Unlike standard [colrm(1)](http://man.he.net/man1/colrm), _start_ and _end_ can be repeated as
 many times as desired.  Next command removes column 1-3 and 7-9 and
 produces `4560` as a result.

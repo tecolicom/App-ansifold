@@ -36,7 +36,7 @@ Version 1.19
 =head1 DESCRIPTION
 
 This is an alias for L<ansifold(1)> command and works as if option
-B<--colrm> was given.  See L<App::ansifold> manual for detail.
+B<--colrm> was given.  See L<App::ansifold> manual for other options.
 
 =head1 OPTIONS
 
@@ -48,15 +48,14 @@ C<colrm start end> and takes care of ANSI terminal sequences.
 
     $ ansifold --colrm start end
 
+    $ ansicolrm start end
+
 Unlike standard L<colrm(1)>, I<start> and I<end> can be repeated as
 many times as desired.  Next command removes column 1-3 and 7-9 and
 produces C<4560> as a result.
 
-    $ echo 1234567890 | ansifold --colrm 1 3 7 9
+    $ echo 1234567890 | ansicolrm 1 3 7 9
            ^^^   ^^^
-
-If the command is executed with the name C<ansicolrm>, it works the
-same as if the B<--colrm> option were given.
 
 =head1 INSTALL
 

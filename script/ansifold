@@ -292,6 +292,8 @@ C<colrm start end> and takes care of ANSI terminal sequences.
 
     $ ansifold --colrm start end
 
+    $ ansicolrm start end
+
 Unlike standard L<colrm(1)>, I<start> and I<end> can be repeated as
 many times as desired.  Next command removes column 1-3 and 7-9 and
 produces C<4560> as a result.
