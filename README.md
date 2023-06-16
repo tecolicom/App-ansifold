@@ -260,13 +260,23 @@ characters at once according to the given style name.  Select from
 
 # COLRM
 
-## **--colrm** \[ start \[ end \] \]
+## **--colrm** \[ _start_ \[ _end_ \] ... \]
 
 Option **--colrm** takes [colrm(1)](http://man.he.net/man1/colrm) command compatible arguments and
 implicitly set **--separate** empty.  Next command behave exactly like
 `colrm start end` and takes care of ANSI terminal sequences.
 
     $ ansifold --colrm start end
+
+Unlike standard [colrm(1)](http://man.he.net/man1/colrm), _start_ and _end_ can be repeated as
+many times as desired.  Next command removes column 1-3 and 7-9 and
+produces `4560` as a result.
+
+    $ echo 1234567890 | ansifold --colrm 1 3 7 9
+           ^^^   ^^^
+
+If the command is executed with the name `ansicolrm`, it works the
+same as if the **--colrm** option were given.
 
 # BUGS
 
@@ -287,6 +297,8 @@ this is not a correct behavior.
     $ cpanm App::ansifold
 
 # SEE ALSO
+
+[ANSI Tool collection](https://github.com/tecolicom/ANSI-Tools)
 
 [ansifold](https://github.com/tecolicom/App-ansifold)
 

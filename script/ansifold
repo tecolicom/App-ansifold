@@ -282,13 +282,23 @@ L<Text::ANSI::Fold> library.
 
 =head1 COLRM
 
-=head2 B<--colrm> [ start [ end ] ]
+=head2 B<--colrm> [ I<start> [ I<end> ] ... ]
 
 Option B<--colrm> takes L<colrm(1)> command compatible arguments and
 implicitly set B<--separate> empty.  Next command behave exactly like
 C<colrm start end> and takes care of ANSI terminal sequences.
 
     $ ansifold --colrm start end
+
+Unlike standard L<colrm(1)>, I<start> and I<end> can be repeated as
+many times as desired.  Next command removes column 1-3 and 7-9 and
+produces C<4560> as a result.
+
+    $ echo 1234567890 | ansifold --colrm 1 3 7 9
+           ^^^   ^^^
+
+If the command is executed with the name C<ansicolrm>, it works the
+same as if the B<--colrm> option were given.
 
 =head1 BUGS
 
@@ -313,6 +323,8 @@ See L<Getopt::EX::Module> for format.
     $ cpanm App::ansifold
 
 =head1 SEE ALSO
+
+L<ANSI Tool collection|https://github.com/tecolicom/ANSI-Tools>
 
 L<ansifold|https://github.com/tecolicom/App-ansifold>
 

@@ -93,13 +93,28 @@ test
 ##
 
 test
-    option => "-n --colrm 4",
+    option => "--colrm",
+    stdin  => "1234567890",
+    expect => "1234567890";
+
+test
+    option => "--colrm 4",
     stdin  => "1234567890",
     expect => "123";
 
 test
-    option => "-n --colrm 4 7",
+    option => "--colrm 4 7",
     stdin  => "1234567890",
     expect => "123890";
+
+test
+    option => "--colrm 1 3 7",
+    stdin  => "1234567890",
+    expect => "456";
+
+test
+    option => "--colrm 1 3 7 9",
+    stdin  => "1234567890",
+    expect => "4560";
 
 done_testing;

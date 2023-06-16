@@ -123,17 +123,22 @@ sub options {
     if ($app->colrm) {
 	$app->separate = '';
 	@{$app->width} = do {
-	    unless (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
-		"-1";
-	    } else {
-		my $start = shift(@ARGV) - 1;
-		if (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
-		    my $end = shift(@ARGV);
-		    sprintf '%d,-%d,-1', $start, $end - $start;
-		} else {
-		    sprintf '%d,', $start;
-		}
+	    my @params;
+	    my @width;
+	    while (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
+		push @params, shift @ARGV;
 	    }
+	    my $pos = 0;
+	    while (my($start, $end) = splice @params, 0, 2) {
+		$pos < $start or die "$start: invalid arg\n";
+		$start--;
+		push @width,
+		    $start - $pos,
+		    defined $end ? $start - $end : '';
+		$pos = $end // last;
+	    }
+	    push @width, -1 if @width == 0 or $width[-1] ne '';
+	    join ',', @width;
 	}
     }
 
