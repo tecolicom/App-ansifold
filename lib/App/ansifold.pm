@@ -19,6 +19,7 @@ our $DEFAULT_WIDTH    //= 72;
 our $DEFAULT_SEPARATE //= "\n";
 our $DEFAULT_EXPAND   //= 0;
 our $DEFAULT_COLRM    //= 0;
+our $DEFAULT_CUT      //= 0;
 
 use Getopt::EX::Hashed 'has'; {
 
@@ -49,6 +50,8 @@ use Getopt::EX::Hashed 'has'; {
     has tabstyle   => '   =s  ' ;
     has discard    => '   =s@ ' , default => [];
     has colrm      => '       ' , default => $DEFAULT_COLRM;
+    has cut        => ' c =s  ' ;
+    has debug      => ' d     ' ;
     has help       => ' h     ' ;
     has version    => ' v     ' ;
 
@@ -120,26 +123,19 @@ sub options {
     Configure "bundling";
     $app->getopt || pod2usage();
 
+    ## --colrm
     if ($app->colrm) {
 	$app->separate = '';
-	@{$app->width} = do {
-	    my @params;
-	    my @width;
-	    while (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
-		push @params, shift @ARGV;
-	    }
-	    my $pos = 0;
-	    while (my($start, $end) = splice @params, 0, 2) {
-		$pos < $start or die "$start: invalid arg\n";
-		$start--;
-		push @width,
-		    $start - $pos,
-		    defined $end ? $start - $end : '';
-		$pos = $end // last;
-	    }
-	    push @width, -1 if @width == 0 or $width[-1] ne '';
-	    join ',', @width;
+	my @params;
+	while (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
+	    push @params, shift @ARGV;
 	}
+	@{$app->width} = colrm_to_width(@params);
+    }
+    ## --cut
+    elsif ($app->cut) {
+	$app->separate = '';
+	@{$app->width} = cut_to_width($app->cut);
     }
 
     if ($app->expand > 0) {
@@ -255,6 +251,49 @@ sub terminal_width {
 	@size = GetTerminalSize $tty, $tty;
     }
     $size[0] or $default;
+}
+
+sub colrm_to_width {
+    my @width;
+    my $pos = 0;
+    while (my($start, $end) = splice @_, 0, 2) {
+	$pos < $start or die "$start: invalid arg\n";
+	$start--;
+	push @width,
+	    $start - $pos,
+	    defined $end ? $start - $end : '';
+	$pos = $end // last;
+    }
+    push @width, -1 if @width == 0 or $width[-1] ne '';
+    join ',', @width;
+}    
+
+sub cut_to_width {
+    my $list = shift;
+    my @params = split /[\s,]+/, $list;
+    my @width;
+    my $pos = 1;
+    while (my $col = shift @params) {
+	next if $col eq '';
+	my($start, $end);
+	if    ($col =~ /^(\d+)$/)       { ($start, $end) = ($1, $1); }
+	elsif ($col =~ /^-(\d+)/)       { ($start, $end) = ($pos, $1); }
+	elsif ($col =~ /^(\d+)-$/)      { ($start, $end) = ($1, -1); }
+	elsif ($col =~ /^(\d+)-(\d+)$/) { ($start, $end) = ($1, $2); }
+	$pos <= $start or die "$start: invalid arg\n";
+	if ($start > $pos) {
+	    push @width, $pos - $start;
+	}
+	if ($end < 0) {
+	    push @width, -1;
+	    last;
+	} else {
+	    push @width, $end - $start + 1;
+	}
+	$pos = $end + 1;
+    }
+    push @width, 0 if $width[-1] != -1;
+    join ',', @width;
 }
 
 1;

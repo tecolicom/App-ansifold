@@ -28,6 +28,7 @@ ansifold/ansicolrm - fold/colrm command handling ANSI terminal sequences
             --tabspace=char          Tab-space character (default space)
             --tabstyle=style         Tab expansion style (shade, dot, symbol)
             --colrm start [ end ]    colrm(1) command compatible
+      -c#   --cut list               cut(1) command compatible
       -h    --help                   Show help message
       -v    --version                Show version
 
@@ -260,7 +261,7 @@ characters at once according to the given style name.  Select from
 
     $ ansifold --expand --tabstyle=shade
 
-# COLRM
+# COLRM COMPATIBLE
 
 ## **--colrm** \[ _start_ \[ _end_ \] ... \]
 
@@ -278,6 +279,26 @@ produces `4560` as a result.
 
     $ echo 1234567890 | ansifold --colrm 1 3 7 9
            ^^^   ^^^
+
+# CUT COMPATIBLE
+
+## **--cut** list ...
+
+## **-c** list ...
+
+Option **--cut** (or **-c**) takes [cut(1)](http://man.he.net/man1/cut) command compatible
+arguments.  Next command behave exactly like `cut -c list` and takes
+care of ANSI terminal sequences.
+
+    $ ansifold -c list ...
+
+Next command retrieve column 4-6 and produces `456` as a result.
+
+    $ echo 1234567890 | ansifold -c 4-6
+              ^^^
+
+Unlike [cut(1)](http://man.he.net/man1/cut)'s **-c** option, parameter number is taken as screen
+width of the terminal, rather than number of logical characters.
 
 # BUGS
 

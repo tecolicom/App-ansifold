@@ -1,0 +1,76 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+use  App::ansifold;
+exit App::ansifold->new->run(splice @ARGV);
+
+__END__
+
+=encoding utf-8
+
+=head1 NAME
+
+ansicut - cut command handling ANSI terminal sequences
+
+=head1 SYNOPSIS
+
+  ansicut -c list ...
+
+=head1 VERSION
+
+Version 1.19
+
+=head1 DESCRIPTION
+
+This is simply an alias for L<ansifold(1)> command.  See
+L<App::ansifold> manual for other options.  Support only B<-c> option
+compatible with L<cut(1)> command.
+
+=head1 OPTIONS
+
+=head2 B<--cut> list ...
+
+=head2 B<-c> list ...
+
+Option B<--cut> (or B<-c>) takes L<cut(1)> command compatible
+arguments.  Next command behave exactly like C<cut -c list> and takes
+care of ANSI terminal sequences.
+
+    $ ansifold -c list ...
+
+Next command retrieve column 4-6 and produces C<456> as a result.
+
+    $ echo 1234567890 | ansifold -c 4-6
+              ^^^
+
+Unlike L<cut(1)>'s B<-c> option, parameter number is taken as screen
+width of the terminal, rather than number of logical characters.
+
+=head1 INSTALL
+
+=head2 CPANMINUS
+
+    $ cpanm App::ansifold
+
+=head1 SEE ALSO
+
+L<ansifold|https://github.com/tecolicom/App-ansifold>
+
+L<cut(1)>
+
+=head1 AUTHOR
+
+Kazumasa Utashiro
+
+=head1 LICENSE
+
+Copyright 2018-2023 Kazumasa Utashiro
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
+
+#  LocalWords:  ansifold colrm ansiexpand ansicolrm
