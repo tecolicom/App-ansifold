@@ -2,6 +2,11 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.20 2023-10-15T08:38:19Z
+
+    - introduce --cut (-c) option compatible with cut(1) command
+    - install script/ansicut
+
 1.19 2023-06-16T07:25:03Z
 
     - make script/ansicolrm installed

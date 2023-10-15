@@ -36,7 +36,7 @@ ansifold/ansicolrm - fold/colrm command handling ANSI terminal sequences
 
 # VERSION
 
-Version 1.19
+Version 1.20
 
 # DESCRIPTION
 
