@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.21 2023-10-19T05:19:54Z
+
+    - now ansicolrm/ansicut accept explicit --separate option
+
 1.20 2023-10-15T08:38:19Z
 
     - introduce --cut (-c) option compatible with cut(1) command

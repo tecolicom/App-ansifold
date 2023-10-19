@@ -38,7 +38,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
 
 # VERSION
 
-Version 1.20
+Version 1.21
 
 # DESCRIPTION
 
@@ -46,13 +46,14 @@ Version 1.20
 [Text::ANSI::Fold](https://metacpan.org/pod/Text%3A%3AANSI%3A%3AFold) module, which enables to handle ANSI terminal
 sequences.
 
-Script **ansicolrm** works like [colrm(1)](http://man.he.net/man1/colrm) command.  This is an alias
-for **ansifold** command and works exactly same except option
-**--colrm** is enabled by default.
+**ansicolrm** works like [colrm(1)](http://man.he.net/man1/colrm) command.  This is an alias for
+**ansifold** command and works exactly same except option **--colrm** is
+enabled by default.
 
-Script **ansicut** works like [cut(1)](http://man.he.net/man1/cut). This is an alias for
+**ansicut** works like [cut(1)](http://man.he.net/man1/cut) command. This is an alias for
 **ansifold** command and works exactly same except default separator
-string is set as empty by default.
+string is set as empty by default.  Support only **-c** (or **--cut**)
+option of the original [cut(1)](http://man.he.net/man1/cut) command.
 
 ## FOLD BY WIDTH
 
@@ -304,7 +305,7 @@ Next command retrieve column 4-6,9- and produces `45690` as a result.
               ^^^  ^^
 
 Unlike [cut(1)](http://man.he.net/man1/cut)'s **-c** option, parameter number is taken as screen
-width of the terminal, rather than number of logical characters.
+columns of the terminal, rather than number of logical characters.
 
 # BUGS
 

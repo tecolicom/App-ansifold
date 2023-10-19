@@ -63,7 +63,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
 
 =head1 VERSION
 
-Version 1.20
+Version 1.21
 
 =head1 DESCRIPTION
 
@@ -71,13 +71,13 @@ B<ansifold> is a L<fold(1)> compatible command utilizing
 L<Text::ANSI::Fold> module, which enables to handle ANSI terminal
 sequences.
 
-Script B<ansicolrm> works like L<colrm(1)> command.  This is an alias
-for B<ansifold> command and works exactly same except option
-B<--colrm> is enabled by default.
+B<ansicolrm> works like L<colrm(1)> command.  This is an alias for
+B<ansifold> command and works exactly same except option B<--colrm> is
+enabled by default.
 
-Script B<ansicut> works like L<cut(1)> command. This is an alias for
+B<ansicut> works like L<cut(1)> command. This is an alias for
 B<ansifold> command and works exactly same except default separator
-string is set as empty by default.  Support only B<-c> (or B<--cut)
+string is set as empty by default.  Support only B<-c> (or B<--cut>)
 option of the original L<cut(1)> command.
 
 =head2 FOLD BY WIDTH
