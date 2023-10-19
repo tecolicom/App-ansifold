@@ -3,6 +3,8 @@
 use strict;
 use warnings;
 
+$App::ansifold::DEFAULT_SEPARATE = "";
+
 use  App::ansifold;
 exit App::ansifold->new->run(splice @ARGV);
 
@@ -40,13 +42,13 @@ care of ANSI terminal sequences.
 
     $ ansifold -c list ...
 
-Next command retrieve column 4-6 and produces C<456> as a result.
+Next command retrieve column 4-6,9- and produces C<45690> as a result.
 
-    $ echo 1234567890 | ansifold -c 4-6
-              ^^^
+    $ echo 1234567890 | ansifold -c 4-6,9-
+              ^^^  ^^
 
 Unlike L<cut(1)>'s B<-c> option, parameter number is taken as screen
-width of the terminal, rather than number of logical characters.
+columns of the terminal, rather than number of logical characters.
 
 =head1 INSTALL
 

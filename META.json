@@ -1,5 +1,5 @@
 {
-   "abstract" : "fold/colrm command handling ANSI terminal sequences",
+   "abstract" : "fold/colrm/cut command handling ANSI terminal sequences",
    "author" : [
       "Kazumasa Utashiro"
    ],

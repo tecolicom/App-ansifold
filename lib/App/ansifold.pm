@@ -37,7 +37,7 @@ use Getopt::EX::Hashed 'has'; {
     has ambiguous  => '   =s  ' ;
     has paragraph  => ' p +   ' , default => 0;
     has refill     => ' r +   ' , default => 0;
-    has separate   => '   =s  ' , default => $DEFAULT_SEPARATE;
+    has separate   => '   =s  ' ;
     has linebreak  => '   =s  ' , alias   => 'lb';
     has runin      => '   =i  ' , min => 1, default => 4;
     has runout     => '   =i  ' , min => 1, default => 4;
@@ -125,7 +125,7 @@ sub options {
 
     ## --colrm
     if ($app->colrm) {
-	$app->separate = '';
+	$app->separate //= '';
 	my @params;
 	while (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
 	    push @params, shift @ARGV;
@@ -134,13 +134,15 @@ sub options {
     }
     ## --cut
     elsif ($app->cut) {
-	$app->separate = '';
+	$app->separate //= '';
 	@{$app->width} = cut_to_width($app->cut);
     }
 
     if ($app->expand > 0) {
 	$app->tabstop = $app->expand;
     }
+
+    $app->separate //= $DEFAULT_SEPARATE;
 
     use charnames ':loose';
     for (@{$app}{qw(tabhead tabspace)}) {
@@ -273,13 +275,13 @@ sub cut_to_width {
     my @params = split /[\s,]+/, $list;
     my @width;
     my $pos = 1;
-    while (my $col = shift @params) {
-	next if $col eq '';
-	my($start, $end);
-	if    ($col =~ /^(\d+)$/)       { ($start, $end) = ($1, $1); }
-	elsif ($col =~ /^-(\d+)/)       { ($start, $end) = ($pos, $1); }
-	elsif ($col =~ /^(\d+)-$/)      { ($start, $end) = ($1, -1); }
-	elsif ($col =~ /^(\d+)-(\d+)$/) { ($start, $end) = ($1, $2); }
+    for (@params) {
+	next if $_ eq '';
+	my($start, $end) =
+	    /^(\d+)$/       ? ( $1,   $1 ) :
+	    /^-(\d+)/       ? ( $pos, $1 ) :
+	    /^(\d+)-$/      ? ( $1,   -1 ) :
+	    /^(\d+)-(\d+)$/ ? ( $1,   $2 ) : die "$list: format error";
 	$pos <= $start or die "$start: invalid arg\n";
 	if ($start > $pos) {
 	    push @width, $pos - $start;

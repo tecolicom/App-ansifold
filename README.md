@@ -1,7 +1,7 @@
 [![Actions Status](https://github.com/tecolicom/App-ansifold/workflows/test/badge.svg)](https://github.com/tecolicom/App-ansifold/actions) [![MetaCPAN Release](https://badge.fury.io/pl/App-ansifold.svg)](https://metacpan.org/release/App-ansifold)
 # NAME
 
-ansifold/ansicolrm - fold/colrm command handling ANSI terminal sequences
+ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal sequences
 
 # SYNOPSIS
 
@@ -34,6 +34,8 @@ ansifold/ansicolrm - fold/colrm command handling ANSI terminal sequences
 
     ansicolrm [ options ]
 
+    ansicut -c list
+
 # VERSION
 
 Version 1.20
@@ -44,9 +46,13 @@ Version 1.20
 [Text::ANSI::Fold](https://metacpan.org/pod/Text%3A%3AANSI%3A%3AFold) module, which enables to handle ANSI terminal
 sequences.
 
-Script **ansicolrm** is also installed and it works like [colrm(1)](http://man.he.net/man1/colrm)
-command.  This is an alias for **ansifold** command and works exactly
-same except option **--colrm** is enabled by default.
+Script **ansicolrm** works like [colrm(1)](http://man.he.net/man1/colrm) command.  This is an alias
+for **ansifold** command and works exactly same except option
+**--colrm** is enabled by default.
+
+Script **ansicut** works like [cut(1)](http://man.he.net/man1/cut). This is an alias for
+**ansifold** command and works exactly same except default separator
+string is set as empty by default.
 
 ## FOLD BY WIDTH
 
@@ -292,10 +298,10 @@ care of ANSI terminal sequences.
 
     $ ansifold -c list ...
 
-Next command retrieve column 4-6 and produces `456` as a result.
+Next command retrieve column 4-6,9- and produces `45690` as a result.
 
-    $ echo 1234567890 | ansifold -c 4-6
-              ^^^
+    $ echo 1234567890 | ansifold -c 4-6,9-
+              ^^^  ^^
 
 Unlike [cut(1)](http://man.he.net/man1/cut)'s **-c** option, parameter number is taken as screen
 width of the terminal, rather than number of logical characters.
