@@ -186,7 +186,7 @@ sub params {
 	    my @map = [ (int(pop @width)) x 2 ];
 	    unshift @map, map { [ $_ < 0 ? (-$_, 0) : ($_, 1) ] } @width;
 	    @width = map { $_->[0] } @map;
-	    $app->width_index = [ grep { $map[$_][1] } 0 .. $#map ];
+	    $app->width_index = [ grep { $map[$_][1] } keys @map ];
 	    \@width;
 	}
     };
