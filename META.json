@@ -69,7 +69,7 @@
          "web" : "https://github.com/tecolicom/App-ansifold"
       }
    },
-   "version" : "1.21",
+   "version" : "1.22",
    "x_authority" : "cpan:UTASHIRO",
    "x_contributors" : [
       "Kazumasa Utashiro <kaz@utashiro.com>",
