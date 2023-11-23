@@ -12,7 +12,7 @@ sub ansifold {
     Runner->new(
 	sub {
 	    use App::ansifold;
-	    App::ansifold->new->run(@opts);
+	    App::ansifold->new->perform(@opts);
 	});
 }
 

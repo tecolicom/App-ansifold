@@ -9,9 +9,12 @@ use t::Util;
 is(ansifold('/dev/null')->run->{result} >> 8, 0, "/dev/null");
 is(ansifold('--undefined')->run->{result} >> 8, 2, "undefined option");
 
-is(ansifold('--runin', '0')->run->{result} >> 8, 2, "invalid --runin");
-is(ansifold('--runout', '-1')->run->{result} >> 8, 2, "invalid --runout");
-is(ansifold('--tabstop', '0')->run->{result} >> 8, 2, "invalid --tabstop");
+is(ansifold('--runin', '-1', '/dev/null')->run->{result} >> 8, 2, "invalid --runin");
+is(ansifold('--runout', '-1', '/dev/null')->run->{result} >> 8, 2, "invalid --runout");
+is(ansifold('--tabstop', '0', '/dev/null')->run->{result} >> 8, 2, "invalid --tabstop");
+
+is(ansifold('--run', '4', '/dev/null')->run->{result} >> 8, 0, "valid --run");
+isnt(ansifold('--run', '-1', '/dev/null')->run->{result} >> 8, 0, "invalid --run");
 
 is(ansifold('--tabstop', '1', '/dev/null')->run->{result} >> 8, 0, "valid --tabstop");
 

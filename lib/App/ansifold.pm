@@ -39,8 +39,9 @@ use Getopt::EX::Hashed 'has'; {
     has refill     => ' r +   ' , default => 0;
     has separate   => '   =s  ' ;
     has linebreak  => '   =s  ' , alias   => 'lb';
-    has runin      => '   =i  ' , min => 1, default => 4;
-    has runout     => '   =i  ' , min => 1, default => 4;
+    has runin      => '   =i  ' , min => 0, default => 4;
+    has runout     => '   =i  ' , min => 0, default => 4;
+    has run        => '   =i  ' , min => 0;
     has nonewline  => ' n     ' ;
     has smart      => ' s !   ' ;
     has expand     => ' x :-1 ' , default => $DEFAULT_EXPAND;
@@ -87,6 +88,11 @@ use Getopt::EX::Hashed 'has'; {
 	    };
 	};
 
+    ### --run
+    has '+run' => sub {
+	$_->runin = $_->runout = $_[1];
+    };
+
     has '+smart' => sub {
 	my $smart = $_->{$_[0]} = $_[1];
 	($_->boundary, $_->linebreak) = do {
@@ -104,7 +110,7 @@ use Getopt::EX::Hashed 'has'; {
 
 } no Getopt::EX::Hashed;
 
-sub run {
+sub perform {
     my $app = shift;
     local @ARGV = @_;
     $app->options->params->doit;
