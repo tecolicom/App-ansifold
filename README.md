@@ -7,30 +7,30 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
 
     ansifold [ options ]
 
-      -w#   --width=#                Folding width (default 72)
-            --boundary=word|space    Fold on word boundary
-            --padding[=#]            Padding to margin space
-            --padchar=_              Default padding character
-            --prefix=string          Set prefix string (default empty)
-            --autoindent=pattern     Set auto-indent pattern
-            --ambiguous=narrow|wide  Unicode ambiguous character handling
-      -p    --paragraph              Print extra newline
-      -r    --refill                 Join paragraph into single line first
-            --separate=string        Set separator string (default newline)
-      -n    --nonewline              Same as --separate ''
-            --linebreak=mode         Line-break mode (all, runin, runout, none)
-            --runin                  Run-in width (default 4)
-            --runout                 Run-out width (default 4)
-      -s    --smart                  Same as --boundary=word --linebreak=all
-      -x[#] --expand[=#]             Expand tabs
-            --tabstop=n              Tab-stop position (default 8)
-            --tabhead=char           Tab-head character (default space)
-            --tabspace=char          Tab-space character (default space)
-            --tabstyle=style         Tab expansion style (shade, dot, symbol)
-            --colrm start [ end ]    colrm(1) command compatible
-      -c#   --cut list               cut(1) command compatible
-      -h    --help                   Show help message
-      -v    --version                Show version
+      -w#    --width=#                Folding width (default 72)
+             --boundary=word|space    Fold on word boundary
+             --padding[=#]            Padding to margin space
+             --padchar=_              Default padding character
+             --prefix=string          Set prefix string (default empty)
+             --autoindent=pattern     Set auto-indent pattern
+             --ambiguous=narrow|wide  Unicode ambiguous character handling
+      -p     --paragraph              Print extra newline
+      -r     --refill                 Join paragraph into single line first
+             --separate=string        Set separator string (default newline)
+      -n     --nonewline              Same as --separate ''
+      --lb=# --linebreak=mode         Line-break mode (all, runin, runout, none)
+             --runin                  Run-in width (default 4)
+             --runout                 Run-out width (default 4)
+      -s     --smart                  Same as --boundary=word --linebreak=all
+      -x[#]  --expand[=#]             Expand tabs
+             --tabstop=n              Tab-stop position (default 8)
+             --tabhead=char           Tab-head character (default space)
+             --tabspace=char          Tab-space character (default space)
+             --tabstyle=style         Tab expansion style (shade, dot, symbol)
+             --colrm start [ end ]    colrm(1) command compatible
+      -c#    --cut list               cut(1) command compatible
+      -h     --help                   Show help message
+      -v     --version                Show version
 
     ansicolrm [ options ]
 
@@ -207,7 +207,7 @@ Context of word is defined by option value; _word_ means
 alpha-numeric sequence, while _space_ means simply non-space
 printables.
 
-## **--linebreak**=_all_|_runin_|_runout_|_none_
+## **--linebreak**=_all_|_runin_|_runout_|_none_, **--lb**=...
 
 Option **--linebreak** takes a value of _all_, _runin_, _runout_ or
 _none_.  Default value is _none_.
@@ -246,8 +246,10 @@ option.
 
     $ ansifold -x4w-1
 
-If the command is executed with the name `ansiexpand`, it works the
-same as if the **--expand** option were given.
+If the command is executed with the name `ansiexpand`, it works as if
+the **--expand** option were given, and set default folding width to
+\-1.  [App::ansiexpand](https://metacpan.org/pod/App%3A%3Aansiexpand) is a bit more sophisticated and we recommend
+using that one rather.
 
 ## **--tabhead**, **--tabspace**
 
