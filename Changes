@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.23 2023-11-28T01:30:00Z
+
+    - now -w takes '=' as a terminal width with following RPN expression
+
 1.22 2023-11-23T22:59:58Z
 
     - introduce --run option to set --runin/--runout both
