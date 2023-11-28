@@ -44,6 +44,7 @@
          "requires" : {
             "Getopt::EX" : "v2.1.2",
             "Getopt::EX::Hashed" : "1.05",
+            "Getopt::EX::RPN" : "0",
             "Term::ReadKey" : "0",
             "Text::ANSI::Fold" : "2.2102",
             "Text::ANSI::Fold::Util" : "1.01",

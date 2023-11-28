@@ -74,7 +74,19 @@ option.
 **--ambiguous** takes _wide_ or _narrow_ and it specifies the visual
 width of Unicode ambiguous characters.
 
-If the width value is `term`, it is replaced by the terminal width.
+## TERMINAL WIDTH and CALCULATION
+
+If the width argument begins with `=`, it is interpreted as an RPN
+(Reverse Polish Notation) expression with the terminal width as the
+initial value.  Therefore,
+
+    ansifold -w=
+
+will wrap at the width of the terminal, and
+
+    ansifold -w=2/
+
+will wrap at half the width of the terminal.
 
 ## MULTIPLE WIDTH
 
@@ -178,7 +190,7 @@ label length.  For example, command `ps auxgw` produce very long line
 output and you may want to fold `COMMAND` portion with appropiate
 indentation.  In this case use **--autoindent** option like this:
 
-    $ ps axgw | ansifold --autoindent '.*TIME (?=COMMAND)' -s
+    $ ps axgw | ansifold --autoindent '.*TIME (?=COMMAND)' -w= --boundary=word
       PID   TT  STAT      TIME COMMAND
         1   ??  Ss   817:25.87 /sbin/launchd
       354   ??  S      4:30.01 /System/Applications/TextEdit.app/Contents/
@@ -358,7 +370,7 @@ Kazumasa Utashiro
 
 # LICENSE
 
-Copyright 2018-2023 Kazumasa Utashiro
+Copyright ©︎ 2018-2023 Kazumasa Utashiro
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

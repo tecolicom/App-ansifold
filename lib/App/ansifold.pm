@@ -177,8 +177,9 @@ sub params {
 	    elsif (/^(-?[-\d:]+) (?:\{(\d+)\})? $/x) {	# a:b:c:d{e}
 		($numbers->parse($1)->sequence) x ($2 // 1);
 	    }
-	    elsif (/^(term|tty)$/) {
-		terminal_width();
+	    elsif (/^=(.*)/) {
+		require Getopt::EX::RPN;
+		int Getopt::EX::RPN::rpn_calc(terminal_width(), $1);
 	    }
 	    else { die "$_: width format error.\n" }
 	}
@@ -309,6 +310,8 @@ sub cut_to_width {
 
 __END__
 
+=encoding utf-8
+
 =head1 NAME
 
 App::ansifold - fold command handling ANSI terminal sequences
@@ -319,7 +322,7 @@ Kazumasa Utashiro
 
 =head1 LICENSE
 
-Copyright 2018- Kazumasa Utashiro.
+Copyright ©︎ 2018- Kazumasa Utashiro
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
