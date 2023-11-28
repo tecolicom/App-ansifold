@@ -12,6 +12,7 @@ use List::Util qw(min);
 use Hash::Util qw(lock_keys);
 use Text::ANSI::Fold qw(:constants);
 use Text::ANSI::Fold::Util qw(ansi_width);
+Text::ANSI::Fold->configure(expand => 1);
 use Unicode::EastAsianWidth;
 use Data::Dumper;
 
