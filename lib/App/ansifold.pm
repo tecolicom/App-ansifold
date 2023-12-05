@@ -11,8 +11,9 @@ use Pod::Usage;
 use List::Util qw(min);
 use Hash::Util qw(lock_keys);
 use Text::ANSI::Fold qw(:constants);
-use Text::ANSI::Fold::Util qw(ansi_width);
-Text::ANSI::Fold->configure(expand => 1);
+use Text::ANSI::Fold::Util qw(ansi_width); {
+    Text::ANSI::Fold->configure(expand => 1);
+}
 use Unicode::EastAsianWidth;
 use Data::Dumper;
 
@@ -35,6 +36,7 @@ use Getopt::EX::Hashed 'has'; {
     has padchar    => '   =s  ' ;
     has prefix     => '   =s  ' ;
     has autoindent => '   =s  ' ;
+    has indentchar => '   =s  ' , default => ' ';
     has ambiguous  => '   =s  ' ;
     has paragraph  => ' p +   ' , default => 0;
     has refill     => ' r +   ' , default => 0;
@@ -108,6 +110,7 @@ use Getopt::EX::Hashed 'has'; {
     # internal use
     has width_index => default => [];
     has indent_pat => ;
+    has min_width => ;
 
 } no Getopt::EX::Hashed;
 
@@ -191,13 +194,15 @@ sub params {
 	if    (@width == 0) { $DEFAULT_WIDTH }
 	elsif (@width == 1) { $width[0] }
 	else {
-	    my @map = [ (int(pop @width)) x 2 ];
-	    unshift @map, map { [ $_ < 0 ? (-$_, 0) : ($_, 1) ] } @width;
-	    @width = map { $_->[0] } @map;
-	    $app->width_index = [ grep { $map[$_][1] } keys @map ];
+	    my @map = map [ abs $_ => $_ >= 0 ], @width;
+	    $map[-1] = [ $width[-1] => $width[-1] ];
+	    @width = map $_->[0], @map;
+	    $app->width_index = [ grep { $map[$_][1] != 0 } keys @map ];
 	    \@width;
 	}
     };
+
+    $app->min_width = ref $app->width ? min @{$app->width} : $app->width;
 
     return $app;
 }
@@ -211,7 +216,7 @@ sub doit {
 	qw(width boundary padding padchar prefix ambiguous
 	   linebreak runin runout
 	   expand tabstyle tabstop tabhead tabspace discard)
-	);
+    );
 
     my $separator = eval sprintf(qq["%s"], $app->separate) // do {
 	warn $@ =~ s/ at .*//r;
@@ -232,7 +237,11 @@ sub doit {
 	my @opt;
 	if ($app->{indent_pat} && /^$app->{indent_pat}/p) {
 	    my $indent = ansi_width ${^MATCH};
-	    my $prefix = ' ' x $indent;
+	    if ($indent >= $app->min_width) {
+		die sprintf("%s\n%s\n%s\n", $_, ("^" x $indent),
+			    "ERROR: Autoindent pattern is longer than folding width.");
+	    }
+	    my $prefix = $app->indentchar x $indent;
 	    $fold->configure(prefix => $prefix);
 	}
 	my @chops = $fold->text($_)->chops;
@@ -276,7 +285,7 @@ sub colrm_to_width {
     }
     push @width, -1 if @width == 0 or $width[-1] ne '';
     join ',', @width;
-}    
+}
 
 sub cut_to_width {
     my $list = shift;
