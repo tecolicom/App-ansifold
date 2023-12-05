@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.24 2023-12-05T06:36:40Z
+
+    - fix inifinite loop when autoindent pattern is longer than folding width
+
 1.23 2023-11-28T01:30:00Z
 
     - now -w takes '=' as a terminal width with following RPN expression
