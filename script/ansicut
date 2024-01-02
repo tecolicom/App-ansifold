@@ -3,7 +3,9 @@
 use strict;
 use warnings;
 
-$App::ansifold::DEFAULT_SEPARATE = "";
+BEGIN {
+    $App::ansifold::DEFAULT_SEPARATE = "";
+}
 
 use  App::ansifold;
 exit App::ansifold->new->perform(splice @ARGV);

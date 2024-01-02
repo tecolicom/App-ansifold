@@ -13,8 +13,8 @@ is(ansifold('--runin', '-1', '/dev/null')->run->{result} >> 8, 2, "invalid --run
 is(ansifold('--runout', '-1', '/dev/null')->run->{result} >> 8, 2, "invalid --runout");
 is(ansifold('--tabstop', '0', '/dev/null')->run->{result} >> 8, 2, "invalid --tabstop");
 
-is(ansifold('--run', '4', '/dev/null')->run->{result} >> 8, 0, "valid --run");
-isnt(ansifold('--run', '-1', '/dev/null')->run->{result} >> 8, 0, "invalid --run");
+is(ansifold('--runlen', '4', '/dev/null')->run->{result} >> 8, 0, "valid --runlen");
+isnt(ansifold('--runlen', '-1', '/dev/null')->run->{result} >> 8, 0, "invalid --runlen");
 
 is(ansifold('--tabstop', '1', '/dev/null')->run->{result} >> 8, 0, "valid --tabstop");
 
