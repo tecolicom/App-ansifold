@@ -96,7 +96,8 @@ use Getopt::EX::Hashed 'has'; {
 	$_->runin = $_->runout = $_[1];
     };
     # for backward compatibility, would be deplicated
-    has 'run' => sub {
+    has run => '=i';
+    has '+run' => sub {
 	$_->runin = $_->runout = $_[1];
     };
 
