@@ -6,7 +6,7 @@ use warnings;
 $App::ansifold::DEFAULT_SEPARATE = "";
 
 use  App::ansifold;
-exit App::ansifold->new->run(splice @ARGV);
+exit App::ansifold->new->perform(splice @ARGV);
 
 __END__
 

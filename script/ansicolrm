@@ -7,7 +7,7 @@ $App::ansifold::DEFAULT_SEPARATE = "";
 $App::ansifold::DEFAULT_COLRM    = 1;
 
 use  App::ansifold;
-exit App::ansifold->new->run(splice @ARGV);
+exit App::ansifold->new->perform(splice @ARGV);
 
 __END__
 
