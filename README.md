@@ -39,7 +39,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
 
 # VERSION
 
-Version 1.24
+Version 1.25
 
 # DESCRIPTION
 
@@ -370,7 +370,7 @@ Kazumasa Utashiro
 
 # LICENSE
 
-Copyright ©︎ 2018-2023 Kazumasa Utashiro
+Copyright ©︎ 2018-2024 Kazumasa Utashiro
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

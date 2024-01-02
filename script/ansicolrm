@@ -25,7 +25,7 @@ ansicolrm - colrm command handling ANSI terminal sequences
 
 =head1 VERSION
 
-Version 1.24
+Version 1.25
 
 =head1 DESCRIPTION
 
@@ -69,7 +69,7 @@ Kazumasa Utashiro
 
 =head1 LICENSE
 
-Copyright ©︎ 2018-2023 Kazumasa Utashiro
+Copyright ©︎ 2018-2024 Kazumasa Utashiro
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

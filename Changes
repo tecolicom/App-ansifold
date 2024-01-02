@@ -2,6 +2,11 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.25 2024-01-02T12:51:46Z
+
+    - rename --run to --runlen
+    - fix bug of ansicolrm/ansicut not to run
+
 1.24 2023-12-05T06:36:40Z
 
     - fix inifinite loop when autoindent pattern is longer than folding width
