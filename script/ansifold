@@ -46,7 +46,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
     --lb=# --linebreak=mode         Line-break mode (all, runin, runout, none)
            --runin=#                Run-in width (default 4)
            --runout=#               Run-out width (default 4)
-           --run=#                  Set run-in and run-out both
+           --runlen=#               Set run-in and run-out both
     -s     --smart                  Same as --boundary=word --linebreak=all
     -x[#]  --expand[=#]             Expand tabs
            --tabstop=n              Tab-stop position (default 8)
@@ -260,12 +260,12 @@ fits to maximum width.
 
 =head2 B<--runin>=I<width>, B<--runout>=I<width>
 
+=head2 B<--runlen>=I<width>
+
 Maximum width of run-in/run-out characters are defined by B<--runin>
 and B<--runout> option.  Default values are 4.
 
-=head2 B<--run>=I<width>
-
-Set both run-in/run-out width at once.
+Option B<--runlen> set both run-in/run-out width at once.
 
 =head2 B<--smart>, B<-s>
 

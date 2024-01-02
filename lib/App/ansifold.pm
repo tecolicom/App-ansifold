@@ -44,7 +44,7 @@ use Getopt::EX::Hashed 'has'; {
     has linebreak  => '   =s  ' , alias   => 'lb';
     has runin      => '   =i  ' , min => 0, default => 4;
     has runout     => '   =i  ' , min => 0, default => 4;
-    has run        => '   =i  ' , min => 0;
+    has runlen     => '   =i  ' , min => 0;
     has nonewline  => ' n     ' ;
     has smart      => ' s !   ' ;
     has expand     => ' x :-1 ' , default => $DEFAULT_EXPAND;
@@ -91,7 +91,11 @@ use Getopt::EX::Hashed 'has'; {
 	    };
 	};
 
-    ### --run
+    ### --runlen
+    has '+runlen' => sub {
+	$_->runin = $_->runout = $_[1];
+    };
+    # for backward compatibility, would be deplicated
     has '+run' => sub {
 	$_->runin = $_->runout = $_[1];
     };
