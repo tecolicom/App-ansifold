@@ -24,7 +24,7 @@ ansicut - cut command handling ANSI terminal sequences
 
 =head1 VERSION
 
-Version 1.25
+Version 1.26
 
 =head1 DESCRIPTION
 

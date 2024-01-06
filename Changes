@@ -2,6 +2,11 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.26 2024-01-06T10:45:39Z
+
+    - now --colrm/--cut option does not implicitly set separator string
+      ansicolrm/ansicut command does
+
 1.25 2024-01-02T12:51:46Z
 
     - rename --run to --runlen
