@@ -15,32 +15,32 @@ use t::Util;
 ##
 
 test
-    option => "-c 1",
+    option => "-nc 1",
     stdin  => "1234567890",
     expect => "1";
 
 test
-    option => "-c 1,3,5,7,9",
+    option => "-nc 1,3,5,7,9",
     stdin  => "1234567890",
     expect => "13579";
 
 test
-    option => "-c 3-5",
+    option => "-nc 3-5",
     stdin  => "1234567890",
     expect => "345";
 
 test
-    option => "-c 1-3,5-7",
+    option => "-nc 1-3,5-7",
     stdin  => "1234567890",
     expect => "123567";
 
 test
-    option => "-c -3",
+    option => "-nc -3",
     stdin  => "1234567890",
     expect => "123";
 
 test
-    option => "-c 5-",
+    option => "-nc 5-",
     stdin  => "1234567890",
     expect => "567890";
 

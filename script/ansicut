@@ -39,14 +39,21 @@ compatible with L<cut(1)> command.
 =head2 B<-c> list ...
 
 Option B<--cut> (or B<-c>) takes L<cut(1)> command compatible
-arguments.  Next command behave exactly like C<cut -c list> and takes
+arguments.
+
+When invoked as B<ansicut> command, the separator string is set to the
+empty by default.
+
+Next command behave exactly like C<cut -c list> and takes
 care of ANSI terminal sequences.
 
-    $ ansifold -c list ...
+    $ ansifold -n -c list ...
+
+    $ ansicut -c list ...
 
 Next command retrieve column 4-6,9- and produces C<45690> as a result.
 
-    $ echo 1234567890 | ansifold -c 4-6,9-
+    $ echo 1234567890 | ansicut -c 4-6,9-
               ^^^  ^^
 
 Unlike L<cut(1)>'s B<-c> option, parameter number is taken as screen

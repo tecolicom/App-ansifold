@@ -32,15 +32,11 @@ Version 1.25
 This is an alias for L<ansifold(1)> command and works as if option
 B<--colrm> was given.  See L<App::ansifold> manual for other options.
 
-=head1 OPTIONS
+=head1 ARGUMENTS
 
-=head2 B<--colrm> [ I<start> [ I<end> ] ... ]
-
-Option B<--colrm> takes L<colrm(1)> command compatible arguments and
-implicitly set B<--separate> empty.  Next command behave exactly like
-C<colrm start end> and takes care of ANSI terminal sequences.
-
-    $ ansifold --colrm start end
+Takes L<colrm(1)> command compatible arguments and implicitly set
+seprator string empty.  Next command behave exactly like C<colrm start
+end> and takes care of ANSI terminal sequences.
 
     $ ansicolrm start end
 

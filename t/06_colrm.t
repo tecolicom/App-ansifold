@@ -20,12 +20,12 @@ use t::Util;
 ##
 
 test
-    option => "4",
+    option => "-n 4",
     stdin  => "1234567890",
     expect => "123";
 
 test
-    option => "4 7",
+    option => "-n 4 7",
     stdin  => "1234567890",
     expect => "123890";
 

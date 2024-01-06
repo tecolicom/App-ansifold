@@ -140,7 +140,6 @@ sub options {
 
     ## --colrm
     if ($app->colrm) {
-	$app->separate = '';
 	my @params;
 	while (@ARGV > 0 and $ARGV[0] =~ /^\d+$/) {
 	    push @params, shift @ARGV;
@@ -149,7 +148,6 @@ sub options {
     }
     ## --cut
     elsif ($app->cut) {
-	$app->separate = '';
 	@{$app->width} = cut_to_width($app->cut);
     }
 

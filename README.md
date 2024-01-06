@@ -291,11 +291,16 @@ characters at once according to the given style name.  Select from
 
 ## **--colrm** \[ _start_ \[ _end_ \] ... \]
 
-Option **--colrm** takes [colrm(1)](http://man.he.net/man1/colrm) command compatible arguments and
-implicitly set **--separate** empty.  Next command behave exactly like
-`colrm start end` and takes care of ANSI terminal sequences.
+Option **--colrm** takes [colrm(1)](http://man.he.net/man1/colrm) command compatible arguments.
 
-    $ ansifold --colrm start end
+Since the separator string is not set, use the **-n** option to get the
+same result as the [colrm(1)](http://man.he.net/man1/colrm) command; when invoked as **ansicolrm**
+command, the separator string is set to the empty by default.
+
+Next command behave exactly like `colrm start end` and takes care of
+ANSI terminal sequences.
+
+    $ ansifold -n --colrm start end
 
     $ ansicolrm start end
 
@@ -303,7 +308,7 @@ Unlike standard [colrm(1)](http://man.he.net/man1/colrm), _start_ and _end_ can 
 many times as desired.  Next command removes column 1-3 and 7-9 and
 produces `4560` as a result.
 
-    $ echo 1234567890 | ansifold --colrm 1 3 7 9
+    $ echo 1234567890 | ansifold -n --colrm 1 3 7 9
            ^^^   ^^^
 
 # CUT COMPATIBLE
@@ -313,14 +318,22 @@ produces `4560` as a result.
 ## **-c** list ...
 
 Option **--cut** (or **-c**) takes [cut(1)](http://man.he.net/man1/cut) command compatible
-arguments.  Next command behave exactly like `cut -c list` and takes
-care of ANSI terminal sequences.
+arguments.
 
-    $ ansifold -c list ...
+Since the separator string is not set, use the **-n** option to get the
+same result as the [cut(1)](http://man.he.net/man1/cut) command; when invoked as **ansicut**
+command, the separator string is set to the empty by default.
+
+Next command behave exactly like `cut -c list` and takes care of ANSI
+terminal sequences.
+
+    $ ansifold -n -c list ...
+
+    $ ansicut -c list ...
 
 Next command retrieve column 4-6,9- and produces `45690` as a result.
 
-    $ echo 1234567890 | ansifold -c 4-6,9-
+    $ echo 1234567890 | ansifold -nc 4-6,9-
               ^^^  ^^
 
 Unlike [cut(1)](http://man.he.net/man1/cut)'s **-c** option, parameter number is taken as screen
