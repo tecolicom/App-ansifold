@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.27 2024-06-27T15:07:00Z
+
+    - make --padding option to work for empty line
+
 1.26 2024-01-06T10:45:39Z
 
     - now --colrm/--cut option does not implicitly set separator string

@@ -25,7 +25,7 @@ ansicolrm - colrm command handling ANSI terminal sequences
 
 =head1 VERSION
 
-Version 1.26
+Version 1.27
 
 =head1 DESCRIPTION
 
