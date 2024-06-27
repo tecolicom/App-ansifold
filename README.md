@@ -16,7 +16,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
              --ambiguous=narrow|wide  Unicode ambiguous character handling
       -p     --paragraph              Print extra newline
       -r     --refill                 Join paragraph into single line first
-             --separate=string        Set separator string (default newline)
+             --separate=string        Set the output separator string (default newline)
       -n     --nonewline              Same as --separate ''
       --lb=# --linebreak=mode         Line-break mode (all, runin, runout, none)
              --runin=#                Run-in width (default 4)
@@ -52,9 +52,9 @@ sequences.
 enabled by default.
 
 **ansicut** works like [cut(1)](http://man.he.net/man1/cut) command. This is an alias for
-**ansifold** command and works exactly same except default separator
-string is set as empty by default.  Support only **-c** (or **--cut**)
-option of the original [cut(1)](http://man.he.net/man1/cut) command.
+**ansifold** command and works exactly same except default output
+separator string is set as empty by default.  Support only **-c** (or
+**--cut**) option of the original [cut(1)](http://man.he.net/man1/cut) command.
 
 ## FOLD BY WIDTH
 
@@ -161,7 +161,7 @@ Option **-n** eliminates newlines between columns.
     $ LANG=C date | ansifold -w 3,-1,3,-1,2 -n
     WedDec19
 
-Option **--separate** set separator string.
+Option **--separate** set the output separator string.
 
     $ echo ABCDEF | ansifold --separate=: -w 1,0,1,0,1,-1
     A::B::C:DEF
@@ -293,9 +293,10 @@ characters at once according to the given style name.  Select from
 
 Option **--colrm** takes [colrm(1)](http://man.he.net/man1/colrm) command compatible arguments.
 
-Since the separator string is not set, use the **-n** option to get the
-same result as the [colrm(1)](http://man.he.net/man1/colrm) command; when invoked as **ansicolrm**
-command, the separator string is set to the empty by default.
+Since the output separator string is not set, use the **-n** option to
+get the same result as the [colrm(1)](http://man.he.net/man1/colrm) command; when invoked as
+**ansicolrm** command, the separator string is set to the empty by
+default.
 
 Next command behave exactly like `colrm start end` and takes care of
 ANSI terminal sequences.
@@ -320,9 +321,10 @@ produces `4560` as a result.
 Option **--cut** (or **-c**) takes [cut(1)](http://man.he.net/man1/cut) command compatible
 arguments.
 
-Since the separator string is not set, use the **-n** option to get the
-same result as the [cut(1)](http://man.he.net/man1/cut) command; when invoked as **ansicut**
-command, the separator string is set to the empty by default.
+Since the output separator string is not set, use the **-n** option to
+get the same result as the [cut(1)](http://man.he.net/man1/cut) command; when invoked as
+**ansicut** command, the separator string is set to the empty by
+default.
 
 Next command behave exactly like `cut -c list` and takes care of ANSI
 terminal sequences.
