@@ -117,4 +117,18 @@ test
     stdin  => "1234567890",
     expect => "4560";
 
+##
+## padding
+##
+
+test
+    option => "--padding --padchar=. -w80",
+    stdin  => "1234567890\n",
+    expect => "1234567890" . "." x 70 . "\n";
+
+test
+    option => "--padding --padchar=. -w80",
+    stdin  => "\n",
+    expect => "." x 80 . "\n";
+
 done_testing;

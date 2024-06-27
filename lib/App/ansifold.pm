@@ -230,7 +230,7 @@ sub doit {
 
     local $/ = "\n\n" if $app->refill;
     while (<>) {
-	if (s/\A(\n+)//) {
+	if (not $app->padding and s/\A(\n+)//) {
 	    print $1;
 	    next if length == 0;
 	}
