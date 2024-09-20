@@ -1,5 +1,5 @@
 package App::ansifold;
-our $VERSION = "1.27";
+our $VERSION = "1.28";
 
 use v5.14;
 use warnings;

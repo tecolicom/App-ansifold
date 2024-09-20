@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.28 2024-09-20T08:33:12Z
+
+    - do not insert space after Japanese punct char when filling paragraph
+
 1.27 2024-06-27T15:07:00Z
 
     - make --padding option to work for empty line
