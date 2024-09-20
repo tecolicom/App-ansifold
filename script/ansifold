@@ -195,7 +195,8 @@ Option B<-n> is a short-cut for C<--separate ''>.
 
 Option B<--paragraph> (or B<-p>) print extra newline after each line.
 This is convenient when a paragraph is made up of single line, like
-microsoft word document.
+microsoft word document.  The B<-p> option can be repeated multiple
+times and will output that many newline characters.
 
 =head2 PREFIX
 

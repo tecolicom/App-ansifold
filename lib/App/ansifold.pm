@@ -237,7 +237,6 @@ sub doit {
 	# chomp() does not remove single "\n" when $/ is "\n\n"
 	my $chomped = s/(\n+)\z// ? length $1 : 0;
 	fill_paragraph() if $app->refill;
-	my @opt;
 	if ($app->{indent_pat} && /^$app->{indent_pat}/p) {
 	    my $indent = ansi_width ${^MATCH};
 	    if ($indent >= $app->min_width) {
@@ -248,7 +247,9 @@ sub doit {
 	    $fold->configure(prefix => $prefix);
 	}
 	my @chops = $fold->text($_)->chops;
-	@chops = grep { defined } @chops[@index] if @index > 0;
+	if (@index > 0) {
+	    @chops = grep { defined } @chops[@index];
+	}
 	print join $separator, @chops;
 	print "\n" x $chomped if $chomped;
 	print "\n" x $app->paragraph if $app->paragraph > 0;
@@ -258,6 +259,7 @@ sub doit {
 }
 
 sub fill_paragraph {
+    s/(?<=\p{InFullwidth})(?<=\pP)\R//g;
     s/(?<=\p{InFullwidth})\R(?=\p{InFullwidth})//g;
     s/[ ]*\R[ ]*/ /g;
 }

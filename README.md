@@ -170,7 +170,8 @@ Option **-n** is a short-cut for `--separate ''`.
 
 Option **--paragraph** (or **-p**) print extra newline after each line.
 This is convenient when a paragraph is made up of single line, like
-microsoft word document.
+microsoft word document.  The **-p** option can be repeated multiple
+times and will output that many newline characters.
 
 ## PREFIX
 
