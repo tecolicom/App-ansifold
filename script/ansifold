@@ -347,10 +347,9 @@ produces C<4560> as a result.
 Option B<--cut> (or B<-c>) takes L<cut(1)> command compatible
 arguments.
 
-Since the output separator string is not set, use the B<-n> option to
-get the same result as the L<cut(1)> command; when invoked as
-B<ansicut> command, the separator string is set to the empty by
-default.
+Since the output separator string is set, use the B<-n> option to get
+the same result as the L<cut(1)> command; when invoked as B<ansicut>
+command, the separator string is set to the empty by default.
 
 Next command behave exactly like C<cut -c list> and takes care of ANSI
 terminal sequences.

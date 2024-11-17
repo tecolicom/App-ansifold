@@ -322,10 +322,9 @@ produces `4560` as a result.
 Option **--cut** (or **-c**) takes [cut(1)](http://man.he.net/man1/cut) command compatible
 arguments.
 
-Since the output separator string is not set, use the **-n** option to
-get the same result as the [cut(1)](http://man.he.net/man1/cut) command; when invoked as
-**ansicut** command, the separator string is set to the empty by
-default.
+Since the output separator string is set, use the **-n** option to get
+the same result as the [cut(1)](http://man.he.net/man1/cut) command; when invoked as **ansicut**
+command, the separator string is set to the empty by default.
 
 Next command behave exactly like `cut -c list` and takes care of ANSI
 terminal sequences.
