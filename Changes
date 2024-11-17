@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.29 2024-11-17T11:30:54Z
+
+    - produce empty or padded entry for uncaptured width parameter
+
 1.28 2024-09-20T08:33:12Z
 
     - do not insert space after Japanese punct char when filling paragraph
