@@ -76,7 +76,7 @@ test
 test
     option => "-w10,10,10,10,10,10",
     stdin  => "0123456789" x 5,
-    expect => join("\n", ("0123456789") x 5);
+    expect => join("\n", ("0123456789") x 5, "");
 
 test
     option => "-w10,10,0",

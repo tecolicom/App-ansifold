@@ -134,6 +134,10 @@ single field.
 Option C<-w80,> is equivalent to C<-w80,0>.  Zero width is ignored
 when seen as a final number, but not ignored otherwise.
 
+If the data is shorter and there is no corresponding string, an empty
+string is returned.  If the padding option is specified, a string
+padded to the given width is returned.
+
 =head2 NEGATIVE WIDTH
 
 Negative number fields are discarded.

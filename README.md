@@ -109,6 +109,10 @@ single field.
 Option `-w80,` is equivalent to `-w80,0`.  Zero width is ignored
 when seen as a final number, but not ignored otherwise.
 
+If the data is shorter and there is no corresponding string, an empty
+string is returned.  If the padding option is specified, a string
+padded to the given width is returned.
+
 ## NEGATIVE WIDTH
 
 Negative number fields are discarded.

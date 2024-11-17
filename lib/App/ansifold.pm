@@ -247,6 +247,12 @@ sub doit {
 	    $fold->configure(prefix => $prefix);
 	}
 	my @chops = $fold->text($_)->chops;
+	if (ref $app->width eq 'ARRAY') {
+	    while (my($i, $w) = each @{$app->width}) {
+		$w = 0 if not $app->padding or $w < 0;
+		$chops[$i] //= ' ' x $w;
+	    }
+	}
 	if (@index > 0) {
 	    @chops = grep { defined } @chops[@index];
 	}
