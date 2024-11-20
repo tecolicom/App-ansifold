@@ -22,6 +22,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
              --runin=#                Run-in width (default 4)
              --runout=#               Run-out width (default 4)
              --runlen=#               Set run-in and run-out both
+             --crackwide[=#]          Split in the middle of wide character
       -s     --smart                  Same as --boundary=word --linebreak=all
       -x[#]  --expand[=#]             Expand tabs
              --tabstop=n              Tab-stop position (default 8)
@@ -246,6 +247,16 @@ Maximum width of run-in/run-out characters are defined by **--runin**
 and **--runout** option.  Default values are 4.
 
 Option **--runlen** set both run-in/run-out width at once.
+
+## **--crackwide**\[=_lefthalf\[righthalf\]_\]
+
+If it becomes necessary to split a character in the middle of a wide
+character, split the character into left and right half.
+
+The parameter is optional, and if single character is given, it is
+assigned to both.  If a string of two or more characters is given,
+treat the first character as left half and the second character as
+right half.
 
 ## **--smart**, **-s**
 
