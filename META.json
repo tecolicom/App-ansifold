@@ -47,7 +47,7 @@
             "Getopt::EX::RPN" : "0",
             "Term::ReadKey" : "0",
             "Text::ANSI::Fold" : "2.2701",
-            "Text::ANSI::Fold::Util" : "1.02",
+            "Text::ANSI::Fold::Util" : "1.04",
             "Unicode::EastAsianWidth" : "0",
             "perl" : "5.016"
          }
