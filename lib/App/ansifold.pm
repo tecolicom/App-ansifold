@@ -22,7 +22,7 @@ our $DEFAULT_SEPARATE //= "\n";
 our $DEFAULT_EXPAND   //= 0;
 our $DEFAULT_COLRM    //= 0;
 our $DEFAULT_CUT      //= 0;
-our $DEFAULT_CRACKWIDE;
+our $DEFAULT_SPLITWIDE;
 
 use Getopt::EX::Hashed 'has'; {
 
@@ -47,7 +47,7 @@ use Getopt::EX::Hashed 'has'; {
     has runout     => '   =i  ' , min => 0, default => 4;
     has runlen     => '   =i  ' , min => 0;
     has nonewline  => ' n     ' ;
-    has crackwide  => '   :s  ' , default => $DEFAULT_CRACKWIDE;
+    has splitwide  => '   :s  ' , default => $DEFAULT_SPLITWIDE;
     has lefthalf   => '   =s  ' , default => "\N{PRECEDES}";
     has righthalf  => '   =s  ' , default => "\N{SUCCEEDS}";
     has smart      => ' s !   ' ;
@@ -171,8 +171,8 @@ sub options {
 	$app->indent_pat = qr/$indent/;
     }
 
-    if (defined (my $char = $app->crackwide)) {
-	$app->crackwide = 1;
+    if (defined (my $char = $app->splitwide)) {
+	$app->splitwide = 1;
 	if ($char =~ s/\A(\X)(\X)?//) {
 	    $app->lefthalf = $1;
 	    $app->righthalf = $2 // $1;
@@ -230,7 +230,7 @@ sub doit {
 	grep { defined $app->$_ }
 	qw(width boundary padding padchar prefix ambiguous
 	   linebreak runin runout
-	   crackwide lefthalf righthalf
+	   splitwide lefthalf righthalf
 	   expand tabstyle tabstop tabhead tabspace discard)
     );
 
