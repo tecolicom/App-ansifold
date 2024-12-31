@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.30 2024-12-31T05:51:14Z
+
+    - introduce --splitwide option
+
 1.29 2024-11-17T11:30:54Z
 
     - produce empty or padded entry for uncaptured width parameter

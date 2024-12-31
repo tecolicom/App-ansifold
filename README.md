@@ -40,7 +40,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
 
 # VERSION
 
-Version 1.29
+Version 1.30
 
 # DESCRIPTION
 

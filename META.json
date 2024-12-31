@@ -47,7 +47,7 @@
             "Getopt::EX::RPN" : "0",
             "Term::ReadKey" : "0",
             "Text::ANSI::Fold" : "2.2702",
-            "Text::ANSI::Fold::Util" : "1.04",
+            "Text::ANSI::Fold::Util" : "1.05",
             "Unicode::EastAsianWidth" : "0",
             "perl" : "5.016"
          }
@@ -70,7 +70,7 @@
          "web" : "https://github.com/tecolicom/App-ansifold"
       }
    },
-   "version" : "1.29",
+   "version" : "1.30",
    "x_authority" : "cpan:UTASHIRO",
    "x_contributors" : [
       "Kazumasa Utashiro <kaz@utashiro.com>",
