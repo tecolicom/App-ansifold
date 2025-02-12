@@ -248,7 +248,8 @@ sub doit {
 	    next if length == 0;
 	}
 	# chomp() does not remove single "\n" when $/ is "\n\n"
-	my $chomped = s/(\n+)\z// ? length $1 : 0;
+	my $chomped = s/(\R+)\z// ? $1 : '';
+	my $eol = $chomped =~ /\r/ ? "\r\n" : "\n";
 	fill_paragraph() if $app->refill;
 	if ($app->{indent_pat} && /^$app->{indent_pat}/p) {
 	    my $indent = ansi_width ${^MATCH};
@@ -270,8 +271,8 @@ sub doit {
 	    @chops = grep { defined } @chops[@index];
 	}
 	print join $separator, @chops;
-	print "\n" x $chomped if $chomped;
-	print "\n" x $app->paragraph if $app->paragraph > 0;
+	print $chomped if $chomped;
+	print $eol x $app->paragraph if $app->paragraph > 0;
     }
 
     return $app;
