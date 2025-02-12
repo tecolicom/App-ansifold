@@ -13,6 +13,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
              --padchar=_              Default padding character
              --prefix=string          Set prefix string (default empty)
              --autoindent=pattern     Set auto-indent pattern
+             --keepindent             Preserve indent string
              --ambiguous=narrow|wide  Unicode ambiguous character handling
       -p     --paragraph              Print extra newline
       -r     --refill                 Join paragraph into single line first
@@ -204,6 +205,12 @@ indentation.  In this case use **--autoindent** option like this:
       522   ??  Ss     2:50.67 /System/Library/PrivateFrameworks/Uninstall.
                                framework/Resources/uninstalld
 
+### **--keepindent**
+
+If the `--keepindent` option is specified, the string matched by
+`--autoindent` is inserted at the beginning of the line rather than
+indenting with spaces.
+
 ## REFILL
 
 Option **--refill** (or **-r**) makes the command to run in paragraph
@@ -324,7 +331,7 @@ ANSI terminal sequences.
     $ ansicolrm start end
 
 Unlike standard [colrm(1)](http://man.he.net/man1/colrm), _start_ and _end_ can be repeated as
-many times as desired.  Next command removes column 1-3 and 7-9 and
+many times as desired.  Next command removes column 1-3 and 7-9, and
 produces `4560` as a result.
 
     $ echo 1234567890 | ansifold -n --colrm 1 3 7 9

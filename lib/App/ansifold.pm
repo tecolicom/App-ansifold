@@ -37,6 +37,7 @@ use Getopt::EX::Hashed 'has'; {
     has padchar    => '   =s  ' ;
     has prefix     => '   =s  ' ;
     has autoindent => '   =s  ' ;
+    has keepindent => '   !   ' ;
     has indentchar => '   =s  ' , default => ' ';
     has ambiguous  => '   =s  ' ;
     has paragraph  => ' p +   ' , default => 0;
@@ -252,12 +253,19 @@ sub doit {
 	my $eol = $chomped =~ /\r/ ? "\r\n" : "\n";
 	fill_paragraph() if $app->refill;
 	if ($app->{indent_pat} && /^$app->{indent_pat}/p) {
-	    my $indent = ansi_width ${^MATCH};
+	    my $matched = ${^MATCH};
+	    my $indent = ansi_width $matched;
 	    if ($indent >= $app->min_width) {
 		die sprintf("%s\n%s\n%s\n", $_, ("^" x $indent),
 			    "ERROR: Autoindent pattern is longer than folding width.");
 	    }
-	    my $prefix = $app->indentchar x $indent;
+	    my $prefix = do {
+		if ($app->keepindent) {
+		    $matched;
+		} else {
+		    $app->indentchar x $indent;
+		}
+	    };
 	    $fold->configure(prefix => $prefix);
 	}
 	my @chops = $fold->text($_)->chops;
