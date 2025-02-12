@@ -2,6 +2,11 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.31 2025-02-12T12:15:41Z
+
+    - properly handle text ending with CRNL
+    - introduce --keepindent option
+
 1.30 2024-12-31T05:51:14Z
 
     - introduce --splitwide option
