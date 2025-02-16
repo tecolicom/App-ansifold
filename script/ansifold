@@ -101,6 +101,11 @@ B<ansifold> handles Unicode multi-byte characters properly.  Option
 B<--ambiguous> takes I<wide> or I<narrow> and it specifies the visual
 width of Unicode ambiguous characters.
 
+If the last character is full-width and must be wrapped in the middle
+of it, it is wrapped just before the character.  If padding is
+specified, then one padding character is inserted.  If you really want
+to keep the wrapping position, use the C<--stripwide> option.
+
 =head2 TERMINAL WIDTH and CALCULATION
 
 If the width argument begins with C<=>, it is interpreted as an RPN
@@ -136,9 +141,9 @@ single field.
 Option C<-w80,> is equivalent to C<-w80,0>.  Zero width is ignored
 when seen as a final number, but not ignored otherwise.
 
-If the data is shorter and there is no corresponding string, an empty
-string is returned.  If the padding option is specified, a string
-padded to the given width is returned.
+If the data is shorter and there is no corresponding string for the
+field, an empty string is returned.  If the padding option is
+specified, the field is padded to the given width.
 
 =head2 NEGATIVE WIDTH
 
@@ -280,17 +285,16 @@ and B<--runout> option.  Default values are 4.
 
 Option B<--runlen> set both run-in/run-out width at once.
 
-=head2 B<--splitwide>[=I<lefthalf[righthalf]>]
+=head2 B<--splitwide>[=I<lefthalf>[I<righthalf>]]
 
-If it becomes necessary to split a character in the middle of a wide
-character, split the character into left and right half.  Replacement
-characters are "\N{PRECEDES}" (C<< ≺ >>) and "\N{SUCCEEDS}" (C<< ≻ >>)
-by default.
+If it becomes necessary to break in the middle of a wide character,
+split the character into left and right half.  Replacement characters
+are C<\N{LEFT HALF BLACK CIRCLE}> (C<◖>) and C<\N{RIGHT HALF BLACK
+CIRCLE}> (C<◗>) by default.
 
-The parameter is optional, and if single character is given, it is
-assigned to both.  If a string of two or more characters is given,
-treat the first character as left half and the second character as
-right half.
+If a parameter is given, the first character is used as the left half.
+The next character, if any, is used as the right half, otherwise the
+first character is used.
 
 =head2 B<--smart>, B<-s>
 

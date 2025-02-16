@@ -49,8 +49,8 @@ use Getopt::EX::Hashed 'has'; {
     has runlen     => '   =i  ' , min => 0;
     has nonewline  => ' n     ' ;
     has splitwide  => '   :s  ' , default => $DEFAULT_SPLITWIDE;
-    has lefthalf   => '   =s  ' , default => "\N{PRECEDES}";
-    has righthalf  => '   =s  ' , default => "\N{SUCCEEDS}";
+    has lefthalf   => '   =s  ' , default => "\N{LEFT HALF BLACK CIRCLE}";
+    has righthalf  => '   =s  ' , default => "\N{RIGHT HALF BLACK CIRCLE}";
     has smart      => ' s !   ' ;
     has expand     => ' x :-1 ' , default => $DEFAULT_EXPAND;
     has tabstop    => '   =i  ' , min => 1;

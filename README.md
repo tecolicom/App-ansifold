@@ -76,6 +76,11 @@ option.
 **--ambiguous** takes _wide_ or _narrow_ and it specifies the visual
 width of Unicode ambiguous characters.
 
+If the last character is full-width and must be wrapped in the middle
+of it, it is wrapped just before the character.  If padding is
+specified, then one padding character is inserted.  If you really want
+to keep the wrapping position, use the `--stripwide` option.
+
 ## TERMINAL WIDTH and CALCULATION
 
 If the width argument begins with `=`, it is interpreted as an RPN
@@ -111,9 +116,9 @@ single field.
 Option `-w80,` is equivalent to `-w80,0`.  Zero width is ignored
 when seen as a final number, but not ignored otherwise.
 
-If the data is shorter and there is no corresponding string, an empty
-string is returned.  If the padding option is specified, a string
-padded to the given width is returned.
+If the data is shorter and there is no corresponding string for the
+field, an empty string is returned.  If the padding option is
+specified, the field is padded to the given width.
 
 ## NEGATIVE WIDTH
 
@@ -255,17 +260,16 @@ and **--runout** option.  Default values are 4.
 
 Option **--runlen** set both run-in/run-out width at once.
 
-## **--splitwide**\[=_lefthalf\[righthalf\]_\]
+## **--splitwide**\[=_lefthalf_\[_righthalf_\]\]
 
-If it becomes necessary to split a character in the middle of a wide
-character, split the character into left and right half.  Replacement
-characters are "\\N{PRECEDES}" (`≺`) and "\\N{SUCCEEDS}" (`≻`)
-by default.
+If it becomes necessary to break in the middle of a wide character,
+split the character into left and right half.  Replacement characters
+are `\N{LEFT HALF BLACK CIRCLE}` (`◖`) and `\N{RIGHT HALF BLACK
+CIRCLE}` (`◗`) by default.
 
-The parameter is optional, and if single character is given, it is
-assigned to both.  If a string of two or more characters is given,
-treat the first character as left half and the second character as
-right half.
+If a parameter is given, the first character is used as the left half.
+The next character, if any, is used as the right half, otherwise the
+first character is used.
 
 ## **--smart**, **-s**
 
