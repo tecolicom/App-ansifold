@@ -2,6 +2,10 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.32 2025-02-16T13:53:07Z
+
+    - use \N{LEFT HALF BLACK CIRCLE} and \N{RIGHT HALF BLACK CIRCLE} for --splitwide replacement
+
 1.31 2025-02-12T12:15:41Z
 
     - properly handle text ending with CRNL
