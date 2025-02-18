@@ -432,9 +432,11 @@ L<Text::ANSI::Fold::Util|https://github.com/tecolicom/Text-ANSI-Fold-Util>
 
 L<Getopt::EX::Numbers>
 
-L<https://www.w3.org/TR/jlreq/>
+L<https://www.w3.org/TR/jlreq/>:
 Requirements for Japanese Text Layout,
 W3C Working Group Note 11 August 2020
+
+L<fold(1)>, L<colrm(1)>, L<cut(1)>
 
 =head1 AUTHOR
 

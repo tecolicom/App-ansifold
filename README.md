@@ -403,9 +403,11 @@ this is not a correct behavior.
 
 [Getopt::EX::Numbers](https://metacpan.org/pod/Getopt%3A%3AEX%3A%3ANumbers)
 
-[https://www.w3.org/TR/jlreq/](https://www.w3.org/TR/jlreq/)
+[https://www.w3.org/TR/jlreq/](https://www.w3.org/TR/jlreq/):
 Requirements for Japanese Text Layout,
 W3C Working Group Note 11 August 2020
+
+[fold(1)](http://man.he.net/man1/fold), [colrm(1)](http://man.he.net/man1/colrm), [cut(1)](http://man.he.net/man1/cut)
 
 # AUTHOR
 
