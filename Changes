@@ -2,6 +2,12 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.33 2026-01-09T02:56:22Z
+
+    - Add --crmode option for App::Greple::tee integration
+    - Add InConcatScript/InFullwidthPunctuation properties for proper CJK text joining
+    - Korean (Hangul) text is now properly joined with spaces
+
 1.32 2025-02-16T13:53:07Z
 
     - use \N{LEFT HALF BLACK CIRCLE} and \N{RIGHT HALF BLACK CIRCLE} for --splitwide replacement
