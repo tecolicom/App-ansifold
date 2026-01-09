@@ -226,6 +226,10 @@ mode, which read consecutive non-blank lines at once, and join them
 into single line before processing.  So all paragraphs are reformatted
 by new text width.  You can use this with **--autoindent** option.
 
+When joining lines, newlines between full-width characters (Japanese,
+Chinese) are simply removed without adding space.  Korean (Hangul) is
+treated like ASCII text and joined with space.
+
 Option **-rw-1** will just fill paragraphs without reformatting.
 
 ### **--crmode**
@@ -235,7 +239,9 @@ module's **--crmode** option.  It does the following:
 
 - Joins text separated by carriage return (CR) characters.  For ASCII
 text, CR is replaced with a space.  For full-width characters (e.g.,
-Japanese), CR between them is simply removed without adding space.
+Japanese and Chinese), CR between them is simply removed without
+adding space.  Korean (Hangul) is treated like ASCII text and joined
+with space.
 - Sets the output separator to CR (equivalent to `--separate '\r'`),
 so that the folded lines are separated by CR instead of newline.
 This allows tee's **--crmode** to convert them back to newlines.
@@ -387,11 +393,6 @@ Next command retrieve column 4-6,9- and produces `45690` as a result.
 
 Unlike [cut(1)](http://man.he.net/man1/cut)'s **-c** option, parameter number is taken as screen
 columns of the terminal, rather than number of logical characters.
-
-# BUGS
-
-Option **--refill** will join Hangul string without space.  Probably
-this is not a correct behavior.
 
 # FILES
 

@@ -293,10 +293,24 @@ sub doit {
     return $app;
 }
 
+sub InConcatScript {
+    return <<"END";
++App::ansifold::InFullwidth
+-utf8::Hangul
+END
+}
+
+sub InFullwidthPunctuation {
+    return <<"END";
++App::ansifold::InFullwidth
+&utf8::Punctuation
+END
+}
+
 sub fill_up {
     my $pat = shift // qr/\R/;
-    s/(?<=\p{InFullwidth})(?<=\pP)$pat//g;
-    s/(?<=\p{InFullwidth})$pat(?=\p{InFullwidth})//g;
+    s/(?<=\p{InFullwidthPunctuation})$pat//g;
+    s/(?<=\p{InConcatScript})$pat(?=\p{InConcatScript})//g;
     s/[ ]*$pat[ ]*/ /g;
 }
 

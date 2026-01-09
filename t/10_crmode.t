@@ -85,4 +85,36 @@ test
     stdin  => "hello world\n",
     expect => "hello\n worl\nd\n";
 
+##
+## Hangul should be joined with space (not concatenated)
+##
+
+test
+    option => "--crmode -w80",
+    stdin  => "한글\rテスト\r漢字\n",
+    expect => "한글 テスト漢字\n";
+
+test
+    option => "--crmode -w80",
+    stdin  => "안녕하세요\r세계\n",
+    expect => "안녕하세요 세계\n";
+
+##
+## Fullwidth numbers and symbols should be concatenated
+##
+
+test
+    option => "--crmode -w80",
+    stdin  => "テスト\r１２３\rです\n",
+    expect => "テスト１２３です\n";
+
+##
+## Ambiguous characters (circles, arrows, etc.) are treated as narrow
+##
+
+test
+    option => "--crmode -w80",
+    stdin  => "テスト\r①②③\rです\n",
+    expect => "テスト ①②③ です\n";
+
 done_testing;
