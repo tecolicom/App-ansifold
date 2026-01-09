@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/tecolicom/App-ansifold/workflows/test/badge.svg)](https://github.com/tecolicom/App-ansifold/actions) [![MetaCPAN Release](https://badge.fury.io/pl/App-ansifold.svg)](https://metacpan.org/release/App-ansifold)
+[![Actions Status](https://github.com/tecolicom/App-ansifold/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/tecolicom/App-ansifold/actions?workflow=test) [![MetaCPAN Release](https://badge.fury.io/pl/App-ansifold.svg)](https://metacpan.org/release/App-ansifold)
 # NAME
 
 ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal sequences
@@ -25,6 +25,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
              --runlen=#               Set run-in and run-out both
              --splitwide[=#]          Split in the middle of wide character
       -s     --smart                  Same as --boundary=word --linebreak=all
+             --crmode                 Treat CR as line separator for fill
       -x[#]  --expand[=#]             Expand tabs
              --tabstop=n              Tab-stop position (default 8)
              --tabhead=char           Tab-head character (default space)
@@ -218,12 +219,30 @@ indenting with spaces.
 
 ## REFILL
 
+### **--refill**, **-r**
+
 Option **--refill** (or **-r**) makes the command to run in paragraph
 mode, which read consecutive non-blank lines at once, and join them
 into single line before processing.  So all paragraphs are reformatted
 by new text width.  You can use this with **--autoindent** option.
 
 Option **-rw-1** will just fill paragraphs without reformatting.
+
+### **--crmode**
+
+Option **--crmode** is designed to work with [App::Greple::tee](https://metacpan.org/pod/App%3A%3AGreple%3A%3Atee)
+module's **--crmode** option.  It does the following:
+
+- Joins text separated by carriage return (CR) characters.  For ASCII
+text, CR is replaced with a space.  For full-width characters (e.g.,
+Japanese), CR between them is simply removed without adding space.
+- Sets the output separator to CR (equivalent to `--separate '\r'`),
+so that the folded lines are separated by CR instead of newline.
+This allows tee's **--crmode** to convert them back to newlines.
+
+Example with [App::Greple::tee](https://metacpan.org/pod/App%3A%3AGreple%3A%3Atee):
+
+    greple -Mtee ansifold -sw80 --crmode -- --crmode ...
 
 # LINE BREAKING
 
@@ -402,6 +421,8 @@ this is not a correct behavior.
 [Text::ANSI::Fold::Util](https://github.com/tecolicom/Text-ANSI-Fold-Util)
 
 [Getopt::EX::Numbers](https://metacpan.org/pod/Getopt%3A%3AEX%3A%3ANumbers)
+
+[App::Greple::tee](https://github.com/kaz-utashiro/App-Greple-tee)
 
 [https://www.w3.org/TR/jlreq/](https://www.w3.org/TR/jlreq/):
 Requirements for Japanese Text Layout,

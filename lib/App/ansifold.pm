@@ -52,6 +52,12 @@ use Getopt::EX::Hashed 'has'; {
     has lefthalf   => '   =s  ' , default => "\N{LEFT HALF BLACK CIRCLE}";
     has righthalf  => '   =s  ' , default => "\N{RIGHT HALF BLACK CIRCLE}";
     has smart      => ' s !   ' ;
+    has crmode     => '   !   ' ;
+
+    has '+crmode' => sub {
+	$_->{$_[0]} = $_[1];
+	$_->separate = "\r" if $_[1];
+    };
     has expand     => ' x :-1 ' , default => $DEFAULT_EXPAND;
     has tabstop    => '   =i  ' , min => 1;
     has tabhead    => '   =s  ' ;
@@ -252,6 +258,7 @@ sub doit {
 	my $chomped = s/(\R+)\z// ? $1 : '';
 	my $eol = $chomped =~ /\r/ ? "\r\n" : "\n";
 	fill_paragraph() if $app->refill;
+	fill_cr() if $app->crmode;
 	if ($app->{indent_pat} && /^$app->{indent_pat}/p) {
 	    my $matched = ${^MATCH};
 	    my $indent = ansi_width $matched;
@@ -286,10 +293,19 @@ sub doit {
     return $app;
 }
 
+sub fill_up {
+    my $pat = shift // qr/\R/;
+    s/(?<=\p{InFullwidth})(?<=\pP)$pat//g;
+    s/(?<=\p{InFullwidth})$pat(?=\p{InFullwidth})//g;
+    s/[ ]*$pat[ ]*/ /g;
+}
+
 sub fill_paragraph {
-    s/(?<=\p{InFullwidth})(?<=\pP)\R//g;
-    s/(?<=\p{InFullwidth})\R(?=\p{InFullwidth})//g;
-    s/[ ]*\R[ ]*/ /g;
+    fill_up(qr/\R/);
+}
+
+sub fill_cr {
+    fill_up(qr/\r/);
 }
 
 sub terminal_width {

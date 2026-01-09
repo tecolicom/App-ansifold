@@ -50,6 +50,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
            --runlen=#               Set run-in and run-out both
            --splitwide[=#]          Split in the middle of wide character
     -s     --smart                  Same as --boundary=word --linebreak=all
+           --crmode                 Treat CR as line separator for fill
     -x[#]  --expand[=#]             Expand tabs
            --tabstop=n              Tab-stop position (default 8)
            --tabhead=char           Tab-head character (default space)
@@ -243,12 +244,39 @@ indenting with spaces.
 
 =head2 REFILL
 
+=head3 B<--refill>, B<-r>
+
 Option B<--refill> (or B<-r>) makes the command to run in paragraph
 mode, which read consecutive non-blank lines at once, and join them
 into single line before processing.  So all paragraphs are reformatted
 by new text width.  You can use this with B<--autoindent> option.
 
 Option B<-rw-1> will just fill paragraphs without reformatting.
+
+=head3 B<--crmode>
+
+Option B<--crmode> is designed to work with L<App::Greple::tee>
+module's B<--crmode> option.  It does the following:
+
+=over 4
+
+=item *
+
+Joins text separated by carriage return (CR) characters.  For ASCII
+text, CR is replaced with a space.  For full-width characters (e.g.,
+Japanese), CR between them is simply removed without adding space.
+
+=item *
+
+Sets the output separator to CR (equivalent to C<--separate '\r'>),
+so that the folded lines are separated by CR instead of newline.
+This allows tee's B<--crmode> to convert them back to newlines.
+
+=back
+
+Example with L<App::Greple::tee>:
+
+    greple -Mtee ansifold -sw80 --crmode -- --crmode ...
 
 =head1 LINE BREAKING
 
@@ -431,6 +459,8 @@ L<Text::ANSI::Fold|https://github.com/tecolicom/Text-ANSI-Fold>
 L<Text::ANSI::Fold::Util|https://github.com/tecolicom/Text-ANSI-Fold-Util>
 
 L<Getopt::EX::Numbers>
+
+L<App::Greple::tee|https://github.com/kaz-utashiro/App-Greple-tee>
 
 L<https://www.w3.org/TR/jlreq/>:
 Requirements for Japanese Text Layout,
