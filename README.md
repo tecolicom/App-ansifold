@@ -23,6 +23,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
              --runin=#                Run-in width (default 4)
              --runout=#               Run-out width (default 4)
              --runlen=#               Set run-in and run-out both
+             --margin=#               Right margin width
              --splitwide[=#]          Split in the middle of wide character
       -s     --smart                  Same as --boundary=word --linebreak=all
              --crmode                 Treat CR as line separator for fill
@@ -284,6 +285,24 @@ Maximum width of run-in/run-out characters are defined by **--runin**
 and **--runout** option.  Default values are 4.
 
 Option **--runlen** set both run-in/run-out width at once.
+
+## **--margin**=_width_
+
+Option **--margin** specifies the right margin width.  The value is
+subtracted from the folding width.  This is useful when you want to
+leave some space on the right side of the output.  For example:
+
+    $ ansifold -w80 --margin=10
+
+will fold text at column 70 (80 - 10), leaving 10 columns of margin on
+the right.
+
+When used with **--runin**, the margin provides extra space for run-in
+characters.  Characters that would normally appear at the beginning of
+the next line (such as closing punctuation) can be pulled into the
+margin area of the current line.  This allows the visible text to stay
+within the intended width while accommodating Japanese line-break
+rules.
 
 ## **--splitwide**\[=_lefthalf_\[_righthalf_\]\]
 

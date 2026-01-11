@@ -47,6 +47,7 @@ use Getopt::EX::Hashed 'has'; {
     has runin      => '   =i  ' , min => 0, default => 4;
     has runout     => '   =i  ' , min => 0, default => 4;
     has runlen     => '   =i  ' , min => 0;
+    has margin     => '   =i  ' , min => 0;
     has nonewline  => ' n     ' ;
     has splitwide  => '   :s  ' , default => $DEFAULT_SPLITWIDE;
     has lefthalf   => '   =s  ' , default => "\N{LEFT HALF BLACK CIRCLE}";
@@ -236,7 +237,7 @@ sub doit {
 	map  { $_ => $app->$_ }
 	grep { defined $app->$_ }
 	qw(width boundary padding padchar prefix ambiguous
-	   linebreak runin runout
+	   margin linebreak runin runout
 	   splitwide lefthalf righthalf
 	   expand tabstyle tabstop tabhead tabspace discard)
     );
