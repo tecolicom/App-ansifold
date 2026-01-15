@@ -2,6 +2,11 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.34 2026-01-15T13:19:00Z
+
+    - add --margin option for right margin width
+    - refactor scripts to use exported functions
+
 1.33 2026-01-09T02:56:22Z
 
     - Add --crmode option for App::Greple::tee integration
