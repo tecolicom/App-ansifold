@@ -17,12 +17,36 @@ use Text::ANSI::Fold::Util qw(ansi_width); {
 use Unicode::EastAsianWidth;
 use Data::Dumper;
 
+use Exporter 'import';
+our @EXPORT_OK = qw(ansifold ansiexpand ansicolrm ansicut);
+
 our $DEFAULT_WIDTH    //= 72;
 our $DEFAULT_SEPARATE //= "\n";
 our $DEFAULT_EXPAND   //= 0;
 our $DEFAULT_COLRM    //= 0;
 our $DEFAULT_CUT      //= 0;
 our $DEFAULT_SPLITWIDE;
+
+sub ansifold {
+    __PACKAGE__->new->perform(@_);
+}
+
+sub ansiexpand {
+    local $DEFAULT_WIDTH  = -1;
+    local $DEFAULT_EXPAND = -1;
+    goto &ansifold;
+}
+
+sub ansicolrm {
+    local $DEFAULT_SEPARATE = "";
+    local $DEFAULT_COLRM    = 1;
+    goto &ansifold;
+}
+
+sub ansicut {
+    local $DEFAULT_SEPARATE = "";
+    goto &ansifold;
+}
 
 use Getopt::EX::Hashed 'has'; {
 

@@ -3,12 +3,8 @@
 use strict;
 use warnings;
 
-BEGIN {
-    $App::ansifold::DEFAULT_SEPARATE = "";
-}
-
-use  App::ansifold;
-exit App::ansifold->new->perform(splice @ARGV);
+use App::ansifold qw(ansicut);
+exit ansicut(@ARGV);
 
 __END__
 

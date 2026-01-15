@@ -3,13 +3,8 @@
 use strict;
 use warnings;
 
-BEGIN {
-    $App::ansifold::DEFAULT_SEPARATE = "";
-    $App::ansifold::DEFAULT_COLRM    = 1;
-}
-
-use  App::ansifold;
-exit App::ansifold->new->perform(splice @ARGV);
+use App::ansifold qw(ansicolrm);
+exit ansicolrm(@ARGV);
 
 __END__
 

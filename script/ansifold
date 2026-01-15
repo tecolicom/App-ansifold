@@ -3,22 +3,14 @@
 use strict;
 use warnings;
 
-BEGIN {
-    if ($0 =~ /expand$/) {   ## when executed as 'ansiexpand'
-	$App::ansifold::DEFAULT_WIDTH  = -1;
-	$App::ansifold::DEFAULT_EXPAND = -1;
-    }
-    elsif ($0 =~ /colrm$/) { ## when executed as 'ansicolrm'
-	$App::ansifold::DEFAULT_SEPARATE = "";
-	$App::ansifold::DEFAULT_COLRM    = 1;
-    }
-    elsif ($0 =~ /cut$/) { ## when executed as 'ansicut'
-	$App::ansifold::DEFAULT_SEPARATE = "";
-    }
-}
+use App::ansifold qw(ansifold ansiexpand ansicolrm ansicut);
 
-use  App::ansifold;
-exit App::ansifold->new->perform(splice @ARGV);
+my $func = $0 =~ /expand$/ ? \&ansiexpand :
+           $0 =~ /colrm$/  ? \&ansicolrm  :
+           $0 =~ /cut$/    ? \&ansicut    :
+                             \&ansifold   ;
+
+exit $func->(@ARGV);
 
 __END__
 
