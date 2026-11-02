@@ -2,6 +2,13 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.36 2026-11-02T06:50:20Z
+
+    - Add --keepindent=group and --keepindent=named, which repeat only
+      what the capture groups (or the named groups) of the --autoindent
+      pattern matched and indent the rest with spaces (a block quote
+      marker on every line, a list marker not)
+
 1.35 2026-02-03T05:24:06Z
 
     - require Text::ANSI::Fold 2.3303
