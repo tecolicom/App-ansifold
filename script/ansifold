@@ -30,7 +30,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
            --padchar=_              Default padding character
            --prefix=string          Set prefix string (default empty)
            --autoindent=pattern     Set auto-indent pattern
-           --keepindent             Preserve indent string
+           --keepindent[=mode]      Preserve indent string (all, group, named)
            --ambiguous=narrow|wide  Unicode ambiguous character handling
     -p     --paragraph              Print extra newline
     -r     --refill                 Join paragraph into single line first
@@ -229,11 +229,34 @@ indentation.  In this case use B<--autoindent> option like this:
       522   ??  Ss     2:50.67 /System/Library/PrivateFrameworks/Uninstall.
                                framework/Resources/uninstalld
 
-=head3 B<--keepindent>
+=head3 B<--keepindent>[=I<all>|I<group>|I<named>]
 
 If the C<--keepindent> option is specified, the string matched by
 C<--autoindent> is inserted at the beginning of the line rather than
-indenting with spaces.
+indenting with spaces.  C<--keepindent=all> is the same.
+
+With C<--keepindent=group>, only the parts of the match that the
+capture groups of the pattern matched are inserted, and the rest of
+the match is replaced by spaces of the same width.  Use it when a part
+of the prefix has to be repeated on every line and another part must
+not.  In Markdown, a block quote marker is written on every line while
+a list marker is not, so put the quote marker in a capture group and
+the list marker in a non-capturing C<(?:...)> group:
+
+    $ echo '> - quoted item is long enough to be folded here' |
+      ansifold -w 30 -s --autoindent '^((?:>\h?)*)(?:[-*]\h+)?' --keepindent=group
+    > - quoted item is long enough
+    >   to be folded here
+
+The C<E<gt> > is repeated and the C<- > becomes two spaces.  A pattern
+without any capture group indents with spaces only, as without
+C<--keepindent>.
+
+With C<--keepindent=named>, only named groups are kept and plain
+parentheses just group, so the part to be kept gets a name and no
+C<(?:...)> is needed (Perl 5.22 or later):
+
+    --autoindent '^(?<q>(>\h?)*)([-*]\h+)?' --keepindent=named
 
 =head2 REFILL
 

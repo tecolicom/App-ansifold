@@ -61,7 +61,8 @@ use Getopt::EX::Hashed 'has'; {
     has padchar    => '   =s  ' ;
     has prefix     => '   =s  ' ;
     has autoindent => '   =s  ' ;
-    has keepindent => '   !   ' ;
+    has keepindent => '   :s  ' ;  # '' or all: the whole match, group: captures, named: named captures
+    has no_keepindent => '' , alias => 'no-keepindent', action => sub { $_->keepindent = undef };
     has indentchar => '   =s  ' , default => ' ';
     has ambiguous  => '   =s  ' ;
     has paragraph  => ' p +   ' , default => 0;
@@ -200,6 +201,11 @@ sub options {
     }
 
     if (my $indent = $app->autoindent) {
+	if (($app->keepindent // '') eq 'named') {
+	    # only named groups capture, so plain parentheses just group
+	    # ((?n) needs perl 5.22; an older perl rejects the pattern itself)
+	    $indent = "(?n)$indent";
+	}
 	$app->indent_pat = qr/$indent/;
     }
 
@@ -254,6 +260,28 @@ sub params {
     return $app;
 }
 
+# The prefix of the continuation lines from the string that --autoindent
+# matched: spaces of the same width, the string itself (--keepindent),
+# or the string with everything outside the capture groups blanked
+# (--keepindent=group, =named).  $spans are the [start, end] offsets of
+# the groups in $matched.
+sub indent_prefix {
+    my($app, $matched, $spans) = @_;
+    my $keep = $app->keepindent;
+    return $app->indentchar x ansi_width($matched) if not defined $keep;
+    return $matched if $keep eq '' or $keep eq 'all';
+    $keep eq 'group' or $keep eq 'named'
+	or die "$keep: unknown --keepindent value (all, group or named)\n";
+    my $mask = '0' x length $matched;
+    substr($mask, $_->[0], $_->[1] - $_->[0]) = '1' x ($_->[1] - $_->[0]) for @$spans;
+    my $prefix = '';
+    while ($mask =~ /\G(0+|1+)/g) {
+	my $part = substr $matched, $-[0], $+[0] - $-[0];
+	$prefix .= $1 =~ /1/ ? $part : $app->indentchar x ansi_width($part);
+    }
+    $prefix;
+}
+
 sub doit {
     my $app = shift;
 
@@ -291,14 +319,8 @@ sub doit {
 		die sprintf("%s\n%s\n%s\n", $_, ("^" x $indent),
 			    "ERROR: Autoindent pattern is longer than folding width.");
 	    }
-	    my $prefix = do {
-		if ($app->keepindent) {
-		    $matched;
-		} else {
-		    $app->indentchar x $indent;
-		}
-	    };
-	    $fold->configure(prefix => $prefix);
+	    my @spans = map { [ $-[$_], $+[$_] ] } grep { defined $-[$_] } 1 .. $#-;
+	    $fold->configure(prefix => $app->indent_prefix($matched, \@spans));
 	}
 	my @chops = $fold->text($_)->chops;
 	if (ref $app->width eq 'ARRAY') {
