@@ -1,7 +1,7 @@
 package App::ansifold;
 our $VERSION = "1.36";
 
-use v5.14;
+use v5.26;
 use warnings;
 
 use open IO => 'utf8', ':std';
@@ -203,7 +203,6 @@ sub options {
     if (my $indent = $app->autoindent) {
 	if (($app->keepindent // '') eq 'named') {
 	    # only named groups capture, so plain parentheses just group
-	    # ((?n) needs perl 5.22; an older perl rejects the pattern itself)
 	    $indent = "(?n)$indent";
 	}
 	$app->indent_pat = qr/$indent/;

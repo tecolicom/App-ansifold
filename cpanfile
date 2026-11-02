@@ -1,4 +1,4 @@
-requires 'perl' => '5.016';
+requires 'perl' => '5.026';
 
 requires 'Unicode::EastAsianWidth';
 requires 'Text::ANSI::Fold' => '2.3303';

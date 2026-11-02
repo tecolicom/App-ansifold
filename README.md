@@ -237,7 +237,7 @@ without any capture group indents with spaces only, as without
 
 With `--keepindent=named`, only named groups are kept and plain
 parentheses just group, so the part to be kept gets a name and no
-`(?:...)` is needed (Perl 5.22 or later):
+`(?:...)` is needed:
 
     --autoindent '^(?<q>(>\h?)*)([-*]\h+)?' --keepindent=named
 

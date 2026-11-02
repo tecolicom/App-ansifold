@@ -49,7 +49,7 @@
             "Text::ANSI::Fold" : "2.3303",
             "Text::ANSI::Fold::Util" : "1.05",
             "Unicode::EastAsianWidth" : "0",
-            "perl" : "5.016"
+            "perl" : "v5.26.0"
          }
       },
       "test" : {

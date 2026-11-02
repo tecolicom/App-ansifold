@@ -254,7 +254,7 @@ C<--keepindent>.
 
 With C<--keepindent=named>, only named groups are kept and plain
 parentheses just group, so the part to be kept gets a name and no
-C<(?:...)> is needed (Perl 5.22 or later):
+C<(?:...)> is needed:
 
     --autoindent '^(?<q>(>\h?)*)([-*]\h+)?' --keepindent=named
 
