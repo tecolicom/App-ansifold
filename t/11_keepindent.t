@@ -110,4 +110,28 @@ test
     stdin  => "$both\n",
     expect => "> - quoted item is long enough\n> - to be folded here\n";
 
+##
+## --no-keepindent: back to spaces
+##
+
+test
+    option => "-w 30 -s --autoindent $pat --keepindent --no-keepindent",
+    stdin  => "$list\n",
+    expect => "- item one is long enough to\n  be folded somewhere\n";
+
+##
+## No option name is given twice: Getopt::Long warns about it unless
+## Getopt::EX hides the warning
+##
+
+{
+    my $app = App::ansifold->new;
+    my @spec = grep { not ref } $app->optspec;
+    my %seen;
+    my @dup = grep { $seen{$_}++ }
+	      map { split /\|/, s/[=:!+].*//r } @spec;
+    ok(scalar(@spec), "option specs are found");
+    is_deeply(\@dup, [], "no duplicate option names");
+}
+
 done_testing;

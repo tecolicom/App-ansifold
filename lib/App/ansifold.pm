@@ -63,7 +63,7 @@ use Getopt::EX::Hashed 'has'; {
     has prefix     => '   =s  ' ;
     has autoindent => '   =s  ' ;
     has keepindent => '   :s  ' ;  # '' or all: the whole match, group: captures, named: named captures
-    has no_keepindent => '' , alias => 'no-keepindent', action => sub { $_->keepindent = undef };
+    has no_keepindent => '' , action => sub { $_->keepindent = undef };
     has indentchar => '   =s  ' , default => ' ';
     has ambiguous  => '   =s  ' ;
     has paragraph  => ' p +   ' , default => 0;
