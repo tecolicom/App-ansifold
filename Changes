@@ -2,6 +2,14 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.37 2026-11-03T02:27:07Z
+
+    - Add --trim, which removes spaces at the end of folded lines, so that
+      a space brought there by run-in does not make the line longer than
+      the width.  -s (--smart) turns it on; use --no-trim to keep the
+      spaces, as when the lines are put together again by -n
+    - Require perl 5.26
+
 1.36 2026-11-02T06:50:20Z
 
     - Add --keepindent=group and --keepindent=named, which repeat only
