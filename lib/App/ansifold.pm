@@ -59,6 +59,7 @@ use Getopt::EX::Hashed 'has'; {
 	$_->padchar = $_[1] if $_[1] ne '';
     };
     has padchar    => '   =s  ' ;
+    has trim       => '   !   ' ;
     has prefix     => '   =s  ' ;
     has autoindent => '   =s  ' ;
     has keepindent => '   :s  ' ;  # '' or all: the whole match, group: captures, named: named captures
@@ -140,11 +141,11 @@ use Getopt::EX::Hashed 'has'; {
 
     has '+smart' => sub {
 	my $smart = $_->{$_[0]} = $_[1];
-	($_->boundary, $_->linebreak) = do {
+	($_->boundary, $_->linebreak, $_->trim) = do {
 	    if ($smart) {
-		('word', LINEBREAK_ALL);
+		('word', LINEBREAK_ALL, 1);
 	    } else {
-		('none', LINEBREAK_NONE);
+		('none', LINEBREAK_NONE, 0);
 	    }
 	};
     };
@@ -287,7 +288,7 @@ sub doit {
     my $fold = Text::ANSI::Fold->new(
 	map  { $_ => $app->$_ }
 	grep { defined $app->$_ }
-	qw(width boundary padding padchar prefix ambiguous
+	qw(width boundary padding trim padchar prefix ambiguous
 	   margin linebreak runin runout
 	   splitwide lefthalf righthalf
 	   expand tabstyle tabstop tabhead tabspace discard)

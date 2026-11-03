@@ -54,7 +54,7 @@ test
 test
     option => "--crmode -sw20",
     stdin  => "hello\rworld\rthis\ris\ra\rtest\n",
-    expect => "hello world this is \ra test\n";
+    expect => "hello world this is\ra test\n";
 
 # Japanese - no trailing space
 test

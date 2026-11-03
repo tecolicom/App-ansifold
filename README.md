@@ -11,6 +11,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
              --boundary=word|space    Fold on word boundary
              --padding[=#]            Padding to margin space
              --padchar=_              Default padding character
+             --[no-]trim              Remove spaces at the end of folded lines
              --prefix=string          Set prefix string (default empty)
              --autoindent=pattern     Set auto-indent pattern
              --keepindent[=mode]      Preserve indent string (all, group, named)
@@ -25,7 +26,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
              --runlen=#               Set run-in and run-out both
              --margin=#               Right margin width
              --splitwide[=#]          Split in the middle of wide character
-      -s     --smart                  Same as --boundary=word --linebreak=all
+      -s     --smart                  Same as --boundary=word --linebreak=all --trim
              --crmode                 Treat CR as line separator for fill
       -x[#]  --expand[=#]             Expand tabs
              --tabstop=n              Tab-stop position (default 8)
@@ -338,10 +339,21 @@ If a parameter is given, the first character is used as the left half.
 The next character, if any, is used as the right half, otherwise the
 first character is used.
 
+## **--trim**, **--no-trim**
+
+Remove spaces at the end of folded lines.  Without this, a space after
+the folding point stays on the line by the run-in operation and makes
+it longer than the width, which shows with **--padding**.  Spaces at
+the end of the original lines and colored spaces are left as they are.
+
+Removed spaces are lost when the folded lines are put together again,
+as by **-n** or **--separate**.  Use **--no-trim** in that case.
+
 ## **--smart**, **-s**
 
-Option **--smart** (or simply **-s**) set both **--boundary=word** and
-**--linebreak=all**, and enables all smart text formatting capability.
+Option **--smart** (or simply **-s**) set **--boundary=word**,
+**--linebreak=all** and **--trim**, and enables all smart text
+formatting capability.  Use **--no-trim** after it to keep the spaces.
 
 Use option **--boundary=space** if you want the command to behave more
 like **-s** option of [fold(1)](http://man.he.net/man1/fold) command.
