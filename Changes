@@ -2,6 +2,14 @@ Revision history for `ansifold' command.
 
 {{$NEXT}}
 
+1.38 2026-11-03T08:48:44Z
+
+    - Do not define --no-keepindent twice, which made a warning and a test
+      failure with Getopt::EX older than 3.03
+    - Require Text::ANSI::Fold 2.37, which does not die with "no progress"
+      or hang when --autoindent leaves little room at a narrow width
+    - Require Getopt::EX 3.05
+
 1.37 2026-11-03T02:27:07Z
 
     - Add --trim, which removes spaces at the end of folded lines, so that
