@@ -1,7 +1,7 @@
 requires 'perl' => '5.026';
 
 requires 'Unicode::EastAsianWidth';
-requires 'Text::ANSI::Fold' => '2.36';
+requires 'Text::ANSI::Fold' => '2.37';
 requires 'Text::ANSI::Fold::Util' => '1.05';
 requires 'Getopt::EX' => '3.05';
 requires 'Getopt::EX::Hashed' => '1.06';
