@@ -61,7 +61,7 @@ ansifold/ansicolrm/ansicut - fold/colrm/cut command handling ANSI terminal seque
 
 =head1 VERSION
 
-Version 1.38
+Version 1.39
 
 =head1 DESCRIPTION
 
