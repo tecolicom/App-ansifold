@@ -34,18 +34,18 @@ sub ansifold {
 sub ansiexpand {
     local $DEFAULT_WIDTH  = -1;
     local $DEFAULT_EXPAND = -1;
-    goto &ansifold;
+    ansifold(@_);
 }
 
 sub ansicolrm {
     local $DEFAULT_SEPARATE = "";
     local $DEFAULT_COLRM    = 1;
-    goto &ansifold;
+    ansifold(@_);
 }
 
 sub ansicut {
     local $DEFAULT_SEPARATE = "";
-    goto &ansifold;
+    ansifold(@_);
 }
 
 use Getopt::EX::Hashed 'has'; {
@@ -68,7 +68,7 @@ use Getopt::EX::Hashed 'has'; {
     has ambiguous  => '   =s  ' ;
     has paragraph  => ' p +   ' , default => 0;
     has refill     => ' r +   ' , default => 0;
-    has separate   => '   =s  ' , default => $DEFAULT_SEPARATE;
+    has separate   => '   =s  ' , default => sub { $DEFAULT_SEPARATE };
     has linebreak  => '   =s  ' , alias   => 'lb';
     has runin      => '   =i  ' , min => 0, default => 4;
     has runout     => '   =i  ' , min => 0, default => 4;
@@ -85,13 +85,13 @@ use Getopt::EX::Hashed 'has'; {
 	$_->{$_[0]} = $_[1];
 	$_->separate = "\r" if $_[1];
     };
-    has expand     => ' x :-1 ' , default => $DEFAULT_EXPAND;
+    has expand     => ' x :-1 ' , default => sub { $DEFAULT_EXPAND };
     has tabstop    => '   =i  ' , min => 1;
     has tabhead    => '   =s  ' ;
     has tabspace   => '   =s  ' ;
     has tabstyle   => '   =s  ' ;
     has discard    => '   =s@ ' , default => [];
-    has colrm      => '       ' , default => $DEFAULT_COLRM;
+    has colrm      => '       ' , default => sub { $DEFAULT_COLRM };
     has cut        => ' c =s  ' ;
     has debug      => ' d     ' ;
     has help       => ' h     ' ;
